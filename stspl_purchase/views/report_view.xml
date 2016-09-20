@@ -1,0 +1,25 @@
+<openerp>
+    <data>
+        
+        <!--  Purchase Qweb Report -->
+        <report
+            id="purchase_report"
+            model="purchase.order"
+            string="Purchase Report"
+            report_type="qweb-pdf"
+            name="stspl_purchase.report_purchase_order"
+            file="stspl_purchase.report_purchase_order"
+            />
+            
+        <!--  Purchase Qweb Report -->
+        <report
+            id="stspl_tax_invoice"
+            model="account.invoice"
+            string="Tax Invoice"
+            report_type="qweb-pdf"
+            name="stspl_purchase.report_stspl_tax_invoice"
+            file="stspl_purchase.report_stspl_tax_invoice"
+            />
+
+        </data>
+</openerp>

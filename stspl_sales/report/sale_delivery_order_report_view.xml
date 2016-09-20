@@ -1,0 +1,234 @@
+<openerp>
+    <data>
+<template id="external_layout_stspl_sales_delivery_report_template">
+    		<!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+        
+            <t t-call="stspl_sales.external_layout_header_stspl_sales_delivery_report_template" />
+            <t t-raw="0" />
+            <t t-call="stspl_sales.external_layout_footer_stspl_sales_delivery_report_template" />
+</template>
+
+    	<!-- Header for Sales Delivery Report -->
+
+<template id="external_layout_header_stspl_sales_delivery_report_template">
+    		<div class="header">
+           		<div class="col-xs-3">
+           			<span t-if="o.company_id and o.company_id.logo">
+       					<img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
+       				</span>
+       			</div>
+
+       			<div class="col-xs-8 col-xs-offset-1 text-right">
+       				<div t-if="o.company_id">
+       					<div><strong><span t-field="o.company_id.name" ></span></strong></div>
+       					<div><span t-field="o.company_id.street"/>
+       						<span t-field="o.company_id.city"/>
+       						<span t-field="o.company_id.state_id"/>
+       						<span t-field="o.company_id.country_id"/>
+       					</div>
+       					
+       					<div>
+       						<span>Tel :</span>
+       						<span t-field="o.company_id.phone"/>
+       						
+       						<span>Fax :</span>
+       						<span t-field="o.company_id.fax"/>
+       					</div>
+
+       					<div>
+       						<span >CO. REG. NO. </span>
+       						<span t-field="o.company_id.company_registry" />
+       					</div>
+
+       					<div>
+       						<span class="text-right">GST REG NO. </span>
+       						<span t-field="o.company_id.gst_no"/>
+       					</div>
+
+       				</div>
+       			</div> 
+            </div>
+</template>
+    	<!-- Footer for Sales Delivery Report -->
+<template id="external_layout_footer_stspl_sales_delivery_report_template">
+	<div class="footer">
+      	<table style="border-top:1px solid ;" width="100%">
+      		<tr>
+      			<td width="80%">
+                	<div><span>Please visit our website @ </span><span t-field="o.company_id.website" /></div>
+       	<div><span>email : </span><span t-field="o.company_id.email" /></div>
+       	<div><span>This is a computer generated documents and no signature is required</span></div> 
+      			</td>
+      			<td width="20%">
+      				<ul class="list-inline" style='text-align:right'>
+            <li>Page:</li>
+            <li><span class="page"/></li>
+            <li>/</li>
+            <li><span class="topage"/></li>
+        </ul>
+      			</td>
+      		</tr>
+      	</table>
+    </div>
+</template>
+
+<!-- Template for Sales Delivery Report -->
+
+<template id="sgtpl_sale_delivery_report_template">
+	<style type="text/css"> 
+        td.line , span.line ,th.line {
+        							font-family:times new roman;
+               						 }
+    </style>
+    	<t t-call="report.html_container">
+               <t t-call="stspl_sales.external_layout_stspl_sales_delivery_report_template">
+	               <div class="page">
+	                   <div class="oe_structure" />
+	                  
+	                   		<div class="col-xs-6">
+	                   			<h3><b>DELIVERY ORDER</b></h3>
+	                   		</div>
+
+	                   		<div class="col-xs-6 text-right">
+	                   				<span>DO No.</span> <strong><span t-field="o.name"/></strong><br/>
+
+	                   				<span>Date</span> <span t-field="o.date" t-field-options='{"format": "dd-MM-Y"}'/>
+	                   		</div>
+	                   		<table class=" table tabcenter-block " width="100%" style="border: 1px solid black">
+	                   			<tr>
+	                   				<th style="border-top: 1px solid;border-right:1px solid;" width="50%">SOLD TO:</th>
+	                   				<th style="border-top: 1px solid;  " width="50%">SHIP TO:</th>
+	                   			</tr>
+
+	                   			<td width="50%" style="border-top: 0px white;">
+		                   			<div t-if="o.partner_id" name="partner_header">
+                                        <div t-field="o.partner_id"
+                                           t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                                        <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
+                                    </div>
+	                   			</td>
+	                   			<td width="50%" style="border-left: 1px solid; border-top: 0px white;">
+	                            <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
+                              		<div t-field="o.move_lines[0].partner_id"
+                                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                                </div>
+                              	<div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id == o.partner_id.id">
+                              		<div t-field="o.partner_id"
+                                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                              </div>
+	                   			</td>
+                   			</table>
+	                   		<table class="table center-block" width="100%" style="border: 1px solid black">
+	                   			<tr style="text-align:right;border: 1px solid black">
+	                   				<th style="border: 1px solid black" width="16%">Your Ref.</th>
+	                   				<th style="border: 1px solid black" width="16%">Incoterm</th>
+	                   				<th style="border: 1px solid black" width="17%">Payment Term</th>
+	                   				<th style="border: 1px solid black" width="16%">Ship Via</th>
+	                   				<th style="border: 1px solid black" width="17%">Sales Person</th>
+	                   				<th style="border: 1px solid black" width="20%">Payment Due</th>
+	                   			</tr>
+                          <t t-foreach="o.sale_id" t-as="s">
+	                   			<tr style="text-align:right;border: 1px solid black">
+
+	                   				  <td class="text-right" style="border: 1px solid black" width="16%">
+                                <t t-if="s.client_order_ref">
+                                  <span t-field="s.client_order_ref"/>
+                                </t>
+	                   				  </td>
+
+	                   				   <td class="text-right" style="border: 1px solid black" width="16%">
+                                <t t-if="s.incoterm">
+                                  <span t-field="s.incoterm"/></t>
+	                   				  </td>
+
+	                   				   <td class="text-right" style="border: 1px solid black" width="16%">
+                                <t t-if="s.payment_term">
+                                  <span t-field="s.payment_term"/></t>
+	                   				  </td>
+
+	                   				   <td class="text-right" style="border: 1px solid black" width="16%">
+
+	                   				  </td>
+
+	                   				   <td class="text-right" style="border: 1px solid black" width="17%">
+                                <t t-if="s.user_id.name">
+                                  <span t-field="s.user_id.name"/></t>
+	                   				  </td>
+
+	                   				   <td class="text-right" style="border: 1px solid black" width="20%">
+
+	                   				  </td>
+	                   		
+	                   			</tr>
+                        </t>
+	                   		</table>
+
+	                   		<table  width="100%">
+                  
+                           			<tr style="border-top: 1px solid">
+                           	   			<th class="text-center line"  width="30%"  colspan="3" >
+                           	   				Quantity
+                           	   			</th>
+                           	   			<td class="text-center line" width="70%"> <b>Description/Part No. </b></td>
+                           	   	</tr>
+
+                           	   		<tr>
+                           	   			<th style="border-top: 1px solid;border-bottom: 1px solid " width="10%">Ord</th>
+                           	   			<th style="border-top: 1px solid;border-bottom: 1px solid " width="10%">Shp</th>
+                           	   			<th style="border-top: 1px solid;border-bottom: 1px solid " width="10%">Bck</th>
+                           	   			<!-- <th style="border-bottom: 1px solid" width="75%"><span/></th> -->
+                           	   		</tr>
+
+                                  <tr  t-foreach="o.move_lines" t-as="m" >
+                                     
+                                    <td  class="text-left" style="border-top: 1px solid; " width="10%"  >
+                                      <span t-field="m.product_uom_qty"/>
+                                    </td>
+
+                                    <td class="text-left" style="border-top: 1px solid; " width="10%">
+                                      <span t-field="m.product_uom_qty"/>
+                                    </td>
+                                
+                                    <td class="text-left" style="border-top: 1px solid;" width="10%">
+                                      <t t-foreach="o.backorder_id" t-as="b" >
+                                        <t t-foreach="b.move_lines" t-as="bm">
+                                          <span t-field="bm.product_uom_qty"/>
+                                        </t>
+                                      </t>
+                                    </td> 
+
+                                    <td  class="text-left" style="border-top: 1px solid;" width="70%">
+                                              <span t-field="m.name"/>
+                                    </td>
+                                </tr>
+                           	   </table>
+                           	   <br/>
+                              <br/>
+                              <br/>
+                         <div style="text-align:left;">
+                           <t t-foreach="o.sale_id" t-as="s">
+                          REMARKS: <span t-field="s.note"/></t>
+                          </div>  
+                         <br/>
+
+                         <div style="text-align:left;">Shipping Tracking No. </div>    	   
+	               </div>
+       		</t>
+       	</t>
+</template>
+
+<template id="report_sale_delivery_order">
+    		<t t-call="report.html_container">
+        		<t t-foreach="doc_ids" t-as="doc_id">
+            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_delivery_report_template')"/>
+        		</t>
+    		</t>
+</template>
+</data>
+</openerp>

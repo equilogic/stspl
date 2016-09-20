@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<!-- Template for Headre and Footer -->
+    	<template id="external_layout_stspl_sales_report_template">
+    		<!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+        
+            <t t-call="stspl_sales.external_layout_header_stspl_sales_report_template" />
+            <t t-raw="0" />
+            <t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" />
+    	</template>
+    	<!-- Header for Sales Report -->
+    	<template id="external_layout_header_stspl_sales_report_template">
+    		<div class="header">
+           		<div class="col-xs-3">
+           			<span t-if="o.company_id and o.company_id.logo">
+       				<img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
+       				</span>
+       			</div>
+       			<div class="col-xs-8 col-xs-offset-1 text-right">
+       				<div t-if="o.company_id">
+       					<div><strong><span t-field="o.company_id.name" ></span></strong></div>
+       					<div><span t-field="o.company_id.street"/>
+       						<span t-field="o.company_id.city"/>
+       						<span t-field="o.company_id.state_id"/>
+       						<span t-field="o.company_id.country_id"/>
+       					</div>
+       					
+       					<div>
+       						<span>Tel :</span>
+       						<span t-field="o.company_id.phone"/>
+       						
+       						<span>Fax :</span>
+       						<span t-field="o.company_id.fax"/>
+       					</div>
+       					<div>
+       						<span >CO. REG. NO. </span>
+       						<span t-field="o.company_id.company_registry" />
+       					</div>
+       					<div>
+       						<span class="text-right">GST REG NO. </span>
+       						<span t-field="o.company_id.gst_no"/>
+       					</div>
+       				</div>
+       			</div> 
+              </div>
+        </template>
+    	<!-- Footer for Sales Report -->
+    	<template id="external_layout_footer_stspl_sales_report_template">
+    		<div class="footer">
+              	<table style="border-top:1px solid ;" width="100%">
+              		<tr>
+              			<td width="80%">
+		                	<div><span>Please visit our website @ </span><span t-field="o.company_id.website" /></div>
+               	<div><span>email : </span><span t-field="o.company_id.email" /></div>
+               	<div><span>This is a computer generated documents and no signature is required</span></div> 
+              			</td>
+              			<td width="20%">
+              				<ul class="list-inline" style='text-align:right'>
+                    <li>Page:</li>
+                    <li><span class="page"/></li>
+                    <li>/</li>
+                    <li><span class="topage"/></li>
+                </ul>
+              			</td>
+              		</tr>
+              	</table>
+            </div>
+    	</template>
+    	
+    	<!-- Template for Sales Report -->
+		<template id="sgtpl_sale_report_template">
+            <style type="text/css"> 
+                td.line , span.line ,th.line {
+                    font-family:times new roman;
+                }
+            </style>
+            <t t-call="report.html_container">
+            <t t-call="stspl_sales.external_layout_stspl_sales_report_template">
+               <div class="page">
+                   <div class="oe_structure" />
+                   <table width="100%" style="border-bottom:1 px solid black">
+                   		<tr>
+                   			<td width="60%">
+		                			<h3 t-if="o.state != 'draft'">SALES ORDER</h3>
+		                			<h3 t-if="o.state == 'draft'">QUOTATION</h3>
+		                			<strong>TO:</strong>
+		                			<div t-if="o.partner_id ">
+		                				<div t-field="o.partner_id"/>
+		                				<div t-field="o.partner_id.street"/>
+		                				<div t-field="o.partner_id.city"/>
+		                				<div t-field="o.partner_id.state_id"/>
+		                				<div t-field="o.partner_id.country_id"/> 
+		                			</div>
+		                		
+                   			</td>
+                   			<td width="55%">
+	                   			<div>
+	                   				<span>NO.</span>
+	                   				<strong><span t-field="o.name"/></strong>
+	                   			</div>
+	                   			<div>
+	                   				<span>Date: </span><span t-field="o.date_order"  t-field-options='{"format": "dd-MM-Y"}'/>
+	                   			</div>
+	                   			<div>
+	                   				<span>YourRef. :  </span><span t-field="o.client_order_ref"/>
+	                   			</div>
+	                   			<div>
+	                   				<span>Incoterm : </span><span t-field="o.incoterm"/>
+	                   			</div>
+	                   			<div>
+	                   				<span>Payment Term : </span><span t-field="o.payment_term"/>
+	                   			</div>
+	                   			<div>
+	                   				<span>Lead Time</span>
+			                		
+	                   			</div>
+	                   			<div>
+	                   				<span>Sales Persone :  </span><span t-field="o.user_id.name"/>
+	                   			</div>
+	                   			<div>
+	                   				<span>Validity :  </span>
+	                   			</div>
+	                   			<div>
+			                		<span>Currency : </span><span t-field="o.currency_id"/>
+								</div>
+                   			</td>
+                   		</tr>
+                   </table>
+                   
+                   <table class="table table-condensed" width="100%" >
+                       <thead>
+                           <tr>
+                           	   <th width="10%">Item No.</th>
+                           	   <th class="text-center line" width="40%">Description/Part No</th>
+                               <th class="text-left line" width="10%">Qty</th>
+                               <th class="text-left line" width="10%">Units</th>
+                               <th class="text-right line" width="10%">Unit Price</th>
+                               <th class="text-right line" width="10%">Amount</th>
+                           </tr>
+                       </thead>
+                        <tbody>
+                   			<tr t-foreach="o.order_line" t-as="line">
+                   				<td width="10%" class="text-center line"><span t-esc="line_index+1"/></td>
+                   				<td class="text-left line" width="40%">
+		                            <span t-field="line.name"/>
+		                        </td>
+	                   			<td class="text-left line" width="10%">
+		                            <span t-field="line.product_uom_qty" t-field-options='{"widget": "int"}'/>
+	                       		</td>
+	                       		<td class="text-left line" width="10%">
+	                       		 	<span t-field="line.product_uom.name"/>
+	                       		</td>
+		                        <td class="text-right line" width="10%">
+		                            <span t-field="line.price_unit"/>
+		                        </td>
+		                        <td class="text-right line" width="10%">
+		                            <span t-field="line.price_subtotal" />
+		                        </td>
+                    		</tr>
+	                    </tbody>
+    	            </table>
+	   	            <div class="row" >
+		                <div class="col-xs-4 pull-right">
+		                    <table class="table table-condensed">
+		                        <tr class="border-black">
+		                            <td><strong>Sub-Total</strong></td>
+		                            <td class="text-right">
+		                                <span t-field="o.amount_untaxed" />
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                        	<td>Discount</td>
+		                        	<td><span /></td>
+		                        </tr>
+		                        <tr>
+		                            <td>Taxes</td>
+		                            <td class="text-right">
+		                                <span t-field="o.amount_tax"/>
+		                            </td>
+		                        </tr>
+		                        <tr class="border-black">
+		                            <td><strong>Total</strong></td>
+		                            <td class="text-right">
+		                                <span t-field="o.amount_total" />
+		                            </td>
+		                        </tr>
+		                    </table>
+		                </div>
+           			 </div>
+           			 <table width="100%">
+		                	<tr>
+		                		<td>Notes:</td>
+		                	</tr>
+		                	<tr>
+		                		<td width="70%">
+		                			<span t-field="o.note"/>
+		                		</td>
+		                		<td width="30%"></td>
+		                	</tr>
+		             </table>
+		             <div style="page-break-before:always">
+						<span t-field="o.company_id.sale_note" 
+								t-field-options='{"widget": "html"}'
+								/>
+      			 	</div>
+               	</div>
+               </t>
+               </t>
+        </template>
+        
+        <template id="report_sale_order">
+    		<t t-call="report.html_container">
+        		<t t-foreach="doc_ids" t-as="doc_id">
+            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_report_template')"/>
+        		</t>
+    		</t>
+		</template>
+    </data>
+</openerp>
