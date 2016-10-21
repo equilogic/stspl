@@ -36,14 +36,6 @@ class report_print_tax_invoice_stspl(report_sxw.rml_parse):
     def _get_qty(self, qty):
         return int(qty)
 
-#    def _get_pur_do_num(self,picking_ids):
-#        if picking_ids:
-#            print "picking ids...............",picking_ids
-#            for pick in picking_ids:
-#                if pick.picking_type_id.name == 'Delivery Orders':
-#                    return pick.name
-#                print "picking ids...............",pick.picking_type_id.name
-
     def _get_sal_do_num(self,picking_ids):
         if picking_ids:
             for pick in picking_ids:
