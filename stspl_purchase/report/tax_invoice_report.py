@@ -30,12 +30,26 @@ class report_print_tax_invoice_stspl(report_sxw.rml_parse):
         super(report_print_tax_invoice_stspl, self).__init__(cr, uid, name, context)
         self.localcontext.update({
             'get_qty':self._get_qty,
-#            'get_etd':self._get_etd,
-            
+            'get_sal_do_num':self._get_sal_do_num,
         })
 
     def _get_qty(self, qty):
         return int(qty)
+
+#    def _get_pur_do_num(self,picking_ids):
+#        if picking_ids:
+#            print "picking ids...............",picking_ids
+#            for pick in picking_ids:
+#                if pick.picking_type_id.name == 'Delivery Orders':
+#                    return pick.name
+#                print "picking ids...............",pick.picking_type_id.name
+
+    def _get_sal_do_num(self,picking_ids):
+        if picking_ids:
+            for pick in picking_ids:
+                if pick.picking_type_id.name == 'Delivery Orders':
+                    return pick.name
+        return ''
 
 class report_print_tax_invoice_stspl_extended(models.AbstractModel):
     _name = 'report.stspl_purchase.report_stspl_tax_invoice'
