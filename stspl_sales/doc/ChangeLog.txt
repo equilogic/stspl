@@ -1,3 +1,7 @@
 ===============================================================================
  Version Change Log (stspl_sales)
 ===============================================================================
+1.1 : 15 Sep : Nikita Vaghela
+	* Add apllicaton:False in openerp,
+	  Rename file name from inherited_company_view.xml to company_view.xml,
+	  changes in openerp replace inherited_company_view to company_view.xml 

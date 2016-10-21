@@ -22,7 +22,7 @@
 
 {
     'name': 'STSPL Purchase Reports',
-    'version': '1.0',
+    'version': '1.1',
     'depends': ['purchase','sg_account'],
     'author' :'Serpent Consulting Services Pvt. Ltd.',
     'website' : 'http://www.serpentcs.com',
@@ -40,6 +40,7 @@
     ],
     'installable': True,
     'auto_install':False,
+    "application":False,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

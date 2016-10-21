@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<openerp>
+    <data>
+    	
+    	<!--Form View of Product Customer Code  -->
+        <record model="ir.ui.view" id="form_view_product_cust_code">
+            <field name="name">form.view.product.cust.code</field>
+            <field name="model">product.cust.code</field>
+            <field name="arch" type="xml">
+                <form string="Product Customer Code" >
+                	<group>
+                    <field name="prod_code"/>
+                    <field name="partner_id"/>
+                    <field name="prod_id"/>
+                    <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Tree View of Product Customer Code -->
+        <record model="ir.ui.view" id="tree_view_product_cust_code">
+            <field name="name">tree.view.product.cust.code</field>
+            <field name="model">product.cust.code</field>
+            <field name="arch" type="xml">
+                <tree string="Product Customer Code">
+                    <field name="prod_code"/>
+                    <field name="partner_id"/>
+                    <field name="company_id"/>
+                     <field name="prod_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Action for Product Customer Code -->
+        <record id="action_product_cust_code" model="ir.actions.act_window">
+            <field name="name">Product Customer Code</field>
+            <field name="res_model">product.cust.code</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="tree_view_product_cust_code"/>
+        </record>
+        
+        <!-- Search View of Product Customer Code  -->
+        <record id="search_view_product_cust_code" model="ir.ui.view">
+            <field name="name">search.view.product.cust.code</field>
+            <field name="model">product.cust.code</field>
+            <field name="arch" type="xml">
+                <search string="Product Customer Code">
+                    <field name="prod_code"/>
+                    <field name="partner_id"/>
+                    <field name="company_id"/>
+                    <field name="prod_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Company" icon="terp-partner" domain="[]" context="{'group_by':'company_id'}"/>
+                        <filter string="Product" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'prod_id'}"/>
+                        <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <separator orientation="vertical"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- Menuitems for Product Customer Code -->
+        <menuitem action="action_product_cust_code" id="prod_cust_code_sub_menu" sequence="51" parent="product.prod_config_main" groups="group_product_customer_code_manager"/>
+
+    </data>
+</openerp>

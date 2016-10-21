@@ -1,0 +1,7 @@
+===============================================================================
+ Version Change Log (stspl_product)
+===============================================================================
+1.0 : 21 Sep : Nikita Vaghela
+	* created product customer code menu for manage customer code,
+	  added one2many field in product.product.	  
+	

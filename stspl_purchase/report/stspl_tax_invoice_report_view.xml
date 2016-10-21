@@ -76,7 +76,7 @@
     	</template>
     	
     	<!-- Reports Template  -->
-		<template id="sgtpl_tax_invoice_template">
+		<template id="stspl_tax_invoice_template">
             <style type="text/css"> 
                 td.line , span.line ,th.line {
                     font-family:times new roman;
@@ -225,7 +225,7 @@
         <template id="report_stspl_tax_invoice">
     		<t t-call="report.html_container">
         		<t t-foreach="doc_ids" t-as="doc_id">
-            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_purchase.sgtpl_tax_invoice_template')"/>
+            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_purchase.stspl_tax_invoice_template')"/>
         		</t>
     		</t>
 		</template>

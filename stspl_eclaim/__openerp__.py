@@ -22,7 +22,7 @@
 
 {
     "name": "STSPL E-Claim",
-    "version": "1.0",
+    "version": "1.1",
     "depends": ['hr_expense'],
     "author" :"Serpent Consulting Services Pvt. Ltd.",
     "website" : "http://www.serpentcs.com",
@@ -31,8 +31,7 @@
         This application enables you to manage E-Claim.
     """,
     "data": [
-             'views/stspl_hr_inherited_view.xml',
-             
+             'views/hr_eclaim_view.xml',
     ],
     "installable": True,
     "auto_install": False,

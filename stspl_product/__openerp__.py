@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2011-2012 Serpent Consulting Services Pvt. Ltd. (<http://serpentcs.com>).
+#    Copyright (C) 2016 Serpent Consulting Services Pvt. Ltd.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,29 +19,42 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 {
-    "name": "STSPL Sales Reports",
-    "version": "1.1",
-    "depends": ['sale','sg_account'],
+    "name": "STSPL Product",
+    "version": "1.0",
+    "depends": ['product'],
     "author" :"Serpent Consulting Services Pvt. Ltd.",
     "website" : "http://www.serpentcs.com",
-    "category": "sales",
+    "category":"Product",
     "description":"""
-        This module customises the sales reports as per the Customs of STSPL.
+        This application enables you to manage Customer Code for Products.
     """,
     "data": [
-             'data/account_payment_terms_demo.xml',
-             'views/stock_picking.xml',  
-	         'report/sale_delivery_order_report_view.xml',
-             'views/company_view.xml',
-             'report/sale_order_report_view.xml',
-             'views/report_view.xml',
-             
+             "security/product_customer_code_security.xml",
+             "security/ir.model.access.csv",
+             "views/product_customer_code_view.xml",
+             "views/product_product_view.xml",
     ],
     "installable": True,
-    "auto_install":False,
-    "application":False,
+    "auto_install": False,
+    "application": False,
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

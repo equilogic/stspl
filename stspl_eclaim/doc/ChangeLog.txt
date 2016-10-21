@@ -1,3 +1,7 @@
 ===============================================================================
  Version Change Log (stspl_eclaim)
 ===============================================================================
+1.1 : 15 Sep : Nikita Vaghela
+	* Rename String Expense to EClaim in hr_eclaim,
+	  Rename File name form stspl_hr_inherited_view.xml to hr_eclaim_view.xml
+	

@@ -1,226 +1,775 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-    	<!-- Template for Headre and Footer -->
-    	<template id="external_layout_stspl_sales_report_template">
-    		<!-- Multicompany -->
-            <t t-if="o and 'company_id' in o">
-                <t t-set="company" t-value="o.company_id"></t>
-            </t>
-            <t t-if="not o or not 'company_id' in o">
-                <t t-set="company" t-value="res_company"></t>
-            </t>
-        
-            <t t-call="stspl_sales.external_layout_header_stspl_sales_report_template" />
-            <t t-raw="0" />
-            <t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" />
-    	</template>
-    	<!-- Header for Sales Report -->
-    	<template id="external_layout_header_stspl_sales_report_template">
-    		<div class="header">
-           		<div class="col-xs-3">
-           			<span t-if="o.company_id and o.company_id.logo">
-       				<img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
-       				</span>
-       			</div>
-       			<div class="col-xs-8 col-xs-offset-1 text-right">
-       				<div t-if="o.company_id">
-       					<div><strong><span t-field="o.company_id.name" ></span></strong></div>
-       					<div><span t-field="o.company_id.street"/>
-       						<span t-field="o.company_id.city"/>
-       						<span t-field="o.company_id.state_id"/>
-       						<span t-field="o.company_id.country_id"/>
-       					</div>
-       					
-       					<div>
-       						<span>Tel :</span>
-       						<span t-field="o.company_id.phone"/>
-       						
-       						<span>Fax :</span>
-       						<span t-field="o.company_id.fax"/>
-       					</div>
-       					<div>
-       						<span >CO. REG. NO. </span>
-       						<span t-field="o.company_id.company_registry" />
-       					</div>
-       					<div>
-       						<span class="text-right">GST REG NO. </span>
-       						<span t-field="o.company_id.gst_no"/>
-       					</div>
-       				</div>
-       			</div> 
-              </div>
-        </template>
-    	<!-- Footer for Sales Report -->
-    	<template id="external_layout_footer_stspl_sales_report_template">
-    		<div class="footer">
-              	<table style="border-top:1px solid ;" width="100%">
-              		<tr>
-              			<td width="80%">
-		                	<div><span>Please visit our website @ </span><span t-field="o.company_id.website" /></div>
-               	<div><span>email : </span><span t-field="o.company_id.email" /></div>
-               	<div><span>This is a computer generated documents and no signature is required</span></div> 
-              			</td>
-              			<td width="20%">
-              				<ul class="list-inline" style='text-align:right'>
-                    <li>Page:</li>
-                    <li><span class="page"/></li>
-                    <li>/</li>
-                    <li><span class="topage"/></li>
-                </ul>
-              			</td>
-              		</tr>
-              	</table>
-            </div>
-    	</template>
-    	
-    	<!-- Template for Sales Report -->
-		<template id="sgtpl_sale_report_template">
-            <style type="text/css"> 
-                td.line , span.line ,th.line {
-                    font-family:times new roman;
-                }
-            </style>
-            <t t-call="report.html_container">
-            <t t-call="stspl_sales.external_layout_stspl_sales_report_template">
-               <div class="page">
-                   <div class="oe_structure" />
-                   <table width="100%" style="border-bottom:1 px solid black">
-                   		<tr>
-                   			<td width="60%">
-		                			<h3 t-if="o.state != 'draft'">SALES ORDER</h3>
-		                			<h3 t-if="o.state == 'draft'">QUOTATION</h3>
-		                			<strong>TO:</strong>
-		                			<div t-if="o.partner_id ">
-		                				<div t-field="o.partner_id"/>
-		                				<div t-field="o.partner_id.street"/>
-		                				<div t-field="o.partner_id.city"/>
-		                				<div t-field="o.partner_id.state_id"/>
-		                				<div t-field="o.partner_id.country_id"/> 
-		                			</div>
-		                		
-                   			</td>
-                   			<td width="55%">
-	                   			<div>
-	                   				<span>NO.</span>
-	                   				<strong><span t-field="o.name"/></strong>
-	                   			</div>
-	                   			<div>
-	                   				<span>Date: </span><span t-field="o.date_order"  t-field-options='{"format": "dd-MM-Y"}'/>
-	                   			</div>
-	                   			<div>
-	                   				<span>YourRef. :  </span><span t-field="o.client_order_ref"/>
-	                   			</div>
-	                   			<div>
-	                   				<span>Incoterm : </span><span t-field="o.incoterm"/>
-	                   			</div>
-	                   			<div>
-	                   				<span>Payment Term : </span><span t-field="o.payment_term"/>
-	                   			</div>
-	                   			<div>
-	                   				<span>Lead Time</span>
-			                		
-	                   			</div>
-	                   			<div>
-	                   				<span>Sales Persone :  </span><span t-field="o.user_id.name"/>
-	                   			</div>
-	                   			<div>
-	                   				<span>Validity :  </span>
-	                   			</div>
-	                   			<div>
-			                		<span>Currency : </span><span t-field="o.currency_id"/>
-								</div>
-                   			</td>
-                   		</tr>
-                   </table>
-                   
-                   <table class="table table-condensed" width="100%" >
-                       <thead>
-                           <tr>
-                           	   <th width="10%">Item No.</th>
-                           	   <th class="text-center line" width="40%">Description/Part No</th>
-                               <th class="text-left line" width="10%">Qty</th>
-                               <th class="text-left line" width="10%">Units</th>
-                               <th class="text-right line" width="10%">Unit Price</th>
-                               <th class="text-right line" width="10%">Amount</th>
-                           </tr>
-                       </thead>
-                        <tbody>
-                   			<tr t-foreach="o.order_line" t-as="line">
-                   				<td width="10%" class="text-center line"><span t-esc="line_index+1"/></td>
-                   				<td class="text-left line" width="40%">
-		                            <span t-field="line.name"/>
-		                        </td>
-	                   			<td class="text-left line" width="10%">
-		                            <span t-field="line.product_uom_qty" t-field-options='{"widget": "int"}'/>
-	                       		</td>
-	                       		<td class="text-left line" width="10%">
-	                       		 	<span t-field="line.product_uom.name"/>
-	                       		</td>
-		                        <td class="text-right line" width="10%">
-		                            <span t-field="line.price_unit"/>
-		                        </td>
-		                        <td class="text-right line" width="10%">
-		                            <span t-field="line.price_subtotal" />
-		                        </td>
-                    		</tr>
-	                    </tbody>
-    	            </table>
-	   	            <div class="row" >
-		                <div class="col-xs-4 pull-right">
-		                    <table class="table table-condensed">
-		                        <tr class="border-black">
-		                            <td><strong>Sub-Total</strong></td>
-		                            <td class="text-right">
-		                                <span t-field="o.amount_untaxed" />
-		                            </td>
-		                        </tr>
-		                        <tr>
-		                        	<td>Discount</td>
-		                        	<td><span /></td>
-		                        </tr>
-		                        <tr>
-		                            <td>Taxes</td>
-		                            <td class="text-right">
-		                                <span t-field="o.amount_tax"/>
-		                            </td>
-		                        </tr>
-		                        <tr class="border-black">
-		                            <td><strong>Total</strong></td>
-		                            <td class="text-right">
-		                                <span t-field="o.amount_total" />
-		                            </td>
-		                        </tr>
-		                    </table>
-		                </div>
-           			 </div>
-           			 <table width="100%">
-		                	<tr>
-		                		<td>Notes:</td>
-		                	</tr>
-		                	<tr>
-		                		<td width="70%">
-		                			<span t-field="o.note"/>
-		                		</td>
-		                		<td width="30%"></td>
-		                	</tr>
-		             </table>
-		             <div style="page-break-before:always">
-						<span t-field="o.company_id.sale_note" 
-								t-field-options='{"widget": "html"}'
-								/>
-      			 	</div>
-               	</div>
-               </t>
-               </t>
-        </template>
-        
-        <template id="report_sale_order">
-    		<t t-call="report.html_container">
-        		<t t-foreach="doc_ids" t-as="doc_id">
-            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_report_template')"/>
-        		</t>
-    		</t>
+	<data>
+		<!-- Template for Headre and Footer -->
+		<template id="external_layout_stspl_sales_report_template">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+
+			<t t-call="stspl_sales.external_layout_header_stspl_sales_report_template" />
+			<t t-raw="0" />
+			<t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" />
 		</template>
-    </data>
+		<!-- Header for Sales Report -->
+		<template id="external_layout_header_stspl_sales_report_template">
+			<div class="header">
+				<div class="col-xs-3">
+					<span t-if="o.company_id and o.company_id.logo">
+						<img t-att-src="'data:image/png;base64,%s' % o.company_id.logo"
+							style="max-height: 75px;" />
+					</span>
+				</div>
+				<div class="col-xs-8 col-xs-offset-1 text-right">
+					<div t-if="o.company_id">
+						<div>
+							<strong>
+								<span t-field="o.company_id.name"></span>
+							</strong>
+						</div>
+						<div>
+							<span t-field="o.company_id.street" />
+							<span t-field="o.company_id.city" />
+							<span t-field="o.company_id.state_id" />
+							<span t-field="o.company_id.country_id" />
+						</div>
+
+						<div>
+							<span>Tel :</span>
+							<span t-field="o.company_id.phone" />
+
+							<span>Fax :</span>
+							<span t-field="o.company_id.fax" />
+						</div>
+						<div>
+							<span>CO. REG. NO. </span>
+							<span t-field="o.company_id.company_registry" />
+						</div>
+						<div>
+							<span class="text-right">GST REG NO. </span>
+							<span t-field="o.company_id.gst_no" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<!-- Footer for Sales Report -->
+		<template id="external_layout_footer_stspl_sales_report_template">
+			<div class="footer">
+				<table style="border-top:1px solid ;" width="100%">
+					<tr>
+						<td width="80%">
+							<div>
+								<span>Please visit our website @ </span>
+								<span t-field="o.company_id.website" />
+							</div>
+							<div>
+								<span>email : </span>
+								<span t-field="o.company_id.email" />
+							</div>
+							<div>
+								<span>This is a computer generated documents and no signature is
+									required
+								</span>
+							</div>
+						</td>
+						<td width="20%">
+							<ul class="list-inline" style='text-align:right'>
+								<li>Page:</li>
+								<li>
+									<span class="page" />
+								</li>
+								<li>/</li>
+								<li>
+									<span class="topage" />
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</template>
+
+		<!-- Template for Sales Report -->
+		<template id="sgtpl_sale_report_template">
+			<style type="text/css">
+				td.line , span.line ,th.line {
+				font-family:times new
+				roman;
+				}
+			</style>
+			<t t-call="report.html_container">
+				<t t-call="stspl_sales.external_layout_stspl_sales_report_template">
+					<div class="page">
+						<div class="oe_structure" />
+						<div>
+							<h3 t-if="o.state != 'draft'">SALES ORDER</h3>
+							<h3 t-if="o.state == 'draft'">
+								QUOTATION Q
+								<span t-field="o.date_order" t-field-options='{"format": "yy"}' />
+								-
+								<span t-field="o.name" />
+							</h3>
+							<div>
+								<b>QUOTATION DATE:</b>
+							</div>
+							<div>
+								<span t-field="o.date_order" t-field-options='{"format": "dd-MM-Y HH:MM:SS"}' />
+							</div>
+						</div>
+						<br />
+						<table width="100%"
+							style="border-bottom:1 px solid black;font-size:15px;">
+							<tr>
+								<td width="60%">
+									<span>
+										<strong>TO:</strong>
+									</span>
+									<div t-if="o.partner_id ">
+										<div t-field="o.partner_id" />
+										<div t-field="o.partner_id.street" />
+										<div t-field="o.partner_id.city" />
+										<div t-field="o.partner_id.state_id" />
+										<div t-field="o.partner_id.country_id" />
+									</div>
+
+								</td>
+								<td width="55%">
+									<table>
+										<tr>
+											<td style="padding:2px">
+												<span>YourRef   </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px">
+												<span t-field="o.client_order_ref" />
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Incoterms  </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px">
+												<span t-field="o.incoterm.code" />
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Payment Term  </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px">
+												<span t-field="o.payment_term" />
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Lead Time</span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px"></td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Sales Person   </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px">
+												<span t-field="o.user_id.name" />
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Validity   </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px"></td>
+										</tr>
+										<tr>
+											<td style="padding:2px">
+												<span>Currency  </span>
+											</td>
+											<td style="padding:2px">:</td>
+											<td style="padding:2px">
+												<span t-field="o.currency_id" />
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+
+						<table class="table table-condensed" width="100%">
+							<thead>
+								<tr>
+									<th width="12%">Serial No.</th>
+									<th class="text-center line" width="35%">Description/Part No</th>
+									<th class="text-left line" width="13%">ETD</th>
+									<th class="text-left line" width="5%">Qty</th>
+									<th class="text-left line" width="10%">Units</th>
+									<th class="text-right line" width="15%">Unit Price</th>
+									<th class="text-right line" width="10%">Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr t-foreach="o.order_line" t-as="line">
+									<td width="12%" class="text-center line">
+										<span t-esc="line_index+1" />
+									</td>
+									<td class="text-left line" width="35%">
+										<t t-if="line.product_id">
+											<span t-field="line.product_id.name" />
+											:
+											<span t-field="line.product_id.description" />
+										</t>
+
+									</td>
+									<td class="text-left line" width="12%">
+										<t t-if="o.picking_ids and line.product_id">
+											<span t-esc="get_etd(o.picking_ids,line.product_id)" />
+										</t>
+									</td>
+									<td class="text-left line" width="5%">
+										<span t-esc="get_qty(line.product_uom_qty)" />
+									</td>
+									<td class="text-left line" width="10%">
+										<span t-field="line.product_uom.name" />
+									</td>
+									<td class="text-right line" width="15%">
+										<span t-field="line.price_unit" />
+									</td>
+									<td class="text-right line" width="10%">
+										<span t-field="line.price_subtotal" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<br />
+						<br />
+						<br />
+						<br />
+						<div class="row" style="position:absolute;bottom:xxpx;">
+							<div class="col-xs-4 pull-right">
+								<table class="table table-condensed">
+									<tr class="border-black">
+										<td>
+											<strong>Sub-Total</strong>
+										</td>
+										<td class="text-right">
+											<span t-field="o.amount_untaxed" />
+										</td>
+									</tr>
+									<tr>
+										<td>Discount</td>
+										<td>
+											<span />
+										</td>
+									</tr>
+									<tr>
+										<td>Taxes</td>
+										<td class="text-right">
+											<span t-field="o.amount_tax" />
+										</td>
+									</tr>
+									<tr class="border-black">
+										<td>
+											<strong>Total</strong>
+										</td>
+										<td class="text-right">
+											<span t-field="o.amount_total" />
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div style="position:absolute;bottom:xxpx;">
+							<table width="100%">
+								<tr>
+									<td><b>Notes:</b></td>
+								</tr>
+								<tr>
+									<td width="70%">
+										<span t-field="o.note" />
+									</td>
+									<td width="30%"></td>
+								</tr>
+								<tr>
+									<td>Remarks :</td>
+								</tr>
+								<tr t-foreach="o.order_line" t-as="li">
+									<td>
+										<t t-if="li.product_id and li.product_id.remark">
+											<span t-field="li.product_id.remark" />
+										</t>
+									</td>
+
+								</tr>
+							</table>
+						</div>
+						<div style="page-break-before:always;">
+							<style>
+								OL { counter-reset: item }
+								LI { display: block }
+								LI:before {
+								content: counters(item, ".") " "; counter-increment: item }
+							</style>
+
+							<u>
+								<strong>
+									<center>STANDARD TERMS AND CONDITIONS</center>
+								</strong>
+							</u>
+							<ol>
+								<li>
+									<strong>AGREEMENT OF SALE:</strong>
+
+									<p>
+										These Standard Terms and Conditions of Sale (“Terms”) shall
+										apply
+										to Semiconductor Technologies Singapore Pte Ltd
+										(“Seller”)
+										Quotation,Acknowledgment or Invoice in which these
+										Terms are
+										specifically incorporated by reference (the
+										Quotation,
+										Acknowledgment, or Invoice together with these
+										Terms, the
+										“Agreement”). All purchases by Buyer of product and
+										or
+										services described in the Agreement (collectively, the
+										“Product”) are expressly limited to and conditioned upon
+										acceptance of these Terms, regardless of whether Buyer
+										purchases such Product through any media or means,including
+										but limited to, verbal or written purchase orders, electronic
+										orders, acknowledgments, confirmations, or other writings from
+										Buyer to Seller.
+									</p>
+									<p>
+										Unless such provisions are expressly agreed to by Seller in
+										a
+										writing signed by Seller, any additional or conflicting terms
+										and conditions contained on,attached to or referenced in
+										Buyer’s writings, or other prior or later communication from
+										Buyer to Seller, shall have no effect on the purchase of any
+										such Product by Buyer from Seller and are expressly rejected
+										by Seller.
+									</p>
+
+									<p>
+										These Terms along with the Quotation, Acknowledgment or
+										Invoice in
+										which they are incorporated by reference are deemed
+										an offer
+										for sale by Seller.If Buyer does not accept in writing
+										Seller’s offer to sell, Buyer’s commencement of performance
+										(including ordering, purchases or taking delivery of or
+										accepting Product) shall, in all cases, constitute Buyer’s
+										unqualified and unconditional acceptance of the Agreement. Any
+										conduct by Buyer which recognizes the existence of a contract
+										pertaining to the subject matter hereof shall constitute
+										acceptance by Buyer of this Agreement and all of its
+										Terms.Additional or different terms provided in Buyer’s
+										purchase order or any other documentation from Buyer which
+										vary in any degree from any of the Terms here in are hereby
+										objected to and rejected.
+									</p>
+									<p>
+										These Terms may be modified from time to time by Seller, by
+										notice
+										to Buyer. Each such modification shall be binding upon
+										Buyer
+										with respect to all purchases occurring after the date of
+										such
+										modification. Except as otherwise described herein, no
+										modification or termination hereof or waiver of any of the
+										obligations hereunder shall be effective unless in writing and
+										signed by the party against whom such modification,
+										termination or waiver is sought to be enforced.
+									</p>
+								</li>
+								<li>
+									<strong>CONFIDENTIALITY:</strong>
+									<ol type="decimal">
+										<li> Buyer covenants that it will hold in trust and confidence
+											any and all information of a confidential nature regarding
+											Semiconductor Technologies Singapore Pte Ltd’s business or
+											affairs, including, without limitation data provided by
+											Semiconductor Technologies Singapore Pte Ltd regarding the
+											design of the Products, and will not divulge, disclose, or in
+											any way distribute to anyone, except to employees with a need
+											to make use of such proprietary information.
+										</li>
+										<li>Buyer shall protect such proprietary information from
+											disclosure to others with the same degree of care that a
+											reasonable, diligent and prudent person would exercise in
+											protecting its own confidential information of like
+											sensitivity.
+										</li>
+										<li>
+											The foregoing obligation shall not be applicable if Buyer can
+											demonstrate by an appropriate document that such information:
+											<ol type="i">
+												<li>was already or later became, through no fault of Buyer,
+													generally available to the public
+												</li>
+												<li>was already known to Buyer prior to the disclosure
+													thereof by Semiconductor Technologies Singapore Pte Ltd
+												</li>
+												<li>Or has lawfully become known to Buyer through a third
+													party.
+												</li>
+											</ol>
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>VALIDITY:</strong>
+									<ol>
+										<li>All quotations are valid for 30 days, unless specified.
+										</li>
+										<li>Once a quote has passed the expiry date, Semiconductor
+											Technologies Singapore Pte Ltd may cancel the quote without
+											having to notify or receive an approval from customer.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>SPECIFICATION:</strong>
+									<ol>
+										<li>All goods supplied by us shall be in accordance with the
+											quotation given and any further specifications or
+											descriptions agreed or expressly listed or set out on the
+											face of the order.
+										</li>
+										<li>We must be informed in writing within 30 days of
+											acceptance of the quotation of any changes, alterations, or
+											reductions.
+										</li>
+										<li>If Buyer requests changes in specifications or designs
+											relating to any Product to be provided hereunder, shipment
+											schedules shall be revised,if necessary, and an equitable
+											adjustment, upward or downward, shall be made in price.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>PRICING:</strong>
+									<ol>
+										<li>The price in the final quotation may vary from the
+											original price if there are any price or product changes
+											requested by customers.
+										</li>
+										<li>We endeavor to honor every prices quoted, if there is a
+											price increase that is beyond our control, we reserve the
+											right to increase the price as necessary.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>SHIPMENT FEES, GST, VAT AND TAXES:</strong>
+									<ol>
+										<li>Prices listed are exclusive of all transportation,
+											insurance, license fees, customs duties, VAT, GST or any
+											other duties or taxes which may be chargeable in connection
+											with the supply of the products to Buyer, unless other
+											specific terms are shown on the quotation.
+										</li>
+										<li>Any such tax, fee, or charge of any nature whatsoever
+											designated, levied, based or imposed by any governmental
+											authority on, or measured by, the transaction between
+											Semiconductor Technologies Singapore Pte Ltd and Buyer shall
+											be paid by Buyer in addition to the prices quoted or
+											invoiced.
+										</li>
+										<li>In the event Semiconductor Technologies Singapore Pte Ltd
+											pays any such tax, fee, or charge, at the time of sale or
+											thereafter, Buyer shall promptly reimburse Semiconductor
+											Technologies Singapore Pte Ltd.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>NO MODIFICATION:</strong>
+									<ol>
+										<li>This quotation is complete as written, and no changes,
+											amendment or modification shall be made to this quotation
+											without a separate written quotation from Semiconductor
+											Technologies Singapore Pte Ltd.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>ACCEPTANCE:</strong>
+									<ol>
+										<li>On acceptance of the quotation by placing an order within
+											the specified period as of the quotation, you will be bound
+											by these terms and conditions stated. Each quotation accepted
+											shall constitute an individual legally binding contract
+											between you and us. Such contract is hereinafter referred to
+											in these terms and conditions as "an order".
+										</li>
+										<li>Please ensure that our quotation number and the
+											description on the quote to be the same as the one on the PO
+											to avoid any misunderstanding of parts required.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>CANCELLATION:</strong>
+									<ol>
+										<li>Buyer acknowledges that any Product being purchased
+											hereunder is being manufactured especially for Buyer. In no
+											event shall Buyer have the right to cancel, modify or delay
+											any order, except with Seller’s written consent and subject
+											to conditions then to be agreed upon, which shall include
+											protection of Seller against all losses.
+										</li>
+										<li>We reserve the right to retain any deposits or charge in
+											full for any cancellation of PO, depending on the duration of
+											cancellation made after PO was issued.
+										</li>
+										<li>
+											Cancellation of an order for the convenience of the customer
+											will result in the following charges:
+											<table width="70%" border="1 px solid black">
+												<tr>
+													<th>Milestone</th>
+													<th>Charge</th>
+												</tr>
+												<tr>
+													<td>Receipt of order prior to start of engineering</td>
+													<td>0%</td>
+												</tr>
+												<tr>
+													<td>Completion of engineering</td>
+													<td>25%</td>
+												</tr>
+												<tr>
+													<td>Completion of procurement</td>
+													<td>50%</td>
+												</tr>
+												<tr>
+													<td>Completion of sub-assemblies</td>
+													<td>75%</td>
+												</tr>
+												<tr>
+													<td>Completion of manufacturing</td>
+													<td>100%</td>
+												</tr>
+											</table>
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>DELIVERY</strong>
+									<ol>
+										<li>Semiconductor Technologies Singapore Pte Ltd will try to
+											ensure compliance with any delivery times and dates given,
+											but such times and dates are an estimate only. We will not be
+											responsible for any loss whatsoever arising from or
+											consequential upon delay in delivery.
+										</li>
+										<li>Semiconductor Technologies Singapore Pte Ltd have the
+											right to make partial shipments, and each partial shipment
+											shall be deemed a separate sale, and payment shall become due
+											therefore in accordance with the terms of payment as of the
+											quotation, unless otherwise specified.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>INCOTERMS:</strong>
+									<ol>
+										<li>Unless this Agreement expressly provides otherwise, the
+											Terms used in this Agreement shall have the meanings set
+											forth in INCOTERMS 2010, as published and promulgated by the
+											International Chamber of Commerce.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>TITLE AND RISK OF LOSS:</strong>
+									<ol>
+										<li>Notwithstanding any shipping term, title to any Product
+											sold and risk of loss of such Product passes to Buyer upon
+											delivery by Seller to the carrier and Product shall be deemed
+											“delivered” at such time, and any claims for losses or damage
+											occurring after delivery to carrier by Seller shall be made
+											by Buyer directly with the carrier.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>PAYMENT:</strong>
+									<ol>
+										<li>If payment hereunder is not made on time, Semiconductor
+											Technologies Singapore Pte Ltd, in addition to all other
+											legal, equitable and contract rights, shall be entitled to
+											interest on such overdue payment at the rate of 2% (two
+											percent) per month.
+										</li>
+										<li>Notwithstanding the foregoing, interest shall not be
+											charged on any overdue payment at a rate in excess of the
+											maximum rate permitted by law.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>WARRANTY:</strong>
+									<ol>
+										<li>Semiconductor Technologies Singapore Pte Ltd warrants that
+											the Product will conform, at the time of delivery to Buyer,
+											to the Agreement specifications specified in the quotation,
+											order acknowledgment, or invoice.
+										</li>
+										<li>In the case of Product bought from Semiconductor
+											Technologies Singapore Pte Ltd unable to conform,
+											Semiconductor Technologies Singapore Pte Ltd will offer
+											repair or exchange, solely if the cause of disability is due
+											to manufacturing reasons.
+										</li>
+										<li>If any form of repair or consultation from Semiconductor
+											Technologies Singapore Pte Ltd is required, the service will
+											be chargeable and cost has to be agreed before any form of
+											repair or consultation takes place.
+										</li>
+										<li>Semiconductor Technologies Singapore Pte Ltd and Buyer
+											expressly agree that the product excludes any form of
+											arranty, guarantees, or representations, expressed or
+											implied, of compatibility for a particular purpose or use.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>FAILURE ANALYSIS</strong>
+									<ol>
+										<li>
+											If Semiconductor Technologies Singapore Pte Ltd determines,
+											while analyzing your product, that repairs are needed due to
+											failures of parts that are neither supplied nor repaired by
+											Semiconductor Technologies Singapore or are needed due to
+											damage caused by misuse or misapplication, Semiconductor
+											Technologies Singapore Pte Ltd reserves the right to return
+											the product to you without repairing it, and will hold you
+											responsible for the diagnostic fee, shipment charges, plus
+											any applicable tax and also all other charges that are
+											involved in the process.
+											<li>Semiconductor Technologies Singapore Pte Ltd may hold you
+												responsible for the diagnostic fee, shipment charges, plus
+												any applicable tax,and all other charges involved in the
+												process if Semiconductor Technologies Singapore Pte Ltd
+												performs an analysis on your product,provides a quotation to
+												you, and you do not authorize Semiconductor Technologies
+												Singapore Pte Ltd to undertake the repairs for the quoted
+												charges.
+											</li>
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>REPAIR AND EVALUATION:</strong>
+									<ol>
+										<li>Unless your product is repaired under warranty, you will
+											be required to pay Semiconductor Technologies Singapore Pte
+											Ltd.
+										</li>
+										<li>Semiconductor Technologies Singapore Pte Ltd will issue a
+											quotation for the repair cost. Sending out the equipment to
+											Semiconductor Technologies Singapore Pte Ltd for repair
+											denotes the quoted pricing for repair is agreeable.
+										</li>
+										<li>Your payment is due when the product is returned to you
+											unless specified otherwise.
+										</li>
+										<li>The quoted amount will be an estimate and will be liable
+											to changes. It includes all parts, labor, and shipment
+											required for the repair of the product plus any applicable
+											tax.
+										</li>
+									</ol>
+								</li>
+								<li>
+									<strong>SERVICE:</strong>
+									<ol>
+										<li>
+											In the event the services of a Semiconductor Technologies
+											Singapore Pte Ltd required to provide field work or
+											assistance to include, but not be limited to, installation,
+											supervision, training of personnel, etc., following
+											conditions applies:
+											<ol>
+												<li>
+													Semiconductor Technologies Singapore Pte Ltd shall
+													furnish technical and
+													professional services as may be
+													required including
+													labor,transportation, and supervision and
+													shall perform all
+													operations necessary and required to
+													satisfactorily provide
+													technical assistance and direction to
+													the customer during
+													the installation, start-up, and/or
+													training of
+													Semiconductor Technologies Singapore Pte Ltd
+													furnished
+													equipment, as may be requested.
+												</li>
+												<li>
+													Materials, supplies and equipment may either be supplied
+													by
+													Semiconductor Technologies Singapore Pte Ltd or buyer, to
+													be determined at such time that a contract for field
+													service work is initiated.
+												</li>
+												<li>
+													Upon Semiconductor Technologies Singapore Pte Ltd
+													completion of
+													work at the site, Semiconductor Technologies
+													Singapore Pte
+													Ltd shall submit a trip report, documenting
+													dates at the
+													site, people contacted, activities, problems
+													observed, and
+													inspection performed by field personnel.
+												</li>
+												<li>
+													Field Service Orders require customers to FAX a Purchase
+													Order
+													to Semiconductor Technologies Singapore Pte Ltd prior
+													to
+													the departure of the Service Engineer to the jobsite.
+													Work
+													performed due to defective material or workmanship
+													within
+													limitations of the standard warranty will be
+													performed at
+													no charge, subject to the inspection of
+													products.
+												</li>
+											</ol>
+										</li>
+									</ol>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_sale_order">
+			<t t-call="report.html_container">
+				<t t-foreach="doc_ids" t-as="doc_id">
+					<t
+						t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_report_template')" />
+				</t>
+			</t>
+		</template>
+	</data>
 </openerp>
