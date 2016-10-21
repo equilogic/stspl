@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2016 Serpent Consulting Services Pvt. Ltd.
-#    (<http://www.serpentcs.com>)
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +18,30 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import tax_invoice_report
+
+
+from openerp.report import report_sxw
+from openerp import models, api, _, fields
+from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
+class report_print_tax_invoice_stspl(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(report_print_tax_invoice_stspl, self).__init__(cr, uid, name, context)
+        self.localcontext.update({
+            'get_qty':self._get_qty,
+#            'get_etd':self._get_etd,
+            
+        })
+
+    def _get_qty(self, qty):
+        return int(qty)
+
+class report_print_tax_invoice_stspl_extended(models.AbstractModel):
+    _name = 'report.stspl_purchase.report_stspl_tax_invoice'
+    _inherit = 'report.abstract_report'
+    _template = 'stspl_purchase.report_stspl_tax_invoice'
+    _wrapped_report_class = report_print_tax_invoice_stspl
 
 
 

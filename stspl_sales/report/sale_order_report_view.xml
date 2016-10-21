@@ -312,7 +312,7 @@
 							</table>
 						</div>
 						<div style="page-break-before:always;">
-							<style>
+							<style type="text/css">
 								OL { counter-reset: item }
 								LI { display: block }
 								LI:before {
