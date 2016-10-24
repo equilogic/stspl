@@ -1,0 +1,19 @@
+<openerp>
+	<data>
+
+		<record id="seq_type_genrate_develiry_order_id" model="ir.sequence.type">
+            <field name="name">Stock Picking</field>
+            <field name="code">stock.picking.new</field>
+        </record>
+
+		<record id="genrate_develiry_order_id_0" model="ir.sequence">
+			<field name="name">Stock Picking</field>
+			<field name="code">stock.picking.new</field>
+			<field name="number_next">1</field>
+			<field name="number_increment">1</field>
+			<field name="padding">4</field>
+			<field name="prefix">D%(y)s-</field>
+		</record>
+
+	</data>
+</openerp>
