@@ -31,6 +31,7 @@ class report_print_sale_order(report_sxw.rml_parse):
         self.localcontext.update({
             'get_qty':self._get_qty,
             'get_etd':self._get_etd,
+            'get_quat':self._get_quat,
             
         })
 
@@ -45,11 +46,13 @@ class report_print_sale_order(report_sxw.rml_parse):
                     date_formatted = datetime.strftime(converted_date, "%d-%m-%Y")
                     return date_formatted
         return ''
-
-
-        
-        
     
+    def _get_quat(self,date,name):
+        if date:
+            converted_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            date_formatted = datetime.strftime(converted_date, "%y")
+        return 'Q'+date_formatted+'-'+name
+
 class report_print_sale_order_extended(models.AbstractModel):
     _name = 'report.stspl_sales.report_sale_order'
     _inherit = 'report.abstract_report'

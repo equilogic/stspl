@@ -109,10 +109,7 @@
 						<div>
 							<h3 t-if="o.state != 'draft'">SALES ORDER</h3>
 							<h3 t-if="o.state == 'draft'">
-								QUOTATION Q
-								<span t-field="o.date_order" t-field-options='{"format": "yy"}' />
-								-
-								<span t-field="o.name" />
+								QUOTATION <span t-esc="get_quat(o.date_order,o.name)"/>
 							</h3>
 							<div>
 								<b>QUOTATION DATE:</b>
@@ -141,61 +138,61 @@
 								<td width="55%">
 									<table>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>YourRef   </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px">
+											<td style="padding:5px">:</td>
+											<td style="padding:5px">
 												<span t-field="o.client_order_ref" />
 											</td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Incoterms  </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px">
+											<td style="padding:5px">:</td>
+											<td style="padding:5px">
 												<span t-field="o.incoterm.code" />
 											</td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Payment Term  </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px">
+											<td style="padding:5px">:</td>
+											<td style="padding:5px">
 												<span t-field="o.payment_term" />
 											</td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Lead Time</span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px"></td>
+											<td style="padding:5px">:</td>
+											<td style="padding:5px"></td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Sales Person   </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px">
+											<td style="padding:5px">:</td>
+											<td style="padding:5px">
 												<span t-field="o.user_id.name" />
 											</td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Validity   </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px"></td>
+											<td style="padding:5px">:</td>
+											<td style="padding:5px"></td>
 										</tr>
 										<tr>
-											<td style="padding:2px">
+											<td style="padding:5px">
 												<span>Currency  </span>
 											</td>
-											<td style="padding:2px">:</td>
-											<td style="padding:2px">
+											<td style="padding:5px">:</td>
+											<td style="padding:5px">
 												<span t-field="o.currency_id" />
 											</td>
 										</tr>
@@ -249,6 +246,8 @@
 								</tr>
 							</tbody>
 						</table>
+						<br />
+						<br />
 						<br />
 						<br />
 						<br />
