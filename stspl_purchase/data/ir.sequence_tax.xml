@@ -1,0 +1,19 @@
+<openerp>
+	<data>
+
+		<record id="seq_type_genrate_tax_invoice_id" model="ir.sequence.type">
+            <field name="name">Account Invoice</field>
+            <field name="code">account.invoice.new</field>
+        </record>
+
+		<record id="genrate_tax_invoice_id_0" model="ir.sequence">
+			<field name="name">Account Invoice</field>
+			<field name="code">account.invoice.new</field>
+			<field name="number_next">1</field>
+			<field name="number_increment">1</field>
+			<field name="padding">3</field>
+			<field name="prefix">%(y)s-</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,336 @@
+<openerp>
+    <data>
+        <template id="external_layout_stspl_sales_acknowledgment_report_template">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+              <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+              <t t-set="company" t-value="res_company"></t>
+            </t>        
+            <t t-call="stspl_sales.external_layout_header_stspl_sales_acknowledgment_report_template"/>
+            <t t-raw="0"/>
+            <t t-call="stspl_sales.external_layout_footer_stspl_sales_acknowledgment_report_template"/>
+        </template>
+
+       <!-- Header for Sales Delivery Report -->
+
+        <template id="external_layout_header_stspl_sales_acknowledgment_report_template">
+            <div class="header">
+              <div class="row">
+              <div class="col-xs-2">
+                <span t-if="o.company_id and o.company_id.logo">
+                  <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 50px;"/>
+                </span>
+              </div>
+
+              <div class="col-xs-3 col-xs-offset-1">
+                <div t-if="o.company_id" style="font-size:9px">
+                  <div>
+                    <span t-field="o.company_id.name" ></span>
+                  </div>
+                  <div>
+                    <span t-field="o.company_id.street"/>
+                  </div>
+                  <div>
+                    <span t-field="o.company_id.city"/>
+                    ,
+                    <span t-field="o.company_id.state_id"/>
+                    <span t-field="o.company_id.zip"/>
+                    <span t-field="o.company_id.country_id"/>
+                  </div>
+                  <div>
+                    <span>ph :</span>
+                    <span t-field="o.company_id.phone"/>
+                  </div>
+                  <div>
+                    <span>fx :</span>
+                    <span t-field="o.company_id.fax"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-5 col-xs-offset-1 text-right" >
+                <div >
+                  <h4><b><span style="font-size:16px">Sales Order Number:</span><span style="padding: 5px" t-field="o.name"/><br/></b></h4>
+                </div>
+                <div style="font-size:11px">
+                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+                </div>
+              </div>
+            </div>
+            </div>
+        </template>
+            <!-- Footer for Sales Delivery Report -->
+        <template id="external_layout_footer_stspl_sales_acknowledgment_report_template">
+
+          <div class="footer"> 
+            <table style="border-top:1px solid;font-size:11px" width="100%">
+              <tr>
+                <td>
+                  <ul class="list-inline" style='text-align:center' width="20%">
+                    <li></li>
+                    <li><span class="page"/></li>
+                    <li>of</li>
+                    <li><span class="topage"/></li>
+                  </ul>
+                </td>
+
+                <td>
+                  <div class="list-inline" style='text-align:right' width="25%">
+                    <span>Print Date:</span><span style="padding: 5px" t-field="o.date_order"/>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </template>
+
+        <!-- Template for Sales Delivery Report -->
+
+        <template id="sgtpl_sale_acknowledgment_report_template">
+          <style type="text/css"> td.line , span.line ,th.line {font-family:times new roman;}</style>
+          <t t-call="report.html_container">
+            <t t-call="stspl_sales.external_layout_stspl_sales_acknowledgment_report_template">
+              <div class="page">             
+                <div class="oe_structure"/>
+                <div style="text-align:center;">
+                  <h4><b>Acknowledgment</b></h4>
+                </div>
+
+                <!-- Page Content-->
+                <table class="table tabcenter-block" style="border: 0.5px solid black;font-size:12px" width="100%" >
+                  <tr>
+                    <th style="border-top: 0.5px solid;border-right:0.5px solid;" width="50%">Bill To:</th>
+                    <th style="border-top: 0.5px solid;" width="50%">Ship To:</th>
+                  </tr>
+                  <tr style="border:0.5px solid black">
+                    <td width="50%" style="border-top: 0px white;">
+                      <div t-if="o.partner_id">
+                        <div>
+                          <b><span t-field="o.partner_id.name" ></span></b>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.street"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.city"/>
+                          <span t-field="o.partner_id.state_id"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.country_id"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.zip"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.country_id"/>
+                        </div>
+                      </div>
+                      <br/>
+                    </td>
+
+                    <td width="50%" style="border-left: 0.5px solid; border-top: 0px white;">
+                      <div t-if="o.partner_id">
+                        <div>
+                          <b><span t-field="o.partner_id.name" ></span></b>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.street"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.city"/>
+                          <span t-field="o.partner_id.state_id"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.country_id"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.zip"/>
+                        </div>
+                        <div>
+                          <span t-field="o.partner_id.country_id"/>
+                        </div>
+                        <div>
+                          <span>ph :</span>
+                          <span t-field="o.partner_id.phone"/>
+                        </div>
+                      </div>
+                      <p><b>Attention:</b><b><span style="padding:5px;" t-field="o.name"/></b></p>
+                    </td>
+                  </tr>
+                </table>
+
+                <table width="100%" style="font-size:12px">
+                  <tr>
+                    <th  width="17%">Payment Term</th>
+                    <th  width="16%">Customer PO</th>
+                    <th  width="16%">Ship Via</th>
+                    <th  width="17%">Ordered By</th>
+                    <th  width="17%">Sales Person</th>
+                  </tr>
+                  <br/>
+                  <t t-foreach="o.partner_id" t-as="s"> 
+                    <tr>
+                      <td style="text-align:center" width="17%">
+                        <span t-field="o.payment_term"/>
+                      </td>
+
+                      <td style="text-align:center" width="16%">
+                        <t t-if="o.name">
+                          <span t-field="o.name"/></t>
+                      </td>
+
+                      <td style="text-align:center" width="17%">
+                        <t t-if="o.name">
+                          <span t-field="o.name"/></t>
+                      </td>
+
+                      <td style="text-align:center" width="17%">
+                        <t t-if="o.name">
+                          <span t-field="o.name"/></t>
+                      </td>
+
+                      <td style="text-align:center" width="17%">
+                        <span t-field="o.user_id"/>
+                      </td>
+
+                    </tr>
+                  </t>
+                </table>
+
+                <br/>
+
+                <table style="border:0.5px solid black;font-size:12px" width="100%">
+                    <tr style="border:0.5px solid black">
+                      <th style="border:0.5px solid black;padding:5px" width="5%">Line</th>
+                      <th style="border:0.5px solid black;padding:5px" width="10%">Cust line</th>
+                      <th style="border:0.5px solid black;padding:5px" width="40%">Part Number</th>
+                      <th style="border:0.5px solid black;padding:5px" width="10%">Price</th>
+                      <th style="border:0.5px solid black;padding:5px" width="5%">Qty</th>
+                      <th style="border:0.5px solid black;padding:5px" width="15%">Extended Price</th>
+                    </tr>
+
+                    <t t-foreach="o.order_line" t-as="s"> 
+                      <tr style="border:0.5px solid black">
+                        <td style="border:0.5px solid black;" width="5%">
+                          <span t-esc="s_index+1" />
+                        </td>
+
+                        <td style="border:0.5px solid black;" width="10%">
+                          <span t-esc="s_index+1" />
+                        </td>
+
+                        <td style="border:0.5px solid black;padding:5px" width="40%">
+                          <t t-if="s.name">
+                            <span t-field="s.name"/><br/>
+                            <span><b>Adder Codes:</b></span><span t-field="s.name"/><br/>
+                            <span><b>Part Description:</b></span><span t-field="s.name"/><br/>
+                            <span><b>Notes:</b></span><span t-field="s.name"/><br/>
+                            <span><b>Scheduled Ship Date:</b></span><span t-field="s.name"/><br/>
+                          </t>
+                        </td>
+
+                        <td style="border:0.5px solid black;padding:5px" width="10%">
+                          <span t-field="s.price_unit"/>
+                        </td>
+
+                        <td style="border:0.5px solid black;padding:5px" width="5%">
+                          <span t-field="s.product_uom_qty" />
+                        </td>
+
+                        <td style="border:0.5px solid black;padding:5px" width="15%">
+                          
+                            <span t-field="s.price_unit"/>
+                        </td>
+                      </tr>
+                    </t>
+                </table>
+
+                <div style='text-align:right'>
+                  <td width="30%">
+                    <span><b>Sales Order Total:</b></span><span t-field="o.amount_total"/>
+                    <br/>
+                    <p>Plus Shipping and Tax Where Applicable.</p>
+                  </td>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Sipping Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id">
+                    <span> <b>Sipping Contacts:</b> </span>
+                    <span t-field="o.partner_id.name"/>,
+                    <span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>,
+                    <span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>,
+                    <span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Billing Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Billing Contacts:</b> </span>
+                    <span t-field="o.partner_id.name"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Ordered By:</b> </span>
+                    <span t-field="o.partner_id.name"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Sales Person:</b> </span>
+                    <span t-field="o.user_id"/>,,,
+                    <span t-field="o.user_id.email"/>
+                  </p>
+                </div>
+
+                <div  style="font-size:11px">
+                  <p>
+                    This is an acknowledgment of the order received by Alicat Scientific, and a list of the items to be delivered. If there are any discrepancies between what
+                    is shown and what you intended to order, please notify us immediately so corrections can be made. All prices listed in U.S. Dollars.
+                  </p>
+                  <p>
+                    For customers outside of the United States, import duties/taxes are not included in the above pricing. Contact your local Customs Department with any
+                    questions regarding the billing of import duties/taxes. Purchase Orders will be processed in accordance with Alicat Standard Terms and Conditions of
+                    Sale and Quotation Agreement. The Agreement can be reviewed at http://www.alicatscientific.com/terms_of_sale.php
+                  </p>
+                </div>
+              </div> 
+            </t>
+          </t>
+        </template>
+
+        <template id="report_sale_acknowledgment">
+          <t t-call="report.html_container">
+            <t t-foreach="doc_ids" t-as="doc_id">
+              <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_acknowledgment_report_template')"/>
+            </t>
+          </t>
+        </template>
+    </data>
+</openerp>

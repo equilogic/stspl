@@ -1,4 +1,11 @@
-from openerp  import fields,models,api
+from datetime import date, datetime
+from dateutil import relativedelta
+import json
+import time
+
+from openerp.osv import fields, osv
+from openerp import models,fields,api
+
 
 class account_invoice(models.Model):
     
@@ -6,6 +13,20 @@ class account_invoice(models.Model):
 
     purchase_id= fields.Many2one('purchase.order','Prchase Id')
     sales_id=fields.Many2one('sale.order','Sales Id')
+
+
+    @api.model
+    def create(self,vals):
+        res = super(account_invoice,self).create(vals)
+        if res:
+            seq_ids = self.env['ir.sequence'].search([('code','=', 'account.invoice.new')])
+            if seq_ids:
+                next_id = self.env['ir.sequence'].next_by_code('account.invoice.new')
+            
+                res.write({'number':next_id})
+        return res
+        
+
 
 class purchase_order(models.Model):
     _inherit = 'purchase.order'
@@ -23,3 +44,5 @@ class sale_order(models.Model):
         res=super(sale_order,self)._prepare_invoice(cr, uid, order, lines, context=context)
         res.update({'sales_id':order.id})
         return res
+
+

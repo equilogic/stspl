@@ -1,0 +1,277 @@
+<openerp>
+    <data>
+        <template id="external_layout_stspl_picking_list_report_template">
+      		  <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+              <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+              <t t-set="company" t-value="res_company"></t>
+            </t>        
+            <t t-call="stspl_sales.external_layout_header_stspl_picking_list_report_template"/>
+            <t t-raw="0"/>
+            
+        </template>
+
+    	 <!-- Header for Packing List Report -->
+
+        <template id="external_layout_header_stspl_picking_list_report_template">
+          <div class="header">
+            <div class="col-xs-6">
+              <span t-if="o.company_id and o.company_id.logo">
+                <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo"
+                  style="max-height: 75px;" />
+              </span>
+
+              <div t-if="o.company_id" style="font-size:13px">
+                <div>
+                  <h4><b><span t-field="o.company_id.name"></span></b></h4>
+                </div>
+                <div>
+                  <span t-field="o.company_id.street" />
+                </div>
+                <div>
+                  <span t-field="o.company_id.city" />
+                  <span t-field="o.company_id.state_id" />
+                  <span t-field="o.company_id.zip" />
+                  <span t-field="o.company_id.country_id" />
+                </div>
+
+                <div>
+                  <span>Tel :</span>
+                  <span t-field="o.company_id.phone" />
+
+                  <span>Fax :</span>
+                  <span t-field="o.company_id.fax" />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-5">
+              <div>
+                <table style="border: 1px solid;width:345px;border-radius:50px;font-size:15px">
+                    <th style="text-align:center;">
+                      <p>
+                        <b>PACKING LIST</b>
+                      </p>
+                    </th>
+                </table>
+              </div>
+              <br/>
+              <div style="border: 1px solid black;padding: 3px 10px;width: 345px;border-radius: 15px;font-size:10.5px">
+                <table>
+                  <tr t-foreach="o.order_line" t-as="s">
+                    <td style="padding:5px">
+                      <span>PAGE NO.   </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-esc="s_index+1" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>INVOICE#  </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-field="o.name" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>SHIP DATE  </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-field="o.date_order" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>DOCUMENTARY CREDIT #</span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>SALESMAN   </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-field="o.user_id.name" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>CUSTOMER PH #   </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>CUSTOMER PO #  </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-field="o.currency_id" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px">
+                      <span>FREIGHT TERMS  </span>
+                    </td>
+                    <td style="padding:5px">:</td>
+                    <td style="padding:5px">
+                      <span t-field="o.currency_id" />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </template>
+    	   
+
+        <!-- Template for Sales Delivery Report -->
+
+        <template id="sgtpl_picking_list_report_template">
+          <style type="text/css"> td.line , span.line ,th.line {font-family:times new roman;}</style>
+        	<t t-call="report.html_container">
+            <t t-call="stspl_sales.external_layout_stspl_picking_list_report_template">
+              <div class="page">             
+                <div class="oe_structure"/>
+                <div class="row">
+                  <br/><br/><br/><br/><br/><br/><br/><br/>
+                  <div class="col-xs-6">
+                    <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
+
+                      <th style="border-top: 1px solid;border-right:1px solid;" width="50%">BILL TO ADDR</th>
+                      <div t-if="o.company_id">
+                        <div>
+                          <span t-field="o.company_id.name"></span>
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.street" />
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.city" />
+                          <span t-field="o.company_id.state_id" />
+                          <span t-field="o.company_id.zip" />
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.country_id" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-5">
+                      <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
+
+                        <th style="border-top: 1px solid;border-right:1px solid;" width="50%">SHIP TO ADDR</th>
+                        <div t-if="o.company_id">
+                        <div>
+                          <span t-field="o.company_id.name"></span>
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.street" />
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.city" />
+                          <span t-field="o.company_id.state_id" />
+                          <span t-field="o.company_id.zip" />
+                        </div>
+                        <div>
+                          <span t-field="o.company_id.country_id" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+
+                <div style="border: 1px solid black;padding: 3px 10px;width: 720px;border-radius: 10px;font-size:12px">
+                  <table width="100%" >
+                    <tr>
+                      <td colspan="3" width="35%">
+                        <span>SHIP VIA:</span><span t-field="o.partner_id.name"/>
+                      </td>
+                      <td colspan="2" width="35%">
+                        <span>TERMS:</span><span t-field="o.partner_id.company_id"/>
+                      </td>
+                      <td colspan="2" width="30%">
+                         <span>ACCT:</span><span t-field="o.partner_id.phone"/>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 1px solid">
+                      <td class="text-center line" width="10%">ITEM #</td>
+                      <td class="text-center line" width="10%">RCH P/N</td>
+                      <td class="text-center line" width="15%">QUANTIY ORDERED</td>
+                      <td class="text-center line" width="20%">UNIT</td>
+                      <td class="text-center line" width="15%">PREVIOUS QTY SHIPPED</td>
+                      <td class="text-center line" width="15%">BACKORDER QTY</td>
+                      <td class="text-center line" width="15%">QTY SHIPPED</td>
+                    </tr>
+               	  </table>
+                </div>
+                <table width="100%">
+                  <tr t-foreach="o.order_line" t-as="line">
+                    <td width="7%" style="text-align:right">
+                      <b><span t-esc="line_index+1"/></b>
+                    </td>
+
+                    <td  width="10%" style="text-align:right" >
+                      <b><span t-esc="line_index+1"/></b>
+                    </td>
+
+                    <td width="75%">
+                      <span style="font-size:11px;">DESCRIPTION:</span><span style="padding:5px" t-field="line.product_id.name"/>
+                    </td>
+                  </tr>
+
+                  <tr t-foreach="o.order_line" t-as="line">
+                    <th></th>
+                    <th></th>
+
+                    <td width="10%" class="linebreak">
+                      <b><span t-field="line.product_uom_qty"/></b>
+                    </td>
+
+                    <td width="20%" class="text-center line">
+                      <span t-field="line.product_uom.name" />
+                    </td>
+
+                    <td width="30%" class="text-center line">
+                      <span t-field="line.product_uom_qty" />
+                    </td>
+
+                    <td width="40.%" class="text-center line">
+                      <span t-field="line.product_uom_qty" />
+                    </td>
+
+                    <td width="30%" class="text-center line">
+                      <b><span t-field="line.product_uom_qty"/></b>
+                    </td>
+                  </tr>    
+                </table>         
+              </div> 
+     		    </t>
+     	    </t>
+        </template>
+
+        <template id="report_packing_list">
+      		<t t-call="report.html_container">
+          	<t t-foreach="doc_ids" t-as="doc_id">
+              <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_picking_list_report_template')"/>
+          	</t>
+      		</t>
+        </template>
+    </data>
+</openerp>

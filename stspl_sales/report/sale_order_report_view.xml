@@ -11,12 +11,13 @@
 				<t t-set="company" t-value="res_company"></t>
 			</t>
 
-			<t t-call="stspl_sales.external_layout_header_stspl_sales_report_template" />
+			<!-- <t t-call="stspl_sales.external_layout_header_stspl_sales_report_template" /> -->
 			<t t-raw="0" />
-			<t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" />
+			<!-- <t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" /> -->
 		</template>
+
 		<!-- Header for Sales Report -->
-		<template id="external_layout_header_stspl_sales_report_template">
+<!-- 		<template id="external_layout_header_stspl_sales_report_template">
 			<div class="header">
 				<div class="col-xs-3">
 					<span t-if="o.company_id and o.company_id.logo">
@@ -25,17 +26,17 @@
 					</span>
 				</div>
 				<div class="col-xs-8 col-xs-offset-1 text-right">
-					<div t-if="o.company_id">
+					<div t-if="o.company_id" style="font-size:13px">
 						<div>
-							<strong>
-								<span t-field="o.company_id.name"></span>
-							</strong>
+							<strong><span t-field="o.company_id.name"></span></strong>
 						</div>
 						<div>
-							<span t-field="o.company_id.street" />
-							<span t-field="o.company_id.city" />
-							<span t-field="o.company_id.state_id" />
-							<span t-field="o.company_id.country_id" />
+							<span t-field="o.company_id.street"/>
+							,
+							<span t-field="o.company_id.city"/>
+							,
+							<span t-field="o.company_id.country_id"/>
+							<span t-field="o.company_id.zip"/>
 						</div>
 
 						<div>
@@ -56,11 +57,48 @@
 					</div>
 				</div>
 			</div>
-		</template>
+		</template> -->
 		<!-- Footer for Sales Report -->
-		<template id="external_layout_footer_stspl_sales_report_template">
+<!-- 		<template id="external_layout_footer_stspl_sales_report_template">
 			<div class="footer">
-				<table style="border-top:1px solid ;" width="100%">
+			    <div class="row" style="position:absolute;bottom:xxpx;">
+					<div class="col-xs-4 pull-right" style="font-size:11.5px">
+						<table class="table table-condensed">
+							<tr>
+								<td>Sub-Total</td>
+								<td class="text-right">
+									<span t-field="o.amount_untaxed" />
+								</td>
+							</tr>
+							<tr>
+								<td>Discount</td>
+								<td>
+									<span />
+								</td>
+							</tr>
+							<tr>
+								<td>GST ZR 0%</td>
+								<td class="text-right">
+									<span t-field="o.amount_tax" />
+								</td>
+							</tr>
+							<tr>
+								<td><b>Total</b></td>
+								<td class="text-right">
+									<span t-field="o.amount_total" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<br/><br/><br/><br/><br/>
+				<div style="text-align:left;font-size:10px;">
+					<u>
+						<p>Note:</p>
+					</u>
+					<p t-if="o.partner_id.comment"><span t-field="o.partner_id.comment"/></p>
+	        	</div>
+				<table style="border-top:0.5px solid;font-size:12px;" width="100%">
 					<tr>
 						<td width="80%">
 							<div>
@@ -71,6 +109,7 @@
 								<span>email : </span>
 								<span t-field="o.company_id.email" />
 							</div>
+							<br/>
 							<div>
 								<span>This is a computer generated documents and no signature is
 									required
@@ -78,6 +117,7 @@
 							</div>
 						</td>
 						<td width="20%">
+							<br/>
 							<ul class="list-inline" style='text-align:right'>
 								<li>Page:</li>
 								<li>
@@ -92,7 +132,7 @@
 					</tr>
 				</table>
 			</div>
-		</template>
+		</template> -->
 
 		<!-- Template for Sales Report -->
 		<template id="sgtpl_sale_report_template">
@@ -106,26 +146,53 @@
 				<t t-call="stspl_sales.external_layout_stspl_sales_report_template">
 					<div class="page">
 						<div class="oe_structure" />
-						<div>
-							<h3 t-if="o.state != 'draft'">SALES ORDER</h3>
-							<h3 t-if="o.state == 'draft'">
-								QUOTATION <span t-esc="get_quat(o.date_order,o.name)"/>
-							</h3>
-							<div>
-								<b>QUOTATION DATE:</b>
+						<div class="row">
+							<div class="col-xs-3">
+								<span t-if="o.company_id and o.company_id.logo">
+									<img t-att-src="'data:image/png;base64,%s' % o.company_id.logo"
+										style="max-height: 75px;" />
+								</span>
 							</div>
-							<div>
-								<span t-field="o.date_order" t-field-options='{"format": "dd-MM-Y HH:MM:SS"}' />
+							<div class="col-xs-8 col-xs-offset-1 text-right">
+								<div t-if="o.company_id" style="font-size:12px">
+									<div>
+										<h5><b><span t-field="o.company_id.name"></span></b></h5>
+									</div>
+									<div>
+										<span t-field="o.company_id.street"/>
+										,
+										<span t-field="o.company_id.city"/>
+										,
+										<span t-field="o.company_id.country_id"/>
+										<span t-field="o.company_id.zip"/>
+									</div>
+
+									<div>
+										<span>Tel :</span>
+										<span t-field="o.company_id.phone" />
+
+										<span>Fax :</span>
+										<span t-field="o.company_id.fax" />
+									</div>
+									<div>
+										<span>CO. REG. NO. </span>
+										<span t-field="o.company_id.company_registry" />
+									</div>
+									<div>
+										<span class="text-right">GST REG NO. </span>
+										<span t-field="o.company_id.gst_no" />
+									</div>
+								</div>
 							</div>
 						</div>
-						<br />
-						<table width="100%"
-							style="border-bottom:1 px solid black;font-size:15px;">
-							<tr>
+						<br/>
+						<div class="row">
+							<div class="col-xs-7" style="font-size:12px">
+								<h4 t-if="o.state == 'draft'"><b>QUOTATION</b></h4>
+								<h4 t-if="o.state != 'draft'"><b>SALES ORDER</b></h4>
+
 								<td width="60%">
-									<span>
-										<strong>TO:</strong>
-									</span>
+									<span>TO:</span>
 									<div t-if="o.partner_id ">
 										<div t-field="o.partner_id" />
 										<div t-field="o.partner_id.street" />
@@ -133,10 +200,26 @@
 										<div t-field="o.partner_id.state_id" />
 										<div t-field="o.partner_id.country_id" />
 									</div>
-
+									<br/>
+									<div>
+										<span>ATTN:</span><span style="padding:25px" t-field="o.user_id"/><br/>
+										<span>C.C:</span><span style="padding:25px" t-field="o.partner_id.website"/><br/>
+										<span>TEL:</span><span style="padding:25px" t-field="o.partner_id.phone"/><br/>
+									</div>
 								</td>
-								<td width="55%">
-									<table>
+							</div>
+
+							<div class="col-xs-5 text-right">
+                   				<div style="font-size:13px">
+                   					<span>NO.</span>
+                   					<strong><span style="padding:82px" t-esc="get_quat(o.date_order,o.name)"/></strong>
+                   				</div>
+                   				<div style="font-size:12px">
+                   					<span>DATE</span><span style="padding:59px" t-field="o.date_order" t-field-options='{"format": "dd-MM-Y HH:MM:SS"}' />
+                   				</div>
+
+                   				<td width="55%">
+									<table style="font-size:11px">
 										<tr>
 											<td style="padding:5px">
 												<span>YourRef   </span>
@@ -198,15 +281,17 @@
 										</tr>
 									</table>
 								</td>
-							</tr>
-						</table>
+		                  	</div>
+						</div>
+						<br />
 
-						<table class="table table-condensed" width="100%">
+						<table class="table table-condensed" width="100%" style="border-top:0.5px solid;font-size:11px;">
 							<thead>
 								<tr>
-									<th width="12%">Serial No.</th>
+									<th t-if="o.state == 'draft'" width="12%">Item No</th>
+									<th t-if="o.state != 'draft'" width="12%">Serial No.</th>
 									<th class="text-center line" width="35%">Description/Part No</th>
-									<th class="text-left line" width="13%">ETD</th>
+									<th t-if="o.state != 'draft'" class="text-left line" width="13%">ETD</th>
 									<th class="text-left line" width="5%">Qty</th>
 									<th class="text-left line" width="10%">Units</th>
 									<th class="text-right line" width="15%">Unit Price</th>
@@ -215,7 +300,10 @@
 							</thead>
 							<tbody>
 								<tr t-foreach="o.order_line" t-as="line">
-									<td width="12%" class="text-center line">
+									<td t-if="o.state == 'draft'" width="12%" class="text-center line">
+										<span t-esc="line_index+1" />
+									</td>
+									<td t-if="o.state != 'draft'" width="12%" class="text-center line">
 										<span t-esc="line_index+1" />
 									</td>
 									<td class="text-left line" width="35%">
@@ -224,9 +312,8 @@
 											:
 											<span t-field="line.product_id.description" />
 										</t>
-
 									</td>
-									<td class="text-left line" width="12%">
+									<td t-if="o.state != 'draft'" class="text-left line" width="12%">
 										<t t-if="o.picking_ids and line.product_id">
 											<span t-esc="get_etd(o.picking_ids,line.product_id)" />
 										</t>
@@ -246,71 +333,82 @@
 								</tr>
 							</tbody>
 						</table>
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<div class="row" style="position:absolute;bottom:xxpx;">
-							<div class="col-xs-4 pull-right">
-								<table class="table table-condensed">
-									<tr class="border-black">
-										<td>
-											<strong>Sub-Total</strong>
-										</td>
-										<td class="text-right">
-											<span t-field="o.amount_untaxed" />
-										</td>
-									</tr>
-									<tr>
-										<td>Discount</td>
-										<td>
-											<span />
-										</td>
-									</tr>
-									<tr>
-										<td>Taxes</td>
-										<td class="text-right">
-											<span t-field="o.amount_tax" />
-										</td>
-									</tr>
-									<tr class="border-black">
-										<td>
-											<strong>Total</strong>
-										</td>
-										<td class="text-right">
-											<span t-field="o.amount_total" />
-										</td>
-									</tr>
-								</table>
+						<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+						<div class="row">
+						    <div class="row" style="position:absolute;bottom:xxpx;">
+								<div class="col-xs-4 pull-right" style="font-size:11px">
+									<table class="table table-condensed">
+										<tr>
+											<td>Sub-Total</td>
+											<td class="text-right">
+												<span t-field="o.amount_untaxed" />
+											</td>
+										</tr>
+										<tr>
+											<td>Discount</td>
+											<td>
+												<span />
+											</td>
+										</tr>
+										<tr>
+											<td>GST ZR 0%</td>
+											<td class="text-right">
+												<span t-field="o.amount_tax" />
+											</td>
+										</tr>
+										<tr>
+											<td style="font-size:12px"><b>Total</b></td>
+											<td class="text-right">
+												<span t-field="o.amount_total" />
+											</td>
+										</tr>
+									</table>
+								</div>
 							</div>
-						</div>
-						<div style="position:absolute;bottom:xxpx;">
-							<table width="100%">
+							<br/><br/><br/><br/><br/>
+							<div style="text-align:left;font-size:10px;">
+								<u>
+									<p>Note:</p>
+								</u>
+								<p t-if="o.partner_id.comment"><span t-field="o.partner_id.comment"/></p>
+				        	</div>
+							<table style="border-top:0.5px solid;font-size:11px;" width="100%">
 								<tr>
-									<td><b>Notes:</b></td>
-								</tr>
-								<tr>
-									<td width="70%">
-										<span t-field="o.note" />
+									<td width="80%">
+										<div>
+											<span>Please visit our website @ </span>
+											<span t-field="o.company_id.website" />
+										</div>
+										<div>
+											<span>email : </span>
+											<span t-field="o.company_id.email" />
+										</div>
+										<br/>
+										<div>
+											<span>This is a computer generated documents and no signature is
+												required
+											</span>
+										</div>
 									</td>
-									<td width="30%"></td>
-								</tr>
-								<tr>
-									<td>Remarks :</td>
-								</tr>
-								<tr t-foreach="o.order_line" t-as="li">
-									<td>
-										<t t-if="li.product_id and li.product_id.remark">
-											<span t-field="li.product_id.remark" />
-										</t>
+									<td width="20%">
+										<br/>
+										<ul class="list-inline" style='text-align:right'>
+											<li>Page</li>
+											<li>
+												<span class="page" />
+											</li>
+											<li>/</li>
+											<li>
+												<span class="topage" />
+											</li>
+										</ul>
 									</td>
-
 								</tr>
 							</table>
 						</div>
-						<div style="page-break-before:always;">
+
+
+						<div style="page-break-before:always;font-size:9.5px">
 							<style>
 								OL { counter-reset: item }
 								LI { display: block }
@@ -318,7 +416,7 @@
 								content: counters(item, ".") " "; counter-increment: item }
 							</style>
 
-							<u>
+							<u style="font-size:13px">
 								<strong>
 									<center>STANDARD TERMS AND CONDITIONS</center>
 								</strong>
