@@ -148,7 +148,7 @@
               <div class="page">             
                 <div class="oe_structure"/>
                 <div class="row">
-                  <br/><br/><br/><br/><br/><br/><br/><br/>
+                  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                   <div class="col-xs-6">
                     <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
 
@@ -222,44 +222,46 @@
                	  </table>
                 </div>
                 <table width="100%">
-                  <tr t-foreach="o.order_line" t-as="line">
-                    <td width="7%" style="text-align:right">
-                      <b><span t-esc="line_index+1"/></b>
-                    </td>
+                  <t t-foreach="o.order_line" t-as="line">
+                    <tr >
+                      <td width="9%" style="text-align:right">
+                        <b><span t-esc="line_index+1"/></b>
+                      </td>
 
-                    <td  width="10%" style="text-align:right" >
-                      <b><span t-esc="line_index+1"/></b>
-                    </td>
+                      <td  width="9%" style="text-align:right" >
+                        <b><span t-esc="line_index+1"/></b>
+                      </td>
 
-                    <td width="75%">
-                      <span style="font-size:11px;">DESCRIPTION:</span><span style="padding:5px" t-field="line.product_id.name"/>
-                    </td>
-                  </tr>
+                      <td width="10%" colspan="5" class="text-left line">
+                        <span style="font-size:11px;">DESCRIPTION:</span><span style="padding:5px" t-field="line.product_id.name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="10%" style="text-align:right">
+                      </td>
+                      <td  width="10%" style="text-align:right" >
+                      </td>
+                      <td width="10%" class="text-center line">
+                        <b><span t-field="line.product_uom_qty"/></b>
+                      </td>
 
-                  <tr t-foreach="o.order_line" t-as="line">
-                    <th></th>
-                    <th></th>
+                      <td width="20%" class="text-center line">
+                        <span t-field="line.product_uom.name" />
+                      </td>
 
-                    <td width="10%" class="linebreak">
-                      <b><span t-field="line.product_uom_qty"/></b>
-                    </td>
+                      <td width="30%" class="text-center line">
+                        <span t-field="line.product_uom_qty" />
+                      </td>
 
-                    <td width="20%" class="text-center line">
-                      <span t-field="line.product_uom.name" />
-                    </td>
+                      <td width="40%" class="text-center line">
+                        <span t-field="line.product_uom_qty" />
+                      </td>
 
-                    <td width="30%" class="text-center line">
-                      <span t-field="line.product_uom_qty" />
-                    </td>
-
-                    <td width="40.%" class="text-center line">
-                      <span t-field="line.product_uom_qty" />
-                    </td>
-
-                    <td width="30%" class="text-center line">
-                      <b><span t-field="line.product_uom_qty"/></b>
-                    </td>
-                  </tr>    
+                      <td width="30%" class="text-center line">
+                        <b><span t-field="line.product_uom_qty"/></b>
+                      </td>
+                    </tr>
+                  </t>
                 </table>         
               </div> 
      		    </t>
