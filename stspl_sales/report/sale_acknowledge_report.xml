@@ -13,7 +13,7 @@
             <t t-call="stspl_sales.external_layout_footer_stspl_sales_acknowledgment_report_template"/>
         </template>
 
-       <!-- Header for Sales Delivery Report -->
+       <!-- Header for Packing List Report -->
 
         <template id="external_layout_header_stspl_sales_acknowledgment_report_template">
             <div class="header">
@@ -62,7 +62,7 @@
             </div>
             </div>
         </template>
-            <!-- Footer for Sales Delivery Report -->
+            <!-- Footer for Packing List Report -->
         <template id="external_layout_footer_stspl_sales_acknowledgment_report_template">
 
           <div class="footer"> 
@@ -87,7 +87,7 @@
           </div>
         </template>
 
-        <!-- Template for Sales Delivery Report -->
+        <!-- Template for Packing List Report -->
 
         <template id="sgtpl_sale_acknowledgment_report_template">
           <style type="text/css"> td.line , span.line ,th.line {font-family:times new roman;}</style>

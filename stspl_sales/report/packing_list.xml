@@ -139,7 +139,7 @@
         </template>
     	   
 
-        <!-- Template for Sales Delivery Report -->
+        <!-- Template for Packing List Report -->
 
         <template id="sgtpl_picking_list_report_template">
           <style type="text/css"> td.line , span.line ,th.line {font-family:times new roman;}</style>

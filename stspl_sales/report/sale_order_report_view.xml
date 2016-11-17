@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
-		<!-- Template for Headre and Footer -->
+		<!-- Template for Header and Footer -->
 		<template id="external_layout_stspl_sales_report_template">
 			<!-- Multicompany -->
 			<t t-if="o and 'company_id' in o">
@@ -16,7 +16,7 @@
 			<!-- <t t-call="stspl_sales.external_layout_footer_stspl_sales_report_template" /> -->
 		</template>
 
-		<!-- Header for Sales Report -->
+		<!-- Header for Sales Order Report -->
 <!-- 		<template id="external_layout_header_stspl_sales_report_template">
 			<div class="header">
 				<div class="col-xs-3">
@@ -134,7 +134,7 @@
 			</div>
 		</template> -->
 
-		<!-- Template for Sales Report -->
+		<!-- Template for Sales Order Report -->
 		<template id="sgtpl_sale_report_template">
 			<style type="text/css">
 				td.line , span.line ,th.line {
