@@ -152,12 +152,10 @@
                       </div>
                     </div>
                     <br/>
-                    <p>
-                      ATTN: 
-                      <span style="padding:5px" t-field="o.partner_id.parent_id"/>
+                    <span>ATTN:</span> 
+                    <span style="padding:5px" t-field="o.partner_id.parent_id"/>
                       -
-                      <span t-field="o.partner_id.parent_id"/>
-                    </p>
+                    <span t-field="o.partner_id.parent_id"/>
              			</td>
 
                		<td width="50%" style="border-left: 0.5px solid; border-top: 0px white;font-size:12px">
@@ -179,12 +177,9 @@
                         <span t-field="o.partner_id.country_id"/>
                       </div>
                     </div>
-
-                    <br/>
-                    <p>
-                      C.C: 
-                      <span style="padding:5px" t-field="o.partner_id.parent_id"/>
-                    </p>
+                    <br/><br/><br/>
+                    <span>C.C:</span> 
+                    <span style="padding:5px" t-field="o.partner_id.parent_id"/>
                		</td>
              		</table>
 

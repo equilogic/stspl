@@ -32,7 +32,53 @@
 				<xpath expr="//field[@name='company_id']" position="after">
 					<field name="remark"/>
 				</xpath>
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="brand"/>
+                    <field name="code"/>
+                    <field name="hs_code"/>
+                </xpath>
             </field>
         </record>
+
+
+        <!--  Brand  Tree View-->
+        <record model="ir.ui.view" id="brand_tree_view">
+            <field name="name">Brand.tree</field>
+            <field name="model">brand.brand</field>
+            <field name="arch" type="xml">
+                <tree string="Brand">                
+                       <field name="name"/>
+                       <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Brand Form View -->
+        <record model="ir.ui.view" id="brand_form_view">
+            <field name="name">Brand.form</field>
+            <field name="model">brand.brand</field>
+            <field name="arch" type="xml">
+                <form string="Brand">                
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Brand Action -->
+        <record model="ir.actions.act_window" id="brand_list_action">
+            <field name="name">Brands</field>
+            <field name="res_model">brand.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- Menu for Brand -->
+        <menuitem id="brand_menu" name="Brands" parent="base.menu_product"
+                  action="brand_list_action"/>
     </data>
 </openerp>

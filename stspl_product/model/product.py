@@ -71,6 +71,15 @@ class product_template(models.Model):
     _inherit = 'product.template'
 
     remark = fields.Char('Remarks')
+    brand = fields.Many2one('brand.brand', string="Brand")
+    code = fields.Char(string="Code")
+    hs_code = fields.Char(string="HS Code")
+class brand(models.Model):
+    _name = 'brand.brand'
+    _description = "Product Brand"
+
+    name = fields.Char('Name')
+    code = fields.Char('Code')
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
