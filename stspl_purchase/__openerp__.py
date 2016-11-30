@@ -32,11 +32,8 @@
     """,
     
     'data': [
-             'views/inherited_invoice_account_view.xml',
              'report/stspl_purchase_report_view.xml',
-             'report/stspl_tax_invoice_report_view.xml',
              'views/report_view.xml',
-             'data/ir.sequence_tax.xml',
              
     ],
     'installable': True,
