@@ -37,13 +37,6 @@ class purchase_order(models.Model):
         res = super(purchase_order, self)._prepare_invoice(cr,uid,order, line_ids,context=context)
         res.update({'purchase_id':order.id})
         return  res
-
-
-
-class ship_via_purchase(models.Model):
-    _name = 'ship.via.purchase'
-    
-    name = fields.Char('Name')
     
 
 

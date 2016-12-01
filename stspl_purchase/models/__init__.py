@@ -21,6 +21,7 @@
 ##############################################################################
 
 import inherited_invoice_account
+import purchase_order
 
 
 
