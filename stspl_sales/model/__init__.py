@@ -1,1 +1,2 @@
 import stock_picking
+import sale_order_new

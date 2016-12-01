@@ -9,6 +9,10 @@
             		<field name="purchase_id" invisible="1"/>
             		<field name="sales_id" invisible="1"/>
             	</xpath>
+
+                <xpath expr="//page[@string='Other Info']//field[@name='date_due']" position='after'>
+                    <field name="ship_via_id"/>
+                </xpath>
          	</field>
         </record>
 	</data>

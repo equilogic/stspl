@@ -30,12 +30,23 @@ class account_invoice(models.Model):
 
 class purchase_order(models.Model):
     _inherit = 'purchase.order'
+
+    ship_via_id = fields.Many2one('ship.via.purchase', 'Ship Via')
     
     def _prepare_invoice(self,cr,uid,order, line_ids,context=None):
         res = super(purchase_order, self)._prepare_invoice(cr,uid,order, line_ids,context=context)
         res.update({'purchase_id':order.id})
         return  res
+
+
+
+class ship_via_purchase(models.Model):
+    _name = 'ship.via.purchase'
     
+    name = fields.Char('Name')
+    
+
+
     
 class sale_order(models.Model):
     _inherit='sale.order'
