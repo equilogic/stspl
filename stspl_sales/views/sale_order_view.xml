@@ -13,6 +13,9 @@
 						domain="[('type','=','contact'),('parent_id','=',partner_id)]"
 						attrs="{'readonly': [('state','not in',('draft','sent'))]}" />					
 				</xpath>
+				<xpath expr="//page[@string='Other Information']//field[@name='company_id']" position='after'>
+                    <field name="ship_via_id"/>
+                </xpath>
 			</field>
 		</record>
 
