@@ -19,26 +19,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    "name": "STSPL Product",
-    "version": "1.0",
-    "depends": ['product'],
-    "author" :"Serpent Consulting Services Pvt. Ltd.",
-    "website" : "http://www.serpentcs.com",
-    "category":"Product",
-    "description":"""
-        This application enables you to manage Customer Code for Products.
-    """,
-    "data": [
-             "security/product_customer_code_security.xml",
-             "security/ir.model.access.csv",
-             "views/product_customer_code_view.xml",
-             "views/product_product_view.xml",
-    ],
-    "installable": True,
-    "auto_install": False,
-    "application": False,
-}
+
+import time
+from openerp.osv import fields, osv
+from openerp import models,fields,api
+
+
+class purchase_order(models.Model):
+    _inherit = 'purchase.order'
+    
+    customer_po = fields.Char('Customer PO')
+    attn_pur = fields.Many2one('res.partner', 'ATTN')    
+
+
+
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

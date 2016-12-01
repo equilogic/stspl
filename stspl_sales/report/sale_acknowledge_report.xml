@@ -8,14 +8,14 @@
             <t t-if="not o or not 'company_id' in o">
               <t t-set="company" t-value="res_company"></t>
             </t>        
-            <t t-call="stspl_sales.external_layout_header_stspl_sales_acknowledgment_report_template"/>
+            <t t-call="stspl_sales.external_header_acknowledgment_report"/>
             <t t-raw="0"/>
-            <t t-call="stspl_sales.external_layout_footer_stspl_sales_acknowledgment_report_template"/>
+            <t t-call="stspl_sales.external_footer_acknowledgment_report"/>
         </template>
 
        <!-- Header for Packing List Report -->
 
-        <template id="external_layout_header_stspl_sales_acknowledgment_report_template">
+        <template id="external_header_acknowledgment_report">
             <div class="header">
               <div class="row">
               <div class="col-xs-2">
@@ -63,8 +63,7 @@
             </div>
         </template>
             <!-- Footer for Packing List Report -->
-        <template id="external_layout_footer_stspl_sales_acknowledgment_report_template">
-
+        <template id="external_footer_acknowledgment_report">
           <div class="footer"> 
             <table style="border-top:1px solid;font-size:11px" width="100%">
               <tr>
@@ -96,7 +95,7 @@
               <div class="page">             
                 <div class="oe_structure"/>
                 <div style="text-align:center;">
-                  <h4><b>Acknowledgment</b></h4>
+                  <h4><b>SO/Acknowledgment</b></h4>
                 </div>
 
                 <!-- Page Content-->
@@ -169,6 +168,7 @@
                     <th  width="16%">Ship Via</th>
                     <th  width="17%">Ordered By</th>
                     <th  width="17%">Sales Person</th>
+                    <th  width="17%">Incoterm</th>
                   </tr>
                   <br/>
                   <t t-foreach="o.partner_id" t-as="s"> 
@@ -195,7 +195,9 @@
                       <td style="text-align:center" width="17%">
                         <span t-field="o.user_id"/>
                       </td>
-
+                      <td style="text-align:center" width="17%">
+                        <span t-field="o.incoterm"/>
+                      </td>
                     </tr>
                   </t>
                 </table>
@@ -205,9 +207,10 @@
                     <tr style="border:0.5px solid black">
                       <th style="border:0.5px solid black;padding:5px" width="5%">Line</th>
                       <th style="border:0.5px solid black;padding:5px" width="10%">Cust line</th>
-                      <th style="border:0.5px solid black;padding:5px" width="40%">Part Number</th>
+                      <th style="border:0.5px solid black;padding:5px" width="40%">Part Number/Description</th>
                       <th style="border:0.5px solid black;padding:5px" width="10%">Price</th>
                       <th style="border:0.5px solid black;padding:5px" width="5%">Qty</th>
+                      <th style="border:0.5px solid black;padding:5px" width="5%">Units</th>
                       <th style="border:0.5px solid black;padding:5px" width="15%">Extended Price</th>
                     </tr>
                   </thead>
@@ -240,6 +243,10 @@
                           <span t-field="s.product_uom_qty" />
                         </td>
 
+                        <td style="border:0.5px solid black;padding:5px" width="5%">
+                          <span t-field="s.product_uom" />
+                        </td>
+                        
                         <td style="border:0.5px solid black;padding:5px" width="15%">
                           
                             <span t-field="s.price_unit"/>
@@ -274,10 +281,16 @@
                 <div style="text-align:left;font-size:12px">
                   <p t-if="o.partner_id">
                     <span> <b>Sipping Contacts:</b> </span>
-                    <span t-field="o.partner_id.name"/>,
-                    <span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>,
-                    <span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>,
-                    <span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
+                    <span t-field="o.partner_id.name"/>
+                    <t t-if="o.partner_id.phone">,
+                    	<span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>
+                    </t>,
+                    <t t-if="o.partner_id.fax">,
+                    	<span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>
+                    </t>
+                    <t t-if="o.partner_id.email">,
+                    	<span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
+                    </t>
                   </p>
                 </div>
 
@@ -312,13 +325,12 @@
 
                 <div  style="font-size:11px">
                   <p>
-                    This is an acknowledgment of the order received by Alicat Scientific, and a list of the items to be delivered. If there are any discrepancies between what
-                    is shown and what you intended to order, please notify us immediately so corrections can be made. All prices listed in U.S. Dollars.
+                    This is an acknowledgment of the order received by STSPL, and a list of the items to be delivered. If there are any discrepancies between what
+                    is shown and what you intended to order, please notify us immediately so corrections can be made.
                   </p>
                   <p>
-                    For customers outside of the United States, import duties/taxes are not included in the above pricing. Contact your local Customs Department with any
-                    questions regarding the billing of import duties/taxes. Purchase Orders will be processed in accordance with Alicat Standard Terms and Conditions of
-                    Sale and Quotation Agreement. The Agreement can be reviewed at http://www.alicatscientific.com/terms_of_sale.php
+                    Purchase Orders will be processed in accordance with STSPL Standard Terms and Conditions of
+                    Sale and Quotation Agreement.
                   </p>
                 </div>
               </div> 

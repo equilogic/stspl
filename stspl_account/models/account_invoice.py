@@ -35,6 +35,8 @@ class account_invoice(models.Model):
 
     purchase_id= fields.Many2one('purchase.order','Purchase')
     sales_id=fields.Many2one('sale.order','Sales')
+    customer_po = fields.Char('Customer PO')
+    attn_inv = fields.Many2one('res.partner', 'ATTN')
 
 
     @api.model

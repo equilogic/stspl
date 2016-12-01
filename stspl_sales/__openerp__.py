@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    "name": "STSPL Sales Reports",
+    "name": "STSPL Sales",
     "version": "1.1",
     "depends": ['sale','sg_account'],
     "author" :"Serpent Consulting Services Pvt. Ltd.",
@@ -40,6 +40,7 @@
              'report/sale_acknowledge_report.xml',
              'views/report_view.xml',
              'data/ir.sequence.xml',
+             'views/sale_order_view.xml',
              
     ],
     "installable": True,

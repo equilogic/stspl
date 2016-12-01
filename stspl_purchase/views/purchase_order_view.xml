@@ -1,0 +1,20 @@
+<openerp>
+	<data>
+		
+		<record id="inherited_purchase_form_view" model="ir.ui.view">
+			<field name="name">inherited.purchase.form.view</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="arch" type="xml">
+				
+				<xpath expr="//field[@name='currency_id']" position="after">
+					<field name="attn_pur"
+						domain="[('type','=','contact'),('parent_id','=',partner_id)]"
+						attrs="{'readonly': [('state','not in',('draft','sent'))]}" />
+					<field name="customer_po" />
+				</xpath>
+			</field>
+		</record>
+		
+	</data>
+</openerp>		
