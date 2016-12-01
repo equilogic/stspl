@@ -117,14 +117,14 @@
                     </td>
                     <td style="padding:5px">:</td>
                     <td style="padding:5px">
-                      <span t-field="o.currency_id" />
+                      <span t-field="o.customer_po" />
                     </td>
                     <td style="padding:5px">
                       <span>FREIGHT TERMS  </span>
                     </td>
                     <td style="padding:5px">:</td>
                     <td style="padding:5px">
-                      <span t-field="o.currency_id" />
+                      <!-- <span t-field="o.currency_id" /> -->
                     </td>
                   </tr>
                 </table>

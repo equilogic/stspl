@@ -123,7 +123,7 @@
                    <div class="row">
                    		<div class="col-xs-6">
                    			<h3 t-if="o.state != 'draft'">PURCHASE ORDER</h3>
-                   			<h3 t-if="o.state == 'draft'">PURCHASE QUOTATION</h3>
+                   			<h3 t-if="o.state == 'draft'">REQUEST FOR QUOTATION</h3>
                    			<strong>TO:</strong>
                    			<div t-if="o.partner_id ">
                    				<div t-field="o.partner_id"/>
@@ -189,15 +189,6 @@
                                 <span t-field="o.partner_id.country_id"/>
                               </div>
                             </div>
-<!--                    					<div t-if="o.dest_address_id">
-				                        <div t-field="o.dest_address_id"
-				                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
-				                    </div> -->
-<!-- 				                    <div t-if="not o.dest_address_id and o.picking_type_id and o.picking_type_id.warehouse_id">
-				                        <span t-field="o.picking_type_id.warehouse_id.name"/>
-				                        <div t-field="o.picking_type_id.warehouse_id.partner_id"
-				                            t-field-options='{"widget": "contact", "fields": ["address", "phone", "fax"], "no_marker": true}'/>
-				                    </div> -->
                    				</td>
 
                    				<td width="45%">
@@ -222,9 +213,6 @@
                               </div>
                             </div>
 
-<!--                    					<div t-field="o.partner_id"
-			                        t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
-			                        <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p> -->
                    				</td>
                    			</tr>
                    		</table>
@@ -234,6 +222,7 @@
                        <thead>
                            <tr>
                                <th class="text-left line" width="15%">Qty</th>
+                               <th class="text-left line" width="15%">Units</th> 
                                <th class="text-center line" width="30%">Description/Part No</th>
                                <th class="text-right line" width="15%">Unit Price</th>
                                <th class="text-right line" width="15%">Amount</th>
@@ -243,8 +232,10 @@
                    			<tr t-foreach="o.order_line" t-as="line">
 	                   			<td class="text-left" width="15%">
 		                            <span t-field="line.product_qty" t-field-options='{"widget": "int"}'/>
-		                            <span t-field="line.product_uom.name"/>
 	                       		 </td>
+	                   			<td class="text-left" width="15%">
+		                            <span t-field="line.product_uom.name"/>
+	                       		 </td>	                       		 
 		                        <td class="text-left line" width="30%">
 		                            <span t-field="line.name"/>
 		                        </td>

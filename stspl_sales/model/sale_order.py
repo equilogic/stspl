@@ -28,21 +28,7 @@ class sale_order(models.Model):
 
     customer_po = fields.Char('Customer PO')
     attn_sales = fields.Many2one('res.partner', 'ATTN')
-    ship_via_id = fields.Many2one('ship.via.sale', 'Ship Via')
-
-
-
-
-class ship_via_sale(models.Model):
-    _name = 'ship.via.sale'
-    
-    name = fields.Char('Name')
-
-
-
-
-
-
+    ship_via_id = fields.Many2one('ship.via', 'Ship Via')
 
 
 
