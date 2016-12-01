@@ -37,6 +37,7 @@ class account_invoice(models.Model):
     sales_id=fields.Many2one('sale.order','Sales')
     customer_po = fields.Char('Customer PO')
     attn_inv = fields.Many2one('res.partner', 'ATTN')
+    ship_via_id = fields.Many2one('ship.via', 'Ship Via')
 
 
     @api.model
@@ -68,5 +69,11 @@ class sale_order(models.Model):
         res=super(sale_order,self)._prepare_invoice(cr, uid, order, lines, context=context)
         res.update({'sales_id':order.id})
         return res
+
+
+class ship_via(models.Model):
+    _name = 'ship.via'
+    
+    name = fields.Char('Name')
 
 

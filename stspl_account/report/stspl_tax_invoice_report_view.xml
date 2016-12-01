@@ -215,7 +215,7 @@
               <table style="border:0.5px solid;font-size:11px" width="100%">
               	<tr style="border:0.5px solid">
               		<td style="border:0.5px solid;padding:5px"><strong>Customer P/O No.</strong></td>
-              		<td style="border:0.5px solid;padding:5px"><strong>Shipment Terms</strong></td>
+              		<td style="border:0.5px solid;padding:5px"><strong>Ship Via</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Payment Term</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Payment Due</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Sales Person</strong></td>
@@ -224,7 +224,7 @@
 
               	<tr style="border:0.5px solid">
               		<td style="border:0.5px solid;padding:5px"><span></span></td>
-              		<td style="border:0.5px solid;padding:5px"><span/></td> 
+              		<td style="border:0.5px solid;padding:5px"><span/><span t-field="o.ship_via_id.name" /></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.payment_term" /></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.date_due"/></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.user_id" /></td>
@@ -236,6 +236,7 @@
                 <thead>
                  <tr>
                      <th class="text-left line" width="15%">Qty</th>
+                     <th class="text-left line" width="15%">Unit</th> 
                      <th class="text-center line" width="30%">Description/Part No</th>
                      <th class="text-right line" width="15%">Unit Price</th>
                      <th class="text-right line" width="15%">Amount</th>
@@ -247,6 +248,9 @@
                       <span t-field="line.quantity" t-field-options='{"widget": "int"}' />
                       <span t-field="line.uos_id.name"/>  
                    	</td>
+                    <td >
+                      <!-- <span t-field="line.product_uom.name"/> -->
+                    </td>
 
                     <td class="text-left line" width="30%">
                         <span t-field="line.name"/>
