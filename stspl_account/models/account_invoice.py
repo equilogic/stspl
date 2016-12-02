@@ -71,9 +71,3 @@ class sale_order(models.Model):
         return res
 
 
-class ship_via(models.Model):
-    _name = 'ship.via'
-    
-    name = fields.Char('Name')
-
-

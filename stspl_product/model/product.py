@@ -81,5 +81,10 @@ class brand(models.Model):
     name = fields.Char('Name')
     code = fields.Char('Code')
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
+class ship_via(models.Model):
+    _name = 'ship.via'
+    
+    name = fields.Char('Name')
+    
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

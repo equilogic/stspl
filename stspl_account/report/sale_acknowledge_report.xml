@@ -8,9 +8,9 @@
             <t t-if="not o or not 'company_id' in o">
               <t t-set="company" t-value="res_company"></t>
             </t>        
-            <t t-call="stspl_sales.external_header_acknowledgment_report"/>
+            <t t-call="stspl_account.external_header_acknowledgment_report"/>
             <t t-raw="0"/>
-            <t t-call="stspl_sales.external_footer_acknowledgment_report"/>
+            <t t-call="stspl_account.external_footer_acknowledgment_report"/>
         </template>
 
        <!-- Header for Packing List Report -->
@@ -55,8 +55,8 @@
                   <h4><b><span style="font-size:16px">Sales Order Number:</span><span style="padding: 5px" t-field="o.name"/><br/></b></h4>
                 </div>
                 <div style="font-size:11px">
-                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
-                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.sales_id.date_order"/><br/>
+                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.sales_id.date_order"/><br/>
                 </div>
               </div>
             </div>
@@ -65,6 +65,85 @@
             <!-- Footer for Packing List Report -->
         <template id="external_footer_acknowledgment_report">
           <div class="footer"> 
+			<div class="footer">
+                <div style='text-align:right'>
+                  <td width="30%">
+                    <span><b>Sales Order Total:</b></span><span t-field="o.amount_total"/>
+                    <br/>
+                    <p>Plus Shipping and Tax Where Applicable.</p>
+                  </td>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Sipping Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id">
+                    <span> <b>Sipping Contacts:</b> </span>
+                    <span t-field="o.partner_id.name"/>
+                    <t t-if="o.partner_id.phone">,
+                    	<span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>
+                    </t>,
+                    <t t-if="o.partner_id.fax">,
+                    	<span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>
+                    </t>
+                    <t t-if="o.partner_id.email">,
+                    	<span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
+                    </t>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Billing Notes:</b> </span>
+                    <span t-field="o.partner_id.comment"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Billing Contacts:</b> </span>
+                    <span t-field="o.partner_id.name"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Ordered By:</b> </span>
+                    <span t-field="o.partner_id.name"/>
+                  </p>
+                </div>
+
+                <div style="text-align:left;font-size:12px">
+                  <p t-if="o.partner_id.comment">
+                    <span> <b>Sales Person:</b> </span>
+                    <span t-field="o.user_id"/>,,,
+                    <span t-field="o.user_id.email"/>
+                  </p>
+                </div>
+
+                <div  style="font-size:11px">
+                  <p>
+                    This is an acknowledgment of the order received by STSPL, and a list of the items to be delivered. If there are any discrepancies between what
+                    is shown and what you intended to order, please notify us immediately so corrections can be made.
+                  </p>
+                  <p>
+                    Purchase Orders will be processed in accordance with STSPL Standard Terms and Conditions of
+                    Sale and Quotation Agreement.
+                  </p>
+                </div>
+		  	</div>          
             <table style="border-top:1px solid;font-size:11px" width="100%">
               <tr>
                 <td>
@@ -78,7 +157,7 @@
 
                 <td>
                   <div class="list-inline" style='text-align:right' width="25%">
-                    <span>Print Date:</span><span style="padding: 5px" t-field="o.date_order"/>
+                    <span>Print Date:</span><span style="padding: 5px" t-field="o.sales_id.date_order"/>
                   </div>
                 </td>
               </tr>
@@ -86,12 +165,13 @@
           </div>
         </template>
 
+		
         <!-- Template for Packing List Report -->
 
         <template id="sgtpl_sale_acknowledgment_report_template">
           <style type="text/css"> td.line , span.line ,th.line {font-family:times new roman;}</style>
           <t t-call="report.html_container">
-            <t t-call="stspl_sales.external_layout_stspl_sales_acknowledgment_report_template">
+            <t t-call="stspl_account.external_layout_stspl_sales_acknowledgment_report_template">
               <div class="page">             
                 <div class="oe_structure"/>
                 <div style="text-align:center;">
@@ -177,26 +257,26 @@
                         <span t-field="o.payment_term"/>
                       </td>
 
-                      <td style="text-align:center" width="16%">
+                      <td style="text-align:left" width="16%">
                         <t t-if="o.name">
-                          <span t-field="o.name"/></t>
+                          <span t-field="o.sales_id.customer_po"/></t>
+                      </td>
+
+                      <td style="text-align:left" width="17%">
+                        <t t-if="o.name">
+                          <span t-field="o.sales_id.ship_via_id.name"/></t>
+                      </td>
+
+                      <td style="text-align:left" width="17%">
+                        <t t-if="o.name">
+                          <span t-field="o.sales_id.name"/></t>
                       </td>
 
                       <td style="text-align:center" width="17%">
-                        <t t-if="o.name">
-                          <span t-field="o.name"/></t>
-                      </td>
-
-                      <td style="text-align:center" width="17%">
-                        <t t-if="o.name">
-                          <span t-field="o.name"/></t>
-                      </td>
-
-                      <td style="text-align:center" width="17%">
-                        <span t-field="o.user_id"/>
+                        <span t-field="o.sales_id.user_id"/>
                       </td>
                       <td style="text-align:center" width="17%">
-                        <span t-field="o.incoterm"/>
+                        <span t-field="o.sales_id.incoterm"/>
                       </td>
                     </tr>
                   </t>
@@ -215,7 +295,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <t t-foreach="o.order_line" t-as="s"> 
+                    <t t-foreach="o.sales_id.order_line" t-as="s"> 
                       <tr style="border:0.5px solid black">
                         <td style="border:0.5px solid black;" width="5%">
                           <span t-esc="s_index+1" />
@@ -256,83 +336,6 @@
                   </tbody>
                 </table>
 
-                <div style='text-align:right'>
-                  <td width="30%">
-                    <span><b>Sales Order Total:</b></span><span t-field="o.amount_total"/>
-                    <br/>
-                    <p>Plus Shipping and Tax Where Applicable.</p>
-                  </td>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Sipping Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id">
-                    <span> <b>Sipping Contacts:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                    <t t-if="o.partner_id.phone">,
-                    	<span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>
-                    </t>,
-                    <t t-if="o.partner_id.fax">,
-                    	<span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>
-                    </t>
-                    <t t-if="o.partner_id.email">,
-                    	<span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
-                    </t>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Billing Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Billing Contacts:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Ordered By:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                  </p>
-                </div>
-
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Sales Person:</b> </span>
-                    <span t-field="o.user_id"/>,,,
-                    <span t-field="o.user_id.email"/>
-                  </p>
-                </div>
-
-                <div  style="font-size:11px">
-                  <p>
-                    This is an acknowledgment of the order received by STSPL, and a list of the items to be delivered. If there are any discrepancies between what
-                    is shown and what you intended to order, please notify us immediately so corrections can be made.
-                  </p>
-                  <p>
-                    Purchase Orders will be processed in accordance with STSPL Standard Terms and Conditions of
-                    Sale and Quotation Agreement.
-                  </p>
-                </div>
               </div> 
             </t>
           </t>
@@ -341,7 +344,7 @@
         <template id="report_sale_acknowledgment">
           <t t-call="report.html_container">
             <t t-foreach="doc_ids" t-as="doc_id">
-              <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_sales.sgtpl_sale_acknowledgment_report_template')"/>
+              <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_account.sgtpl_sale_acknowledgment_report_template')"/>
             </t>
           </t>
         </template>

@@ -21,19 +21,21 @@
 ##############################################################################
 
 {
-    'name': 'STSPL Purchase Reports',
+    'name': 'STSPL Account',
     'version': '1.1',
     'depends': ['purchase','sg_account'],
     'author' :'Serpent Consulting Services Pvt. Ltd.',
     'website' : 'http://www.serpentcs.com',
     'category': 'purchase',
     'description':"""
-            This module customises the purchase reports as per the Customs of STSPL.
+            This module customises the accounting reports as per the Customs of STSPL.
     """,
     
     'data': [
              'views/account_invoice_view.xml',
              'report/stspl_tax_invoice_report_view.xml',
+             'report/packing_list.xml',
+             'report/sale_acknowledge_report.xml',
              'views/report_view.xml',
              'data/ir.sequence_tax.xml',
              

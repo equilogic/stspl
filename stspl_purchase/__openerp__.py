@@ -34,7 +34,6 @@
     'data': [
              'report/stspl_purchase_report_view.xml',
              'views/report_view.xml',
-             'views/inherited_invoice_account_view.xml',
              'views/purchase_order_view.xml',
              
     ],

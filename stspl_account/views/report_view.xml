@@ -11,6 +11,24 @@
             file="stspl_account.report_stspl_tax_invoice"
             />
 
+        <report
+            id="packing_list_report"
+            model="account.invoice"
+            string="Packing Report"
+            report_type="qweb-pdf"
+            name="stspl_account.report_packing_list"
+            file="stspl_account.report_packing_list"
+            />
+
+        <report
+            id="sale_acknowledgment_id"
+            model="account.invoice"
+            string="Acknowledgment Report"
+            report_type="qweb-pdf"
+            name="stspl_account.report_sale_acknowledgment"
+            file="stspl_account.report_sale_acknowledgment"
+            />
+
 
 
         <record id="paperformat_euro_lowmargin_stspl_tax_invoice" model="report.paperformat">
@@ -29,5 +47,37 @@
                 eval="[(4, ref('stspl_account.stspl_tax_invoice'))]" /> 
         </record>
 
+        <record id="paperformat_euro_lowmargin1" model="report.paperformat">
+            <field name="name">European A4 margin Packing List</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">46</field>
+            <field name="margin_bottom">70</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">20</field>
+            <!-- <field name="report_ids" eval="[(4, ref('stspl_account.sale_delivery_id'))]"/> -->
+        </record>
+
+
+         <record id="paperformat_euro_lowmargin_stspl_1" model="report.paperformat">
+            <field name="name">European A4 low margin acknowledgment</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">60</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">100</field>
+            <!-- <field name="report_ids"
+                eval="[(4, ref('stspl_account.sale_acknowledgment_id'))]" />  -->
+        </record>
+        
         </data>
 </openerp>

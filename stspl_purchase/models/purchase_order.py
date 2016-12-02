@@ -30,14 +30,9 @@ class purchase_order(models.Model):
     
     customer_po = fields.Char('Customer PO')
     attn_pur = fields.Many2one('res.partner', 'ATTN')
-    ship_via_id = fields.Many2one('ship.via.purchase', 'Ship Via')  
+    ship_via_id = fields.Many2one('ship.via', 'Ship Via')  
 
 
-
-class ship_via_purchase(models.Model):
-    _name = 'ship.via.purchase'
-    
-    name = fields.Char('Name')  
 
 
 
