@@ -30,10 +30,23 @@ class sale_order(models.Model):
     attn_sales = fields.Many2one('res.partner', 'ATTN')
     ship_via_id = fields.Many2one('ship.via', 'Ship Via')
 
-
-
-
-
-
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        '''
+        Override this method to Rename Report name to print from Quatation and Sales order menu.
+        '''
+        action_obj = self.env['ir.actions.actions']
+        result = super(sale_order, self).fields_view_get(view_id, 
+            view_type, toolbar=toolbar, submenu=submenu)
+        cr,uid,context = self.env.args
+        if toolbar and context.get('params', False) and context['params'].get('action', False):
+            action_rec = action_obj.browse(context['params']['action'])
+            if result.get('toolbar', False) and result['toolbar'].get('print', False):
+                for report_dict in result['toolbar']['print']:
+                    if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_sales.report_sale_order':
+                        report_dict.update({'display_name': 'Quotation Report','name': 'Quotation Report',
+                                            'string': 'Quotation Report'})
+        return result
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
