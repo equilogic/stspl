@@ -14,7 +14,6 @@ class account_invoice(models.Model):
     purchase_id= fields.Many2one('purchase.order','Prchase Id')
     sales_id=fields.Many2one('sale.order','Sales Id')
 
-
     @api.model
     def create(self,vals):
         res = super(account_invoice,self).create(vals)
@@ -25,7 +24,29 @@ class account_invoice(models.Model):
             
                 res.write({'number':next_id})
         return res
-        
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        '''
+        Override this method to remove reports from Supplier invoice menu.
+        '''
+        action_obj = self.env['ir.actions.actions']
+        result = super(account_invoice, self).fields_view_get(view_id, 
+            view_type, toolbar=toolbar, submenu=submenu)
+        cr,uid,context = self.env.args
+        if toolbar and context.get('params', False) and context['params'].get('action', False):
+            action_rec = action_obj.browse(context['params']['action'])
+            if result.get('toolbar', False) and result['toolbar'].get('print', False):
+                dict_lst = []
+                for report_dict in result['toolbar']['print']:
+                    if action_rec.name == 'Supplier Invoices' and report_dict.get('report_name',False):
+                        if report_dict['report_name'] in ['stspl_account.report_packing_list','stspl_account.report_sale_acknowledgment']:
+                            dict_lst.append(report_dict)
+                if action_rec.name == 'Supplier Invoices' and report_dict.get('report_name',False) and dict_lst:
+                    for dict in dict_lst:
+                        report_index = result['toolbar']['print'].index(dict)
+                        result['toolbar']['print'].pop(report_index)
+        return result
 
 
 class purchase_order(models.Model):
