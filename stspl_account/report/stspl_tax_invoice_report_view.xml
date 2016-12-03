@@ -269,12 +269,12 @@
         </t>
       </template>
         
-      <!-- <template id="report_stspl_tax_invoice">
+      <template id="report_stspl_tax_invoice">
     		<t t-call="report.html_container">
         		<t t-foreach="doc_ids" t-as="doc_id">
             		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_account.stspl_tax_invoice_template')"/>
         		</t>
     		</t>
-		  </template> -->
+		  </template>
     </data>
 </openerp>
