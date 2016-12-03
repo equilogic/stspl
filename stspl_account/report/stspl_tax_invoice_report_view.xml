@@ -215,20 +215,22 @@
               <table style="border:0.5px solid;font-size:11px" width="100%">
               	<tr style="border:0.5px solid">
               		<td style="border:0.5px solid;padding:5px"><strong>Customer P/O No.</strong></td>
-              		<td style="border:0.5px solid;padding:5px"><strong>Ship Via</strong></td>
+                  <td style="border:0.5px solid;padding:5px"><strong>Shipment Term</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Payment Term</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Payment Due</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Sales Person</strong></td>
               		<td style="border:0.5px solid;padding:5px"><strong>Currency</strong></td>
+                  <td style="border:0.5px solid;padding:5px"><strong>Ship Via</strong></td>
               	</tr>
 
               	<tr style="border:0.5px solid">
               		<td style="border:0.5px solid;padding:5px"><span></span></td>
-              		<td style="border:0.5px solid;padding:5px"><span/><span t-field="o.ship_via_id.name" /></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.payment_term" /></td>
+                  <td style="border:0.5px solid;padding:5px"><span t-field="o.payment_term" /></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.date_due"/></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.user_id" /></td>
               		<td style="border:0.5px solid;padding:5px"><span t-field="o.currency_id" /></td>
+                  <td style="border:0.5px solid;padding:5px"><span/><span t-field="o.ship_via_id.name" /></td>
               	</tr>
               </table>
               <br/>
