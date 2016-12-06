@@ -32,9 +32,15 @@ class purchase_order(models.Model):
     attn_pur = fields.Many2one('res.partner', 'ATTN')
     ship_via_id = fields.Many2one('ship.via', 'Ship Via')  
 
-
-
-
+    @api.model
+    def create(self,vals):
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].get('purchase.order.new')
+        res = super(purchase_order,self).create(vals)
+        return res
+        
+    
+    
 
 
 

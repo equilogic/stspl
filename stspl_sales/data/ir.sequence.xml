@@ -1,19 +1,48 @@
 <openerp>
 	<data>
-
-		<record id="seq_type_genrate_develiry_order_id" model="ir.sequence.type">
-            <field name="name">Stock Picking</field>
-            <field name="code">stock.picking.new</field>
+		<!-- sequence for stock picking -->
+		<record id="seq_type_genrate_develiry_order_id_new" model="ir.sequence.type">
+            <field name="name">Stock Picking New</field>
+            <field name="code">stock.picking.new_seq</field>
         </record>
 
-		<record id="genrate_develiry_order_id_0" model="ir.sequence">
-			<field name="name">Stock Picking</field>
-			<field name="code">stock.picking.new</field>
+		<record id="genrate_develiry_order_id" model="ir.sequence">
+			<field name="name">Stock Picking New</field>
+			<field name="code">stock.picking.new_seq</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
 			<field name="padding">3</field>
 			<field name="prefix">D%(y)s-</field>
 		</record>
+		
+		<!-- sequence for sales quotation -->
+		<record id="seq_type_sale_quotation" model="ir.sequence.type">
+            <field name="name">Sales Quotation</field>
+            <field name="code">sale.order.quot</field>
+        </record>
 
+		<record id="genrate_sale_quotation" model="ir.sequence">
+			<field name="name">Sales Quotation</field>
+			<field name="code">sale.order.quot</field>
+			<field name="number_next">1</field>
+			<field name="number_increment">1</field>
+			<field name="padding">5</field>
+			<field name="prefix">Q%(y)s-</field>
+		</record>
+		
+		<!-- sequence for sales order -->
+		<record id="seq_type_sale_order_new" model="ir.sequence.type">
+            <field name="name">Sales Order New</field>
+            <field name="code">sale.order.new</field>
+        </record>
+
+		<record id="genrate_sale_order_new" model="ir.sequence">
+			<field name="name">Sales Order New</field>
+			<field name="code">sale.order.new</field>
+			<field name="number_next">1</field>
+			<field name="number_increment">1</field>
+			<field name="padding">5</field>
+			<field name="prefix">S%(y)s-</field>
+		</record>
 	</data>
 </openerp>
