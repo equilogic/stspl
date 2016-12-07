@@ -23,7 +23,7 @@
 {
     'name': 'STSPL Purchase Reports',
     'version': '1.1',
-    'depends': ['purchase','sg_account'],
+    'depends': ['purchase'],
     'author' :'Serpent Consulting Services Pvt. Ltd.',
     'website' : 'http://www.serpentcs.com',
     'category': 'purchase',

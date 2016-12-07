@@ -23,7 +23,7 @@
 {
     "name": "STSPL Sales",
     "version": "1.1",
-    "depends": ['sale','sg_account',],
+    "depends": ['sale'],
     "author" :"Serpent Consulting Services Pvt. Ltd.",
     "website" : "http://www.serpentcs.com",
     "category": "sales",
