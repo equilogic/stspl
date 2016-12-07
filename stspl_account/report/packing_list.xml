@@ -244,7 +244,7 @@
                       </td>
 
                       <td width="20%" class="text-center line">
-                        <!-- <span t-field="line.product_uom.name" /> -->
+                         <span t-field="line.uos_id.name" />
                       </td>
 
                       <td width="30%" class="text-center line">
