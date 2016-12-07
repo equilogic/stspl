@@ -40,18 +40,20 @@ class account_invoice(models.Model):
     ship_via_id = fields.Many2one('ship.via', 'Ship Via')
 
 
-    @api.model
-    def create(self,vals):
-        res = super(account_invoice,self).create(vals)
-        if res:
-            seq_ids = self.env['ir.sequence'].search([('code','=', 'account.invoice.new')])
-            if seq_ids:
-                next_id = self.env['ir.sequence'].next_by_code('account.invoice.new')
-            
-                res.write({'number':next_id})
-        return res
-        
-
+    @api.multi
+    def invoice_validate(self):
+        prefix = ''
+        cr,uid,context = self.env.args
+        if self.partner_id and self.number:
+            country = self.partner_id.country_id.name
+            currency = self.currency_id.name
+            if self.type=='out_invoice':
+                next_id = self.env['ir.sequence'].get('account.invoice.customer')
+                self.write({'number': next_id})                
+            if self.type=='in_invoice':
+                next_supp_id = self.env['ir.sequence'].get('account.invoice.customer')
+                self.write({'number': next_supp_id})                      
+        return self.write({'state': 'open'})
 
 class purchase_order(models.Model):
     _inherit = 'purchase.order'

@@ -39,6 +39,7 @@
              'views/report_view.xml',
              'data/ir.sequence.xml',
              'views/sale_order_view.xml',
+             'views/res_partner_view.xml',
              
     ],
     "installable": True,

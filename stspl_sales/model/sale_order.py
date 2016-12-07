@@ -49,4 +49,17 @@ class sale_order(models.Model):
                                             'string': 'Quotation Report'})
         return result
 
+    @api.model
+    def create(self,vals):
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].get('sale.order.new')
+        res = super(sale_order,self).create(vals)
+        return res
+ 
+ 
+class shipment_term(models.Model):
+    _name = 'ship.via'
+    
+    name = fields.Char('Name')
+       
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

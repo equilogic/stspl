@@ -1,5 +1,5 @@
 <openerp>
-	<data>
+	<data noupdate="1">
 
 		<!-- Sequence for Purchase Order -->
 		<record id="seq_type_purchase_order_new" model="ir.sequence.type">
@@ -13,7 +13,7 @@
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
 			<field name="padding">5</field>
-			<field name="prefix">p%(y)s-</field>
+			<field name="prefix">P%(y)s-</field>
 		</record>
 
 	</data>

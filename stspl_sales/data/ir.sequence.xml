@@ -1,5 +1,5 @@
 <openerp>
-	<data>
+	<data noupdate="1">
 		<!-- sequence for stock picking -->
 		<record id="seq_type_genrate_develiry_order_id_new" model="ir.sequence.type">
             <field name="name">Stock Picking New</field>
@@ -11,7 +11,7 @@
 			<field name="code">stock.picking.new_seq</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">3</field>
+			<field name="padding">5</field>
 			<field name="prefix">D%(y)s-</field>
 		</record>
 		

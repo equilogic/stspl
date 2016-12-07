@@ -3,17 +3,31 @@
 
 		<record id="seq_type_genrate_tax_invoice_id" model="ir.sequence.type">
             <field name="name">Account Invoice</field>
-            <field name="code">account.invoice.new</field>
+            <field name="code">account.invoice.customer</field>
         </record>
 
 		<record id="genrate_tax_invoice_id_0" model="ir.sequence">
 			<field name="name">Account Invoice</field>
-			<field name="code">account.invoice.new</field>
+			<field name="code">account.invoice.customer</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">3</field>
-			<field name="prefix">%(y)s-</field>
+			<field name="padding">5</field>
+			<field name="prefix">CI%(y)s-</field>
 		</record>
 
+		<record id="seq_type_genrate_supp_invoice_id" model="ir.sequence.type">
+            <field name="name">Account Invoice</field>
+            <field name="code">account.invoice.supplier</field>
+        </record>
+
+		<record id="genrate_tax_invoice_supp" model="ir.sequence">
+			<field name="name">Account Invoice</field>
+			<field name="code">account.invoice.supplier</field>
+			<field name="number_next">1</field>
+			<field name="number_increment">1</field>
+			<field name="padding">5</field>
+			<field name="prefix">SI%(y)s-</field>
+		</record>
+		
 	</data>
 </openerp>

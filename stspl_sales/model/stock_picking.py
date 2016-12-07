@@ -32,10 +32,10 @@ class stock_picking_new(models.Model):
     _inherit = 'stock.picking'
 
     
-#    @api.model
-#    def create(self,vals):
-#        if vals.get('name', '/') == '/':
-#            vals['name'] = self.env['ir.sequence'].get('stock.picking.new_seq')
-#        res = super(stock_picking_new,self).create(vals)
-#        return res
+    @api.model
+    def create(self,vals):
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].get('stock.picking.new_seq')
+        res = super(stock_picking_new,self).create(vals)
+        return res
         

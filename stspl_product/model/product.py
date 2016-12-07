@@ -52,9 +52,8 @@ class product_product(models.Model):
         product_customer_code_obj = self.pool.get('product.cust.code')
         if not res:
             ids = []
+            partner_id = context.get('partner_id', False)
             arg=[('prod_code','=', name),('partner_id', '=',partner_id)]
-            partner_id = self._context.get('partner_id', False)
-            
             
             if partner_id:
                 id_prod_code = \
@@ -67,6 +66,7 @@ class product_product(models.Model):
             if ids:
                 res = self.name_get(cr, user, ids, context)
         return res
+    
 class product_template(models.Model):
     _inherit = 'product.template'
 
