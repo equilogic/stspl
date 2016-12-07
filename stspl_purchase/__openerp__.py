@@ -33,6 +33,7 @@
     
     'data': [
              'report/stspl_purchase_report_view.xml',
+             'report/xls_export_view.xml',
              'views/report_view.xml',
              'views/purchase_order_view.xml',
              'data/ir.sequence_tax.xml',
