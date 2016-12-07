@@ -196,13 +196,16 @@
                   <table width="100%" >
                     <tr>
                       <td colspan="3" width="35%">
-                        <span>SHIP VIA:</span><span t-field="o.partner_id.name"/>
+                        <span>SHIP VIA:</span>
+                        <span t-field="o.ship_via_id.name"/>
                       </td>
                       <td colspan="2" width="35%">
-                        <span>TERMS:</span><span t-field="o.partner_id.company_id"/>
+                        <span>TERMS:</span>
+                        <span t-field="o.partner_id.company_id"/>
                       </td>
                       <td colspan="2" width="30%">
-                         <span>ACCT:</span><span t-field="o.partner_id.phone"/>
+                        <span>ACCT:</span>
+                        <span t-field="o.partner_id.phone"/>
                       </td>
                     </tr>
                     <tr style="border-top: 1px solid">

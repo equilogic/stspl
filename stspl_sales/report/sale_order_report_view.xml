@@ -175,7 +175,7 @@
 									</div>
 									<br/>
 									<div>
-										<span>ATTN:</span><span style="padding:25px" t-field="o.user_id"/><br/>
+										<span>ATTN:</span><span style="padding:25px" t-field="o.attn_sales"/><br/>
 										<span>C.C:</span><span style="padding:25px" t-field="o.partner_id.website"/><br/>
 										<span>TEL:</span><span style="padding:25px" t-field="o.partner_id.phone"/><br/>
 									</div>

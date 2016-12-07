@@ -84,8 +84,8 @@
             <field name="header_line" eval="False" />
             <field name="header_spacing">40</field>
             <field name="dpi">100</field>
-            <!-- <field name="report_ids"
-                eval="[(4, ref('stspl_account.sale_acknowledgment_id'))]" />  -->
+            <field name="report_ids"
+                eval="[(4, ref('stspl_account.sale_acknowledgment_id'))]" /> 
         </record>
     
         <record id="paperformat_euro_lowmargin_stspl_tax_invoice" model="report.paperformat">

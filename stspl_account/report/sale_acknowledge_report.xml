@@ -147,17 +147,16 @@
             <table style="border-top:1px solid;font-size:11px" width="100%">
               <tr>
                 <td>
-                  <ul class="list-inline" style='text-align:center' width="20%">
+                  <ul class="list-inline" style='text-align:center'>
                     <li></li>
                     <li><span class="page"/></li>
                     <li>of</li>
                     <li><span class="topage"/></li>
                   </ul>
-                </td>
 
-                <td>
-                  <div class="list-inline" style='text-align:right' width="25%">
-                    <span>Print Date:</span><span style="padding: 5px" t-field="o.sales_id.date_order"/>
+                  <div class="list-inline" style='text-align:right'>
+                    <span>Print Date:</span>
+                    <span t-esc="datetime.datetime.now().date().strftime('%m-%d-%Y' '%X %p')"/>
                   </div>
                 </td>
               </tr>
