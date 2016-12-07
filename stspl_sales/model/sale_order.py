@@ -58,7 +58,7 @@ class sale_order(models.Model):
  
  
 class shipment_term(models.Model):
-    _name = 'ship.via'
+    _name = 'shipment.term'
     
     name = fields.Char('Name')
        
