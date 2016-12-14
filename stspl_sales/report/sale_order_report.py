@@ -51,7 +51,7 @@ class report_print_sale_order(report_sxw.rml_parse):
         if date:
             converted_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
             date_formatted = datetime.strftime(converted_date, "%y")
-        return 'Q'+date_formatted+'-'+name
+        return name
 
 class report_print_sale_order_extended(models.AbstractModel):
     _name = 'report.stspl_sales.report_sale_order'

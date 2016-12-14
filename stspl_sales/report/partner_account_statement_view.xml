@@ -1,0 +1,244 @@
+<openerp>
+  <data>
+    <!-- Template for Headre and Footer -->
+    <template id="external_layout_stspl_partner_account_statement">
+
+      <t t-call="stspl_sales.external_layout_header_stspl_sales_partner_account_statement"/>
+      <t t-raw="0" />
+      <t t-call="stspl_sales.external_layout_footer_stspl_sales_partner_account_statement"/>
+
+    </template>
+
+    <!-- Report Header -->
+    <template id="external_layout_header_stspl_sales_partner_account_statement">
+      <div class="header">
+        <div class="col-xs-3">
+          <span>
+            <img t-att-src="'data:image/png;base64,%s' % get_company(data).logo" style="max-height: 70px;"/>
+          </span>
+        </div>
+
+        <div class="col-xs-8 col-xs-offset-1 text-right">
+          <div style="font-size:20px">
+            <span t-field="get_company(data).name" />
+          </div>
+          <div>
+            <span t-field="get_company(data).street" />
+            <span t-field="get_company(data).city" />
+            <span t-field="get_company(data).state_id" />
+            <span t-field="get_company(data).country_id" />
+            <span t-field="get_company(data).zip" />
+          </div>
+          <div>
+            <span>Tel :</span>
+            <span t-field="get_company(data).phone"/>
+            <span>Fax :</span>
+            <span t-field="get_company(data).fax"/>
+          </div>
+
+          <div>
+            <span >CO. REG. NO.</span>
+            <span t-field="get_company(data).company_registry" />
+          </div>
+
+          <div>
+            <span class="text-right">GST REG NO.</span>
+            <span t-field="get_company(data).gst_no"/>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Footer -->
+    <template id="external_layout_footer_stspl_sales_partner_account_statement">
+      <div class="footer">
+        <table style="border:0.5px solid;font-size:11px" width="100%">
+          <tr style="border:0.5px solid">
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>OVER 120 DAYS</strong></th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;">
+
+              <table style="border:0.5px solid;">
+                <td style="border:0.5px solid;">
+                <th style="border:0.5px solid;"></th>
+                <th style="border:0.5px solid;"></th>
+              </td>
+              <td style="border:0.5px solid;">
+                <tr style="border:0.5px solid;"></tr>
+                <tr style="border:0.5px solid;"></tr>
+              </td>
+              </table>
+            </th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>91 - 120 DAYS</strong></th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>61 - 90 DAYS</strong></th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>31 - 60 DAYS</strong></th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>CURRENT</strong></th>
+            <th style="border:0.5px solid;padding:5px;text-align:center;"><strong>TOTAL</strong></th>
+          </tr>
+
+          <tr style="border:0.5px solid" class="text-center">
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+            <td style="border:0.5px solid;padding:5px">-------</td>
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+            <td style="border:0.5px solid;padding:5px"><span /></td>
+          </tr>
+        </table>
+        <P style="font-size:11px">
+          Please contact the Finance Dept at +65 6459 5962 Ext. 107 or email to ohlk@semiconductortechnologies.com for any query on this Statement. 
+          Interest charge at 1% per month will be levied on overdue amount.
+        </P>
+        <table style="border-top:0.5px solid ;font-size:11px" width="100%">
+          <tr>
+            <td>
+              <div>
+                <span>Warehouse address:</span>
+                <span t-field="get_warehouse(data).street"/>
+                <span t-field="get_warehouse(data).city"/>
+                <span t-field="get_warehouse(data).state_id"/>
+                <span t-field="get_warehouse(data).country_id"/>
+                <span t-field="get_warehouse(data).zip"/>
+              </div>
+              <div>
+                <span>Please visit our website @ </span><span t-field="get_company(data).website"/>
+              </div>
+              <div>
+                <span>email : </span><span t-field="get_company(data).email" />
+              </div>
+              <br/>
+              <div>
+                <span>This is a computer generated documents and no signature is required</span>
+              </div> 
+            </td>
+            <td width="20%">
+              <br/><br/>
+              <ul class="list-inline" style='text-align:right'>
+                <li>Page:</li>
+                <li><span class="page"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </template>
+
+
+    <template id="stspl_sales_partner_account_statement_template">
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+        <t t-call="stspl_sales.external_layout_stspl_partner_account_statement">
+
+          <div class="page">
+            <table width="100%" border="1">
+              <tr>
+                <td class="text-left">
+                <span><h3><b>STATEMENT OF ACCOUNT</b></h3></span>
+                </td>
+                <td class="text-right">
+                  <span><b>AS AT</b></span><span style="padding:10px" t-esc="datetime.datetime.now().date().strftime('%d-%m-%Y')"/>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-left" width="50%">
+                  <span>TO:</span>
+                  <div>
+                    <span t-esc="o.name"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.street"/>
+                    <span t-esc="o.street2"/>
+                    <span t-esc="o.city"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.state_id.name"/>
+                    <span t-esc="o.zip"/>
+                    <span t-esc="o.country_id.name"/>
+                  </div>
+                </td>
+
+                <td class="text-left" width="50%">
+                  <span>ID:</span>
+                </td>
+              </tr>
+            </table>
+            <br/><br/>
+            <table width="100%">
+              <tr>
+                <td class="text-left" width="100%">
+                  <span>ATTN:</span>
+                  <span t-esc="get_attns(o)"/>
+                </td>
+              </tr>
+            </table>
+            <table width="100%">
+              <tr>
+                <td class="text-left" width="25%">
+                  <span>TEL:</span>
+                  <span t-esc="o.phone"/>
+                </td>
+                <td class="text-left" width="25%">
+                  <span>FAX:</span>
+                  <span t-esc="o.fax"/>
+                </td>
+                <td class="text-left" width="50%">
+                  <span>E-MAIL:</span>
+                  <span t-esc="o.email"/>
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <table class="table-condensed" 
+              style="border-top:1px solid;font-family:Helvetica;font-size:12px;" width="100%">
+              <thead>
+                <tr style="border-bottom:1px solid;font-family:Helvetica;font-size:11px;">
+                  <th width="10%">INV DATE</th>
+                  <th width="10%"> DUE DATE</th>
+                  <th width="5%"></th>
+                  <th width="10%">REF</th>
+                  <td width="15%"></td>
+                  <td width="15%"></td>
+                  <td width="5%"></td>
+                  <th width="15%">AMOUNT</th>
+                  <th width="15%">OUTSTANDING</th>
+                </tr>
+              </thead>
+              <tbody>
+<!--                 <tr t-foreach="get_invoice_data(data)" t-as="line">
+                  <td width="15%">
+                    <span t-esc="line.get('date')" />
+                  </td>
+                  <td width="10%"> 
+                    <span t-esc="line.get('invoice')" />
+                  </td>
+                  <td width="10%">
+                    <span t-esc="line.get('customer_po')" />
+                  </td>
+                  <td width="30%">
+                    <span t-esc="line.get('customer')" />
+                  </td>
+                  <td width="8%">
+                    <span t-esc="line.get('amount')" />
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </t>
+      </t>
+    </t>
+    </template>
+  </data>
+</openerp>
+
+
+
+
+
+
+
+
+

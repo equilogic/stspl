@@ -65,85 +65,85 @@
             <!-- Footer for Packing List Report -->
         <template id="external_footer_acknowledgment_report">
           <div class="footer"> 
-			<div class="footer">
-                <div style='text-align:right'>
-                  <td width="30%">
-                    <span><b>Sales Order Total:</b></span><span t-field="o.amount_total"/>
-                    <br/>
-                    <p>Plus Shipping and Tax Where Applicable.</p>
-                  </td>
-                </div>
+			      <div class="last-page">
+              <div style='text-align:right'>
+                <td width="30%">
+                  <span><b>Sales Order Total:</b></span><span t-field="o.amount_total"/>
+                  <br/>
+                  <p>Plus Shipping and Tax Where Applicable.</p>
+                </td>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Notes:</b> </span>
+                  <span t-field="o.partner_id.comment"/>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Sipping Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Sipping Notes:</b> </span>
+                  <span t-field="o.partner_id.comment"/>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id">
-                    <span> <b>Sipping Contacts:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                    <t t-if="o.partner_id.phone">,
-                    	<span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>
-                    </t>,
-                    <t t-if="o.partner_id.fax">,
-                    	<span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>
-                    </t>
-                    <t t-if="o.partner_id.email">,
-                    	<span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
-                    </t>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id">
+                  <span> <b>Sipping Contacts:</b> </span>
+                  <span t-field="o.partner_id.name"/>
+                  <t t-if="o.partner_id.phone">,
+                  	<span>ph:</span><span style="padding:5px" t-field="o.partner_id.phone"/>
+                  </t>,
+                  <t t-if="o.partner_id.fax">,
+                  	<span>fx:</span><span style="padding:5px" t-field="o.partner_id.fax"/>
+                  </t>
+                  <t t-if="o.partner_id.email">,
+                  	<span>email:</span><span style="padding:5px" t-field="o.partner_id.email"/>
+                  </t>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Billing Notes:</b> </span>
-                    <span t-field="o.partner_id.comment"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Billing Notes:</b> </span>
+                  <span t-field="o.partner_id.comment"/>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Billing Contacts:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Billing Contacts:</b> </span>
+                  <span t-field="o.partner_id.name"/>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Ordered By:</b> </span>
-                    <span t-field="o.partner_id.name"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Ordered By:</b> </span>
+                  <span t-field="o.partner_id.name"/>
+                </p>
+              </div>
 
-                <div style="text-align:left;font-size:12px">
-                  <p t-if="o.partner_id.comment">
-                    <span> <b>Sales Person:</b> </span>
-                    <span t-field="o.user_id"/>,,,
-                    <span t-field="o.user_id.email"/>
-                  </p>
-                </div>
+              <div style="text-align:left;font-size:12px">
+                <p t-if="o.partner_id.comment">
+                  <span> <b>Sales Person:</b> </span>
+                  <span t-field="o.user_id"/>,,,
+                  <span t-field="o.user_id.email"/>
+                </p>
+              </div>
 
-                <div  style="font-size:11px">
-                  <p>
-                    This is an acknowledgment of the order received by STSPL, and a list of the items to be delivered. If there are any discrepancies between what
-                    is shown and what you intended to order, please notify us immediately so corrections can be made.
-                  </p>
-                  <p>
-                    Purchase Orders will be processed in accordance with STSPL Standard Terms and Conditions of
-                    Sale and Quotation Agreement.
-                  </p>
-                </div>
-		  	</div>          
+              <div  style="font-size:11px">
+                <p>
+                  This is an acknowledgment of the order received by STSPL, and a list of the items to be delivered. If there are any discrepancies between what
+                  is shown and what you intended to order, please notify us immediately so corrections can be made.
+                </p>
+                <p>
+                  Purchase Orders will be processed in accordance with STSPL Standard Terms and Conditions of
+                  Sale and Quotation Agreement.
+                </p>
+              </div>
+		  	    </div>          
             <table style="border-top:1px solid;font-size:11px" width="100%">
               <tr>
                 <td>
@@ -164,6 +164,50 @@
           </div>
         </template>
 
+
+      <template id="report.minimal_layout">
+              <t t-raw="'&lt;base href=%s&gt;' % base_url"/>
+              &lt;!DOCTYPE html&gt;
+                  <html style="height: 0;">
+                      <head>
+                          <link href="/report/static/src/css/reset.min.css" rel="stylesheet"/>
+                          <link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+                          <link href="/website/static/src/css/website.css" rel="stylesheet"/>
+                          <link href="/web/static/lib/fontawesome/css/font-awesome.css" rel="stylesheet"/>
+                          <style type='text/css'><t t-raw="css"/></style>
+                          <t t-if="subst is True">
+                                          <script>
+                         function subst() {
+                             var vars = {};
+                             var x = document.location.search.substring(1).split('&amp;');
+                             for (var i in x) {
+                                 var z = x[i].split('=', 2);
+                                 vars[z[0]] = unescape(z[1]);
+                             }
+                             var x=['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+                             for (var i in x) {
+                                 var y = document.getElementsByClassName(x[i]);
+                                 for (var j=0; j&lt;y.length; ++j)
+                                     y[j].textContent = vars[x[i]];
+                             }
+                             var operations = {
+                    'last-page': function (elt) { elt.style.visibility = (vars.page === vars.topage) ? "visible" : "hidden"; },
+                };
+
+                             for (var klass in operations) {
+                                 var y = document.getElementsByClassName(klass);
+                                 for (var j=0; j&lt;y.length; ++j)
+                                 operations[klass](y[j]);
+                             }
+                        }
+                    </script>
+                          </t>
+                      </head>
+                      <body class="container" onload="subst()">
+                          <t t-raw="body"/>
+                      </body>
+                  </html>
+            </template>
 		
         <!-- Template for Packing List Report -->
 
@@ -185,54 +229,58 @@
                   </tr>
                   <tr style="border:0.5px solid black">
                     <td width="50%" style="border-top: 0px white;">
-                      <div t-if="o.partner_id">
+                      <div t-if="o.partner_id" name="partner_header">
                         <div>
-                          <b><span t-field="o.partner_id.name" ></span></b>
+                          <span t-field="o.partner_id.name"/>
                         </div>
                         <div>
+                          <span t-field="o.partner_id.house_no"/>
+                          ,
                           <span t-field="o.partner_id.street"/>
                         </div>
                         <div>
+                          <span t-field="o.partner_id.level_no"/>
+                          ,
+                          <span t-field="o.partner_id.street2"/>
+                        </div>
+                        <div>
                           <span t-field="o.partner_id.city"/>
+                          ,
                           <span t-field="o.partner_id.state_id"/>
                         </div>
                         <div>
                           <span t-field="o.partner_id.country_id"/>
-                        </div>
-                        <div>
+                          ,
                           <span t-field="o.partner_id.zip"/>
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.country_id"/>
                         </div>
                       </div>
                       <br/>
                     </td>
 
                     <td width="50%" style="border-left: 0.5px solid; border-top: 0px white;">
-                      <div t-if="o.partner_id">
+                      <div t-if="o.partner_id" name="partner_header">
                         <div>
-                          <b><span t-field="o.partner_id.name" ></span></b>
+                          <span t-field="o.partner_id.name"/>
                         </div>
                         <div>
+                          <span t-field="o.partner_id.house_no"/>
+                          ,
                           <span t-field="o.partner_id.street"/>
                         </div>
                         <div>
+                          <span t-field="o.partner_id.level_no"/>
+                          ,
+                          <span t-field="o.partner_id.street2"/>
+                        </div>
+                        <div>
                           <span t-field="o.partner_id.city"/>
+                          ,
                           <span t-field="o.partner_id.state_id"/>
                         </div>
                         <div>
                           <span t-field="o.partner_id.country_id"/>
-                        </div>
-                        <div>
+                          ,
                           <span t-field="o.partner_id.zip"/>
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.country_id"/>
-                        </div>
-                        <div>
-                          <span>ph :</span>
-                          <span t-field="o.partner_id.phone"/>
                         </div>
                       </div>
                       <p><b>Attention:</b><b><span style="padding:5px;" t-field="o.name"/></b></p>

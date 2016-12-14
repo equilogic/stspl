@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2016 Serpent Consulting Services Pvt. Ltd.
-#    (<http://www.serpentcs.com>)
+#    Copyright (C) 2014 Tech Receptives (<http://techreceptives.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,30 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{
-    'name': 'STSPL Purchase Reports',
-    'version': '1.1',
-    'depends': ['purchase'],
-    'author' :'Serpent Consulting Services Pvt. Ltd.',
-    'website' : 'http://www.serpentcs.com',
-    'category': 'purchase',
-    'description':"""
-            This module customises the purchase reports as per the Customs of STSPL.
-    """,
-    
-    'data': [
-             'report/stspl_purchase_report_view.xml',
-             'report/xls_export_view.xml',
-             'report/xls_import_view.xml',
-             'views/report_view.xml',
-             'views/purchase_order_view.xml',
-             'data/ir.sequence_tax.xml',
-             
-    ],
-    'installable': True,
-    'auto_install':False,
-    "application":False,
-}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,0 +1,50 @@
+<openerp>
+	<data>
+
+		<!-- Form view of wizard - xls Import export-->
+		<record id="wiz_xls_import" model="ir.ui.view">
+			<field name="name">xls import</field>
+			<field name="model">wiz.xls.import</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form>
+					<br/>
+	            	<header>
+						Here Select xls file to import:
+	            	</header>
+					<group>
+						<field name="xls_file" filename="datas_fname"/>
+						<field name="datas_fname" invisible="1"/>
+                    </group>
+					<footer>
+						<button name="xls_import" string="Import"  type="object" class="oe_highlight"/>
+						<button string="Cancel"  type="object" special="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<!-- action of wizard - xls Import-->
+		<record id="action_wiz_xls_import" model="ir.actions.act_window">
+			<field name="name">Xls Import</field>
+			<field name="res_model">wiz.xls.import</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="view_id" ref="wiz_xls_import"/>
+		</record>
+
+		<!-- Inherited purchase Order Form View-->
+		<record id="inherited_purchase_form_view_for_xls_import" model="ir.ui.view">
+			<field name="name">inherited.purchase.form.view</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form[@string='Purchase Order']/header/button[@name='action_cancel_draft']"
+					position="before">
+					<button name="%(action_wiz_xls_import)d" string="Xls Import" type="action" class="oe_highlight"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

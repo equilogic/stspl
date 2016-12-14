@@ -10,8 +10,28 @@
             file="stspl_sales.report_sale_order"
             />
 
+        <!--  Delivery Order qweb Report -->
+        <report
+            id="delivery_order_report"
+            model="stock.picking"
+            string="Delivery Report"
+            report_type="qweb-pdf"
+            name="stspl_sales.report_sale_delivery_order"
+            file="stspl_sales.report_sale_delivery_order"
+            />
+
+
+        <!-- Partner Account Statement-->
+        <report
+            id="account_statement"
+            model="res.partner"
+            string="Account Statement"
+            report_type="qweb-pdf"
+            name="stspl_sales.stspl_sales_partner_account_statement_template"
+            file="stspl_sales.stspl_sales_partner_account_statement_template"
+            />
        
-        <record id="paperformat_euro_lowmargin_stspl" model="report.paperformat">
+        <record id="paperformat_euro_lowmargin_stspl_sales_report" model="report.paperformat">
 			<field name="name">European A4 low margin sales</field>
 			<field name="default" eval="True" />
 			<field name="format">A4</field>
@@ -26,7 +46,38 @@
 			<field name="report_ids"
 				eval="[(4, ref('stspl_sales.sale_report'))]" /> 
 		</record>
-            
+
+        <record id="paperformat_euro_lowmargin_stspl_delivery_report" model="report.paperformat">
+            <field name="name">European A4 low margin sales</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">50</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+            <field name="report_ids"
+                eval="[(4, ref('stspl_sales.delivery_order_report'))]" /> 
+        </record>
+		
+        <record id="paperformat_euro_lowmargin_stspl_account_statement" model="report.paperformat">
+            <field name="name">European A4 low margin sales</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">50</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+            <field name="report_ids"
+                eval="[(4, ref('stspl_sales.account_statement'))]" /> 
+        </record>
 
     </data>
 </openerp>

@@ -15,20 +15,6 @@
 			<field name="prefix">D%(y)s-</field>
 		</record>
 		
-		<!-- sequence for sales quotation -->
-		<record id="seq_type_sale_quotation" model="ir.sequence.type">
-            <field name="name">Sales Quotation</field>
-            <field name="code">sale.order.quot</field>
-        </record>
-
-		<record id="genrate_sale_quotation" model="ir.sequence">
-			<field name="name">Sales Quotation</field>
-			<field name="code">sale.order.quot</field>
-			<field name="number_next">1</field>
-			<field name="number_increment">1</field>
-			<field name="padding">5</field>
-			<field name="prefix">Q%(y)s-</field>
-		</record>
 		
 		<!-- sequence for sales order -->
 		<record id="seq_type_sale_order_new" model="ir.sequence.type">

@@ -167,11 +167,29 @@
 								<td width="60%">
 									<span>TO:</span>
 									<div t-if="o.partner_id ">
-										<div t-field="o.partner_id" />
-										<div t-field="o.partner_id.street" />
-										<div t-field="o.partner_id.city" />
-										<div t-field="o.partner_id.state_id" />
-										<div t-field="o.partner_id.country_id" />
+										<div>
+											<span t-field="o.partner_id"/>
+										</div>
+										<div>
+											<span t-field="o.partner_id.house_no"/>
+											,
+											<span t-field="o.partner_id.street"/>
+										</div>
+										<div>
+											<span t-field="o.partner_id.level_no"/>
+											,
+											<span t-field="o.partner_id.street2"/>
+										</div>
+										<div>
+											<span t-field="o.partner_id.city"/>
+											,
+											<span t-field="o.partner_id.state_id"/>
+										</div>
+										<div>
+											<span t-field="o.partner_id.country_id"/>
+											,
+											<span t-field="o.partner_id.zip"/>
+										</div>
 									</div>
 									<br/>
 									<div>
@@ -185,10 +203,10 @@
 							<div class="col-xs-5 text-right">
                    				<div style="font-size:13px">
                    					<span>NO.</span>
-                   					<strong><span style="padding:82px" t-esc="get_quat(o.date_order,o.name)"/></strong>
+                   					<strong><span style="padding:83px" t-esc="get_quat(o.date_order,o.name)"/></strong>
                    				</div>
                    				<div style="font-size:12px">
-                   					<span>DATE</span><span style="padding:59px" t-field="o.date_order" t-field-options='{"format": "dd-MM-Y HH:MM:SS"}' />
+                   					<span>DATE</span><span style="padding:57px" t-field="o.date_order" t-field-options='{"format": "dd-MM-Y HH:MM:SS"}' />
                    				</div>
 
                    				<td width="55%">

@@ -36,6 +36,7 @@
 	         'report/sale_delivery_order_report_view.xml',
              'views/company_view.xml',
              'report/sale_order_report_view.xml',
+             'report/partner_account_statement_view.xml',
              'views/report_view.xml',
              'data/ir.sequence.xml',
              'views/sale_order_view.xml',

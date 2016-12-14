@@ -20,6 +20,7 @@
 #
 ##############################################################################
 import sale_order_report
+import partner_account_statement
 
 
 

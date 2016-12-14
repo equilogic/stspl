@@ -63,51 +63,96 @@
                 <td width="40%"><span/></td>
               </tr>
             </table>
-                  <div class="row">
-                    <div class="col-xs-4 pull-right">
-                        <table class="table table-condensed">
-                            <tr class="border-black">
-                                <td><strong>Sub-Total</strong></td>
-                                <td class="text-right">
-                                    <span t-field="o.amount_untaxed" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Taxes</td>
-                                <td class="text-right">
-                                    <span t-field="o.amount_tax" />
-                                </td>
-                            </tr>
-                            <tr class="border-black">
-                                <td><strong>Total</strong></td>
-                                <td class="text-right">
-                                    <span t-field="o.amount_total" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                 </div>
-               </div>
-               	<table style="border-top:1px solid ;" width="100%">
-               		<tr>
-               			<td width="80%">
- 		                	<div><span>Please visit our website @ </span><span t-field="o.company_id.website" /></div>
-                	<div><span>email : </span><span t-field="o.company_id.email" /></div>
-                	<div><span>This is a computer generated documents and no signature is required</span></div> 
-               			</td>
-               			<td width="20%">
-               				<ul class="list-inline" style='text-align:right'>
-	                    <li>Page:</li>
-	                    <li><span class="page"/></li>
-	                    <li>/</li>
-	                    <li><span class="topage"/></li>
-	                </ul>
-               			</td>
-               		</tr>
-               	</table>
-	         </div>
+            <div class="row">
+              <div class="col-xs-4 pull-right">
+                  <table class="table table-condensed">
+                      <tr class="border-black">
+                          <td><strong>Sub-Total</strong></td>
+                          <td class="text-right">
+                              <span t-field="o.amount_untaxed" />
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Taxes</td>
+                          <td class="text-right">
+                              <span t-field="o.amount_tax" />
+                          </td>
+                      </tr>
+                      <tr class="border-black">
+                          <td><strong>Total</strong></td>
+                          <td class="text-right">
+                              <span t-field="o.amount_total" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+           </div>
+          </div>
+         	<table style="border-top:1px solid ;" width="100%">
+         		<tr>
+         			<td width="80%">
+                	<div><span>Please visit our website @ </span><span t-field="o.company_id.website" /></div>
+          	<div><span>email : </span><span t-field="o.company_id.email" /></div>
+          	<div><span>This is a computer generated documents and no signature is required</span></div> 
+         			</td>
+         			<td width="20%">
+         				<ul class="list-inline" style='text-align:right'>
+                <li>Page:</li>
+                <li><span class="page"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+            </ul>
+         			</td>
+         		</tr>
+         	</table>
+        </div>
     	</template>
-    	
+
+      <template id="report.minimal_layout">
+              <t t-raw="'&lt;base href=%s&gt;' % base_url"/>
+              &lt;!DOCTYPE html&gt;
+                  <html style="height: 0;">
+                      <head>
+                          <link href="/report/static/src/css/reset.min.css" rel="stylesheet"/>
+                          <link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+                          <link href="/website/static/src/css/website.css" rel="stylesheet"/>
+                          <link href="/web/static/lib/fontawesome/css/font-awesome.css" rel="stylesheet"/>
+                          <style type='text/css'><t t-raw="css"/></style>
+                          <t t-if="subst is True">
+                                          <script>
+                         function subst() {
+                             var vars = {};
+                             var x = document.location.search.substring(1).split('&amp;');
+                             for (var i in x) {
+                                 var z = x[i].split('=', 2);
+                                 vars[z[0]] = unescape(z[1]);
+                             }
+                             var x=['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+                             for (var i in x) {
+                                 var y = document.getElementsByClassName(x[i]);
+                                 for (var j=0; j&lt;y.length; ++j)
+                                     y[j].textContent = vars[x[i]];
+                             }
+                             var operations = {
+                    'last-page': function (elt) { elt.style.visibility = (vars.page === vars.topage) ? "visible" : "hidden"; },
+                };
+
+                             for (var klass in operations) {
+                                 var y = document.getElementsByClassName(klass);
+                                 for (var j=0; j&lt;y.length; ++j)
+                                 operations[klass](y[j]);
+                             }
+                        }
+                    </script>
+                          </t>
+                      </head>
+                      <body class="container" onload="subst()">
+                          <t t-raw="body"/>
+                      </body>
+                  </html>
+            </template>
+
+   	
     	<!-- Reports Template  -->
 		<template id="sgtpl_report_template">
             <style type="text/css"> 
@@ -125,13 +170,31 @@
                    			<h3 t-if="o.state != 'draft'">PURCHASE ORDER</h3>
                    			<h3 t-if="o.state == 'draft'">REQUEST FOR QUOTATION</h3>
                    			<strong>TO:</strong>
-                   			<div t-if="o.partner_id ">
-                   				<div t-field="o.partner_id"/>
-                   				<div t-field="o.partner_id.street"/>
-                   				<div t-field="o.partner_id.city"/>
-                   				<div t-field="o.partner_id.state_id"/>
-                   				<div t-field="o.partner_id.country_id"/> 
-                   			</div>
+                        <div t-if="o.partner_id" name="partner_header">
+                          <div>
+                            <span t-field="o.partner_id.name"/>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.house_no"/>
+                            ,
+                            <span t-field="o.partner_id.street"/>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.level_no"/>
+                            ,
+                            <span t-field="o.partner_id.street2"/>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.city"/>
+                            ,
+                            <span t-field="o.partner_id.state_id"/>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.country_id"/>
+                            ,
+                            <span t-field="o.partner_id.zip"/>
+                          </div>
+                        </div>
                    		</div>
                    		<div class="col-xs-5 col-xs-offset-1">
                    			<div>
@@ -175,44 +238,54 @@
                                 <span t-field="o.partner_id.name"/>
                               </div>
                               <div>
+                                <span t-field="o.partner_id.house_no"/>
+                                ,
                                 <span t-field="o.partner_id.street"/>
+                              </div>
+                              <div>
+                                <span t-field="o.partner_id.level_no"/>
                                 ,
                                 <span t-field="o.partner_id.street2"/>
                               </div>
                               <div>
-                                <span t-field="o.partner_id.zip"/>
                                 <span t-field="o.partner_id.city"/>
                                 ,
                                 <span t-field="o.partner_id.state_id"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.country_id"/>
+                                ,
+                                <span t-field="o.partner_id.zip"/>
                               </div>
                             </div>
                    				</td>
 
                    				<td width="45%">
-
                             <div t-if="o.partner_id" name="partner_header">
                               <div>
                                 <span t-field="o.partner_id.name"/>
                               </div>
                               <div>
+                                <span t-field="o.partner_id.house_no"/>
+                                ,
                                 <span t-field="o.partner_id.street"/>
+                              </div>
+                              <div>
+                                <span t-field="o.partner_id.level_no"/>
                                 ,
                                 <span t-field="o.partner_id.street2"/>
                               </div>
                               <div>
-                                <span t-field="o.partner_id.zip"/>
                                 <span t-field="o.partner_id.city"/>
                                 ,
                                 <span t-field="o.partner_id.state_id"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.country_id"/>
+                                ,
+                                <span t-field="o.partner_id.zip"/>
                               </div>
                             </div>
-
                    				</td>
                    			</tr>
                    		</table>
