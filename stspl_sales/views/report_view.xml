@@ -20,7 +20,26 @@
             file="stspl_sales.report_sale_delivery_order"
             />
 
-
+        <report 
+            id="sale.report_sale_order"
+            string="Quotation / Order"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="sale.report_saleorder" 
+            name="sale.report_saleorder" 
+            menu="False"
+        />
+        
+        <report 
+            string="Picking" 
+            id="stock.action_report_picking" 
+            model="stock.picking" 
+            report_type="qweb-pdf"
+            name="stock.report_picking" 
+            file="stock.report_picking" 
+            menu="False"
+        />
+        
         <!-- Partner Account Statement-->
         <report
             id="account_statement"

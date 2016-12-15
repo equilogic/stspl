@@ -39,7 +39,18 @@
             file="stspl_account.report_stspl_proforma_invoice"
             />
 
-
+        <report 
+            id="account.account_invoices"
+            model="account.invoice"
+            string="Invoices"
+            report_type="qweb-pdf"
+            name="account.report_invoice"
+            file="account.report_invoice"
+            attachment_use="True"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+            menu="False"
+        />
+        
         <record id="paperformat_euro_lowmargin_stspl_tax_invoice" model="report.paperformat">
             <field name="name">European A4 low margin</field>
             <field name="default" eval="True" />
@@ -77,12 +88,12 @@
             <field name="default" eval="True" />
             <field name="format">A4</field>
             <field name="orientation">Portrait</field>
-            <field name="margin_top">45</field>
+            <field name="margin_top">60</field>
             <field name="margin_bottom">60</field>
             <field name="margin_left">10</field>
             <field name="margin_right">10</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">40</field>
+            <field name="header_spacing">60</field>
             <field name="dpi">100</field>
             <field name="report_ids"
                 eval="[(4, ref('stspl_account.sale_acknowledgment_id'))]" /> 
