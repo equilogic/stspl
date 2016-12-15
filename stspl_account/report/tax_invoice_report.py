@@ -32,11 +32,29 @@ class report_print_tax_invoice_stspl(report_sxw.rml_parse):
         self.localcontext.update({
             'get_qty':self._get_qty,
             'get_sal_do_num':self._get_sal_do_num,
+            'get_sgd_details': self._get_sgd_details
         })
 
     def _get_qty(self, qty):
         return int(qty)
 
+    def _get_sgd_details(self, inv, inv_currency):
+        curr_sgd = self.pool.get('res.currency').search(self.cr, self.uid, [('name', '=', 'SGD')])
+        sgd_result = [{'rate':0.0, 'before_gst':0.0, 'gst_amt': 0.0, 'after_amt': 0.0}]
+        if curr_sgd:
+            curr_sgd_rec = self.pool.get('res.currency').browse(self.cr, self.uid, curr_sgd[0])
+            sgd_result[0].update({'rate': curr_sgd_rec.rate_silent or 0.0})
+            if inv_currency and inv and inv.amount_untaxed:
+                exchange_rate = curr_sgd_rec.rate_silent / inv_currency.rate_silent
+                sgd_result[0].update({'before_gst': inv.amount_untaxed * exchange_rate})
+            if inv_currency and inv and inv.amount_tax:
+                exchange_rate = curr_sgd_rec.rate_silent / inv_currency.rate_silent
+                sgd_result[0].update({'gst_amt': inv.amount_tax * exchange_rate})
+            if inv_currency and inv and inv.amount_total:
+                exchange_rate = curr_sgd_rec.rate_silent / inv_currency.rate_silent
+                sgd_result[0].update({'after_amt': inv.amount_total * exchange_rate})
+        return sgd_result
+    
     def _get_sal_do_num(self,picking_ids):
         if picking_ids:
             for pick in picking_ids:
