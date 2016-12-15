@@ -228,13 +228,13 @@
                         <span t-field="o.partner_id.name"/>
                       </div>
                       <div>
-                        <!-- <span t-field="o.partner_id.house_no"/>
-                        <t t-if="o.partner_id.house_no">,</t> -->
+                         <span t-field="o.partner_id.house_no"/>
+                        <t t-if="o.partner_id.house_no">,</t> 
                         <span t-field="o.partner_id.street"/>
                       </div>
                       <div>
-                    <!--     <span t-field="o.partner_id.level_no"/>
-                        <t t-if="o.partner_id.level_no">,</t> -->
+                       <span t-field="o.partner_id.level_no"/>
+                        <t t-if="o.partner_id.level_no">,</t> 
                         <span t-field="o.partner_id.street2"/>
                       </div>
                       <div>
@@ -261,13 +261,13 @@
                         <span t-field="o.partner_id.name"/>
                       </div>
                       <div>
-                        <!-- <span t-field="o.partner_id.house_no"/>
-                        <t t-if="o.partner_id.house_no">,</t> -->
+                        <span t-field="o.partner_id.house_no"/>
+                        <t t-if="o.partner_id.house_no">,</t>
                         <span t-field="o.partner_id.street"/>
                       </div>
                       <div>
-                        <!-- <span t-field="o.partner_id.level_no"/>
-                        <t t-if="o.partner_id.level_no">,</t> -->
+                        <span t-field="o.partner_id.level_no"/>
+                        <t t-if="o.partner_id.level_no">,</t>
                         <span t-field="o.partner_id.street2"/>
                       </div>
                       <div>

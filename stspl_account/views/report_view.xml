@@ -33,7 +33,7 @@
         <report
             id="proforma_invoice_id"
             model="sale.order"
-            string="Proforma Report"
+            string="Proforma Invoice"
             report_type="qweb-pdf"
             name="stspl_account.report_stspl_proforma_invoice"
             file="stspl_account.report_stspl_proforma_invoice"
