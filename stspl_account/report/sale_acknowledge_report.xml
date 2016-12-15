@@ -65,8 +65,8 @@
                   <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
                 </div>
                 <div style="font-size:11px">
-                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_invoice"/><br/>
-                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_invoice"/><br/>
+                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
                 </div>
               </div>
           </div>
@@ -243,12 +243,12 @@
                           <span t-field="o.partner_id.name"/>
                         </div>
                         <div>
-                          <span t-field="o.partner_id.house_no"/>
+                          <!-- <span t-field="o.partner_id.house_no"/> -->
                           ,
                           <span t-field="o.partner_id.street"/>
                         </div>
                         <div>
-                          <span t-field="o.partner_id.level_no"/>
+                          <!-- <span t-field="o.partner_id.level_no"/> -->
                           ,
                           <span t-field="o.partner_id.street2"/>
                         </div>
@@ -272,12 +272,12 @@
                           <span t-field="o.partner_id.name"/>
                         </div>
                         <div>
-                          <span t-field="o.partner_id.house_no"/>
+                          <!-- <span t-field="o.partner_id.house_no"/> -->
                           ,
                           <span t-field="o.partner_id.street"/>
                         </div>
                         <div>
-                          <span t-field="o.partner_id.level_no"/>
+                          <!-- <span t-field="o.partner_id.level_no"/> -->
                           ,
                           <span t-field="o.partner_id.street2"/>
                         </div>
@@ -332,7 +332,7 @@
                         <span t-field="o.user_id"/>
                       </td>
                       <td style="text-align:center" width="17%">
-                        <span t-field="o.sales_id.incoterm"/>
+                        <span t-field="o.incoterm"/>
                       </td>
                     </tr>
                   </t>
@@ -351,7 +351,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <t t-foreach="o.invoice_line" t-as="s"> 
+                    <t t-foreach="o.order_line" t-as="s"> 
                       <tr style="border:0.5px solid black">
                         <td style="border:0.5px solid black;" width="5%">
                           <span t-esc="s_index+1" />
@@ -376,11 +376,11 @@
                         </td>
 
                         <td style="border:0.5px solid black;padding:5px" width="5%">
-                          <span t-field="s.quantity" />
+                          <span t-field="s.product_uom_qty" />
                         </td>
 
                         <td style="border:0.5px solid black;padding:5px" width="5%">
-                          <span t-field="s.quantity" />
+                          <span t-field="s.product_uom_qty" />
                         </td>
                         
                         <td style="border:0.5px solid black;padding:5px" width="15%">
