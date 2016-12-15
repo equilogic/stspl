@@ -23,7 +23,7 @@
 {
     'name': 'STSPL Account',
     'version': '1.1',
-    'depends': ['purchase','sg_account_odoo','l10n_sg_stspl'],
+    'depends': ['purchase','sg_account_odoo'],
     'author' :'Serpent Consulting Services Pvt. Ltd.',
     'website' : 'http://www.serpentcs.com',
     'category': 'purchase',
