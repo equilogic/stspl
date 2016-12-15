@@ -60,15 +60,24 @@
 		              </div>
 		            </div>
           		</div>
-              <div class="col-xs-11 col-xs-offset-1 text-right" >
-                <div >
-                  <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
-                </div>
-                <div style="font-size:11px">
-                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
-                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
-                </div>
-              </div>
+          		<table width="100%">
+          			<tr>
+          				<td width="50%">
+          					<div>
+          						<h4><b>Acknowledgment</b></h4>
+          					</div>
+          				</td>
+          				<td width="50%" class="text-right">
+          					<div >
+			                  <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
+			                </div>
+			                <div style="font-size:11px">
+			                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+			                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+			                </div>
+          				</td>
+          			</tr>
+          		</table>
           </div>
         </template>
             <!-- Footer for Packing List Report -->
@@ -226,10 +235,6 @@
             <t t-call="stspl_account.external_layout_stspl_sales_acknowledgment_report_template">
               <div class="page">             
                 <div class="oe_structure"/>
-                <div style="text-align:center;">
-                  <h4><b>Acknowledgment</b></h4>
-                </div>
-
                 <!-- Page Content-->
                 <table class="table tabcenter-block" style="border: 0.5px solid black;font-size:12px" width="100%" >
                   <tr>
