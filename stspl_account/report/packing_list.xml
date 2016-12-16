@@ -148,18 +148,18 @@
                       <th style="border-top: 1px solid;border-right:1px solid;" width="50%">BILL TO</th>
                       <div t-if="o.company_id">
                         <div>
-                          <span t-field="o.company_id.name"></span>
+                          <span t-field="o.partner_id.name"></span>
                         </div>
                         <div>
-                          <span t-field="o.company_id.street" />
+                          <span t-field="o.partner_id.street" />
                         </div>
                         <div>
-                          <span t-field="o.company_id.city" />
-                          <span t-field="o.company_id.state_id" />
-                          <span t-field="o.company_id.zip" />
+                          <span t-field="o.partner_id.city" />
+                          <span t-field="o.partner_id.state_id" />
+                          <span t-field="o.partner_id.zip" />
                         </div>
                         <div>
-                          <span t-field="o.company_id.country_id" />
+                          <span t-field="o.partner_id.country_id" />
                         </div>
                       </div>
                     </div>
@@ -171,18 +171,18 @@
                         <th style="border-top: 1px solid;border-right:1px solid;" width="50%">SHIP TO</th>
                         <div t-if="o.company_id">
                         <div>
-                          <span t-field="o.company_id.name"></span>
+                          <span t-field="o.partner_id.name"></span>
                         </div>
                         <div>
-                          <span t-field="o.company_id.street" />
+                          <span t-field="o.partner_id.street" />
                         </div>
                         <div>
-                          <span t-field="o.company_id.city" />
-                          <span t-field="o.company_id.state_id" />
-                          <span t-field="o.company_id.zip" />
+                          <span t-field="o.partner_id.city" />
+                          <span t-field="o.partner_id.state_id" />
+                          <span t-field="o.partner_id.zip" />
                         </div>
                         <div>
-                          <span t-field="o.company_id.country_id" />
+                          <span t-field="o.partner_id.country_id" />
                         </div>
                       </div>
                     </div>
