@@ -32,11 +32,20 @@ class report_print_tax_invoice_stspl(report_sxw.rml_parse):
         self.localcontext.update({
             'get_qty':self._get_qty,
             'get_sal_do_num':self._get_sal_do_num,
-            'get_sgd_details': self._get_sgd_details
+            'get_sgd_details': self._get_sgd_details,
+            'get_lines_if_discount': self._get_lines_if_discount
         })
 
     def _get_qty(self, qty):
         return int(qty)
+    
+    def _get_lines_if_discount(self, inv_lines):
+        flag = False
+        if inv_lines:
+            for line in inv_lines:
+                if line.discount and line.discount > 0.0:
+                    flag = True
+        return flag
 
     def _get_sgd_details(self, inv, inv_currency):
         curr_sgd = self.pool.get('res.currency').search(self.cr, self.uid, [('name', '=', 'SGD')])

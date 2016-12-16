@@ -32,11 +32,11 @@
           <div style="font-size:12px">
             <span>Tel :</span>
             <span t-field="get_company(data).phone"/>
-            <span>Fax :</span>
+            <span> Fax :</span>
             <span t-field="get_company(data).fax"/>
           </div>
 
-          <div style="font-size:12px">
+ <!--          <div style="font-size:12px">
             <span >CO. REG. NO.</span>
             <span t-field="get_company(data).company_registry" />
           </div>
@@ -44,7 +44,7 @@
           <div style="font-size:12px">
             <span class="text-right">GST REG NO.</span>
             <span t-field="get_company(data).gst_no"/>
-          </div>
+          </div> -->
         </div>
       </div>
     </template>

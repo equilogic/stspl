@@ -30,7 +30,7 @@
                 <h5><b><span t-field="o.company_id.name" ></span></b></h5>
               </div>
 
-              <div>
+<!--               <div>
                 <span >Company Rrgistration No.</span>
                 <span>:</span>
                 <span t-field="o.company_id.company_registry"/>
@@ -40,7 +40,7 @@
                 <span class="text-center">GST Rrgistration No.</span>
                 <span>:</span>
                 <t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
-              </div>
+              </div> -->
 
               <div>
                 <span t-field="o.company_id.street"/>
@@ -57,13 +57,13 @@
                 <span>Tel :</span>
                 <span t-field="o.company_id.phone"/>
                 
-                <span>Fax :</span>
+                <span> Fax :</span>
                 <span t-field="o.company_id.fax"/>
               </div>
             </div>
           </div>
-          <div class="text-center">
-            <h3><b>PROFORMA INVOICE</b></h3>
+          <div class="text-left">
+            <h4><b>PROFORMA INVOICE</b></h4>
           </div> 
         </div>
       </template>
@@ -99,8 +99,12 @@
                 </table>
               </div>
             </div>
-
-            <table width="100%" style="border:1px solid;">
+            
+          <div class="text-left">
+              <span><b>Additioanal information : </b></span><span t-esc="o.comment"></span>
+          </div> 
+          
+         <!--    <table width="100%" style="border:1px solid;">
               <tr >
                 <td class="text-center" width="25%">
                   <span>Consignee</span>
@@ -117,18 +121,18 @@
               <br/>
               <tr>
                 <td class="text-left" width="25%">
-                  <span>------------------------------------</span>
+                  <span></span>
                   <span style="font-size:11px">Date/Signature/Company Stamp</span>
                 </td>
 
                 <td></td>
 
                 <td class="text-center" width="20%">
-                  <span>------------------------------</span>
+                  <span></span>
                   <span style="font-size:11px">Authorised Signature</span>
                 </td>
               </tr>
-            </table>
+            </table> -->
           </div>
         </div>
       </template>
@@ -195,7 +199,7 @@
                     <td width="2.5%"></td>
                     <td width="45%">
                      <span>Date:</span>
-                     <span t-field="o.date_order" t-field-options='{"format": "dd-MM-Y"}' />
+                     <span t-field="o.date_invoice" t-field-options='{"format": "dd-MM-Y"}' />
                     </td>
                     <td width="7.5%"></td>
                     <td width="45%">
@@ -207,7 +211,7 @@
               </div>
               <table  width="100%" style="font-size:12px" >
                 <tr>
-                  <th width="50%" style="padding:5px">SOLD TO:</th>
+                  <th width="50%" style="padding:5px">BILL TO:</th>
                   <th width="55%" style="padding:5px">SHIP TO:</th>
                 </tr>
                 <tr class="table" style="border:0.5px solid" >
@@ -238,7 +242,7 @@
                       </div>
                     </div>
                     <br/>
-                    <p>ATTN: <span t-field="o.attn_sales"/></p>
+                    <p>ATTN: <span t-field="o.attn_inv"/></p>
                   </td>
 
                   <td width="55%" style="padding:10px">
@@ -300,11 +304,11 @@
                     <th class="text-left line" width="15%">Qty</th>
                     <th class="text-left line" width="15%">Unit</th>
                     <th class="text-left line" width="15%">Unit Price</th>
-                    <th class="text-left line" width="15%">Amount:SGD</th>
+                    <th class="text-left line" width="15%">Amount</th>
                  </tr>
                 </thead>
                 <tbody>
-                  <tr t-foreach="o.order_line" t-as="line">
+                  <tr t-foreach="o.invoice_line" t-as="line">
                     <td width="10%">
                       <span t-esc="line_index+1"/>
                     </td>
@@ -312,10 +316,10 @@
                       <span t-field="line.name"/>
                     </td>
                     <td width="15%">
-                      <span t-field="line.product_uom_qty" t-field-options='{"widget": "int"}' />
+                      <span t-field="line.quantity" t-field-options='{"widget": "int"}' />
                     </td>
                     <td width="15%">
-                      <span t-field="line.product_uom.name"/> 
+                      <span t-field="line.uos_id.name"/> 
                     </td>
                     <td width="15%">
                       <span t-field="o.currency_id.symbol" />
