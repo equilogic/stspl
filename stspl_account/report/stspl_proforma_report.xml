@@ -66,6 +66,9 @@
         <div class="footer">
           <div class="last-page">
             <div class="row">
+	          <div class="col-xs-4 text-left">
+	              <span><b>Notes : </b></span><span t-esc="o.note"></span>
+	          </div>            
               <div class="col-xs-4 pull-right" style="font-size:11.5px">
                 <table class="table table-condensed">
                   <tr>
@@ -93,9 +96,7 @@
               </div>
             </div>
             
-          <div class="text-left">
-              <span><b>Additioanal information : </b></span><span t-esc="o.note"></span>
-          </div> 
+
           
          <!--    <table width="100%" style="border:1px solid;">
               <tr >

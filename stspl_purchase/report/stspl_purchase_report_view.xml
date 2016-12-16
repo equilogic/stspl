@@ -168,7 +168,7 @@
                    <div class="row">
                    		<div class="col-xs-6">
                    			<h3 t-if="o.state != 'draft'">PURCHASE ORDER</h3>
-                   			<h3 t-if="o.state == 'draft'">REQUEST FOR QUOTATION</h3>
+                   			<h3 t-if="o.state == 'draft'">RFQ</h3>
                    			<strong>TO:</strong>
                         <div t-if="o.partner_id" name="partner_header">
                           <div>
