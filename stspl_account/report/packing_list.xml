@@ -17,6 +17,8 @@
 
         <template id="external_layout_header_stspl_picking_list_report_template">
           <div class="header">
+          	<br/>
+          	<br/>
        		<div class="col-xs-3">
        			<span t-if="o.company_id">
    				   <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 65px;"/>
