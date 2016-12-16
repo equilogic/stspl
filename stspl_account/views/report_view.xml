@@ -39,7 +39,6 @@
             file="stspl_account.report_stspl_proforma_invoice"
             />
 
-<<<<<<< HEAD
         <!-- Statement of Account -->
         <report
             id="statement_of_account_id"
@@ -51,7 +50,6 @@
             />
 
 
-=======
         <report 
             id="account.account_invoices"
             model="account.invoice"
@@ -64,7 +62,6 @@
             menu="False"
         />
         
->>>>>>> b3e3df73a9ee63cb539a60c0dd5a3361a245a555
         <record id="paperformat_euro_lowmargin_stspl_tax_invoice" model="report.paperformat">
             <field name="name">European A4 low margin</field>
             <field name="default" eval="True" />
