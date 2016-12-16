@@ -1,5 +1,5 @@
 <openerp>
-	<data>
+	<data noupdate="1">
 
 		<record id="seq_type_genrate_tax_invoice_id" model="ir.sequence.type">
             <field name="name">Account Invoice</field>
@@ -7,7 +7,7 @@
         </record>
 
 		<record id="genrate_tax_invoice_id_0" model="ir.sequence">
-			<field name="name">Account Invoice</field>
+			<field name="name">Customer Invoice</field>
 			<field name="code">account.invoice.customer</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
@@ -21,7 +21,7 @@
         </record>
 
 		<record id="genrate_tax_invoice_supp" model="ir.sequence">
-			<field name="name">Account Invoice</field>
+			<field name="name">Supplier Invoice</field>
 			<field name="code">account.invoice.supplier</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>

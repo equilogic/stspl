@@ -51,7 +51,7 @@ class account_invoice(models.Model):
                 next_id = self.env['ir.sequence'].get('account.invoice.customer')
                 self.write({'number': next_id})                
             if self.type=='in_invoice':
-                next_supp_id = self.env['ir.sequence'].get('account.invoice.customer')
+                next_supp_id = self.env['ir.sequence'].get('account.invoice.supplier')
                 self.write({'number': next_supp_id})                      
         return self.write({'state': 'open'})
 

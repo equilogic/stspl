@@ -65,6 +65,16 @@
           <div class="last-page">
             <p style="font-size:11px">PARTIAL DELIVERY</p>
             <br/>
+            <t t-if="o.partner_id.country_id.name == 'Singapore'">
+                <t t-foreach="get_sgd_details(o,o.currency_id)" t-as="sgd_res">
+	                <p style="font-size:11px">For GST Purpose Only <br/>
+	                    <span>USD 1.00 = </span><span t-esc="sgd_res['rate']" /><br/>
+	                    <span>Amount Before GST = </span><span t-esc="sgd_res['before_gst']" /><br/>
+	                    <span>GST Amount = </span><span t-esc="sgd_res['gst_amt']" /><br/>
+	                    <span>Amount After GST = </span><span t-esc="sgd_res['after_amt']" /><br/>
+	                </p>
+                </t>
+            </t>
             <div class="row" style="font-size:11px">
               <div class="col-xs-4 pull-right">
                 <table class="table table-condensed">
@@ -75,7 +85,15 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>GST ZR 0%</td>
+                  	<t t-if="o.partner_id.country_id">
+                  		<t t-if="o.partner_id.country_id.name == 'Singapore'">
+                  			<td>GST 7% SR</td>
+                  		</t>
+                  		<t t-if="o.partner_id.country_id.name != 'Singapore'">
+                  			<td>GST 0% ZR</td>
+                  		</t>                  		
+                  		
+                  	</t>
                     <td class="text-right">
                       <span t-field="o.amount_tax" />
                     </td>
@@ -210,23 +228,23 @@
                         <span t-field="o.partner_id.name"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.house_no"/>
-                        ,
+                         <span t-field="o.partner_id.house_no"/>
+                        <t t-if="o.partner_id.house_no">,</t> 
                         <span t-field="o.partner_id.street"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.level_no"/>
-                        ,
+                       <span t-field="o.partner_id.level_no"/>
+                        <t t-if="o.partner_id.level_no">,</t> 
                         <span t-field="o.partner_id.street2"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.city"/>
-                        ,
+                        <t t-if="o.partner_id.city">,</t>
                         <span t-field="o.partner_id.state_id"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.country_id"/>
-                        ,
+                        <t t-if="o.partner_id.country_id">,</t>
                         <span t-field="o.partner_id.zip"/>
                       </div>
                     </div>
@@ -244,22 +262,22 @@
                       </div>
                       <div>
                         <span t-field="o.partner_id.house_no"/>
-                        ,
+                        <t t-if="o.partner_id.house_no">,</t>
                         <span t-field="o.partner_id.street"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.level_no"/>
-                        ,
+                        <t t-if="o.partner_id.level_no">,</t>
                         <span t-field="o.partner_id.street2"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.city"/>
-                        ,
+                        <t t-if="o.partner_id.city">,</t>
                         <span t-field="o.partner_id.state_id"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.country_id"/>
-                        ,
+                        <t t-if="o.partner_id.country_id">,</t>
                         <span t-field="o.partner_id.zip"/>
                       </div>
                     </div>                    

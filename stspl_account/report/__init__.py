@@ -20,4 +20,8 @@
 #
 ##############################################################################
 
+<<<<<<< HEAD
 import statement_of_account
+=======
+import tax_invoice_report
+>>>>>>> b3e3df73a9ee63cb539a60c0dd5a3361a245a555
