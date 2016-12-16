@@ -12,7 +12,7 @@
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
 			<field name="padding">5</field>
-			<field name="prefix">CI%(y)s-</field>
+			<field name="prefix">INV%(y)s-</field>
 		</record>
 
 		<record id="seq_type_genrate_supp_invoice_id" model="ir.sequence.type">
@@ -26,7 +26,7 @@
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
 			<field name="padding">5</field>
-			<field name="prefix">SI%(y)s-</field>
+			<field name="prefix">INV%(y)s-</field>
 		</record>
 		
 	</data>
