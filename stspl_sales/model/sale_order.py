@@ -49,12 +49,21 @@ class sale_order(models.Model):
                                             'string': 'Quotation'})
                     if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'stspl_account.report_sale_acknowledgment':
-                        report_dict.update({'display_name': 'Quotation Acknowledgment','name': 'Quotation Acknowledgment',
-                                            'string': 'Quotation Acknowledgment'})
+                        report_dict.update({'display_name': '','name': '',
+                                            'string': ''})
                     if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'stspl_account.report_stspl_proforma_invoice':
-                        report_dict.update({'display_name': 'Quotation Proforma Invoice','name': 'Quotation Proforma Invoice',
-                                            'string': 'Quotation Proforma Invoice'})
+                        report_dict.update({'display_name': '','name': '',
+                                            'string': ''})
+                                                
+                    if action_rec.name == 'Sales Orders' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_sale_acknowledgment':
+                        report_dict.update({'display_name': 'Acknowledgment','name': 'Acknowledgment',
+                                            'string': 'Acknowledgment'})
+                    if action_rec.name == 'Sales Orders' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_stspl_proforma_invoice':
+                        report_dict.update({'display_name': 'Proforma Invoice','name': 'Proforma Invoice',
+                                            'string': 'Proforma Invoice'})
         return result
 
     @api.model

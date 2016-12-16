@@ -133,18 +133,18 @@
 									</div>
 									<div>
 										<span t-field="o.company_id.street"/>
-										,
+										<t t-if="o.company_id.street">,</t>
 										<span t-field="o.company_id.city"/>
-										,
+										<t t-if="o.company_id.city">,</t>
 										<span t-field="o.company_id.country_id"/>
 										<span t-field="o.company_id.zip"/>
 									</div>
 
 									<div>
 										<span>Tel :</span>
-										<span t-field="o.company_id.phone" />
+										<span style="padding:5px"  t-field="o.company_id.phone" />
 
-										<span>Fax :</span>
+										<span style="padding:5px" >Fax :</span>
 										<span t-field="o.company_id.fax" />
 									</div>
 									<div>
@@ -283,8 +283,8 @@
 									<th t-if="o.state != 'draft'" width="12%">Serial No.</th>
 									<th class="text-center line" width="35%">Description/Part No</th>
 									<th t-if="o.state != 'draft'" class="text-left line" width="13%">ETD</th>
-									<th class="text-left line" width="5%">Qty</th>
-									<th class="text-left line" width="10%">Units</th>
+									<th class="text-left line" width="10%">Qty</th>
+									<th class="text-right line" width="10%">Units</th>
 									<th class="text-right line" width="15%">Unit Price</th>
 									<th class="text-right line" width="10%">Amount</th>
 								</tr>
@@ -312,7 +312,7 @@
 									<td class="text-left line" width="5%">
 										<span t-esc="get_qty(line.product_uom_qty)" />
 									</td>
-									<td class="text-left line" width="10%">
+									<td class="text-right line" width="10%">
 										<span t-field="line.product_uom.name" />
 									</td>
 									<td class="text-right line" width="15%">
@@ -336,13 +336,13 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Discount</td>
+									<!-- <td>Discount</td>
 									<td>
 										<span />
-									</td>
+									</td> -->
 								</tr>
 								<tr>
-									<td>GST ZR 0%</td>
+									<td>Taxes</td>
 									<td class="text-right">
 										<span t-field="o.amount_tax" />
 									</td>

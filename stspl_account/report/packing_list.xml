@@ -24,37 +24,34 @@
    			  </div>
        		<div class="col-xs-8 col-xs-offset-1 text-right">
        			<div t-if="o.company_id" style="font-size:12px">
-     					<div>
-                <h5><b><span t-field="o.company_id.name" ></span></b></h5>
-              </div>
-
-     					<div>
-                <span t-field="o.company_id.street"/>
-                ,
-     						<span t-field="o.company_id.city"/>
-                ,
-     						<span t-field="o.company_id.country_id"/>
-                <span t-field="o.company_id.zip"/>
-     					</div>
-       					
-     					<div>
-     						<span>Tel :</span>
-     						<span t-field="o.company_id.phone"/>
-     						
-     						<span> Fax :</span>
-     						<span t-field="o.company_id.fax"/>
-     					</div>
-     			 		<div>
-     						<span >CO. REG. NO. </span>
-     						<span t-field="o.company_id.company_registry" />
-     					</div>
-     					<div>
-     						<span class="text-right">GST REG NO. </span>
-     						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
-     					</div>
+                    <div>
+                        <h5><b><span t-field="o.company_id.name" ></span></b></h5>
+                    </div>
+     		        <div>
+		                <span t-field="o.company_id.street"/>
+		                <t t-if="o.company_id.street">,</t>
+						<span t-field="o.company_id.city"/>
+						<t t-if="o.company_id.city">,</t>
+ 						<span t-field="o.company_id.country_id"/>
+                        <span t-field="o.company_id.zip"/>
+ 					</div>
+ 					<div>
+ 						<span>Tel :</span>
+ 						<span t-field="o.company_id.phone"/>
+ 						
+ 						<span> Fax :</span>
+ 						<span t-field="o.company_id.fax"/>
+ 					</div>
+ 					<div>
+ 						<span >CO. REG. NO. </span>
+ 						<span t-field="o.company_id.company_registry" />
+ 					</div>
+ 					<div>
+ 						<span class="text-right">GST REG NO. </span>
+ 						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
+ 					</div>
        			</div>
-       		</div> 
-          
+       		</div>
             <div>
               <div>
                 <table>
@@ -143,7 +140,6 @@
               <div class="page">             
                 <div class="oe_structure"/>
                 <div class="row">
-                  <br/><br/><br/><br/><br/>
                   <div class="col-xs-6">
                     <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
 

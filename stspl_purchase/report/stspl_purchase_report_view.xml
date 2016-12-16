@@ -176,22 +176,22 @@
                           </div>
                           <div>
                             <span t-field="o.partner_id.house_no"/>
-                            ,
+                            <t t-if="o.partner_id.house_no">,</t>
                             <span t-field="o.partner_id.street"/>
                           </div>
                           <div>
                             <span t-field="o.partner_id.level_no"/>
-                            ,
+                            <t t-if="o.partner_id.level_no">,</t>
                             <span t-field="o.partner_id.street2"/>
                           </div>
                           <div>
                             <span t-field="o.partner_id.city"/>
-                            ,
+                            <t t-if="o.partner_id.city">,</t>
                             <span t-field="o.partner_id.state_id"/>
                           </div>
                           <div>
                             <span t-field="o.partner_id.country_id"/>
-                            ,
+                            <t t-if="o.partner_id.country_id">,</t>
                             <span t-field="o.partner_id.zip"/>
                           </div>
                         </div>
@@ -235,26 +235,26 @@
                    				<td width="55%">
                             <div t-if="o.partner_id" name="partner_header">
                               <div>
-                                <span t-field="o.partner_id.name"/>
+                                <span t-if="o.partner_id.name"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.house_no"/>
-                                ,
+                                <t t-if="o.partner_id.house_no">,</t>
                                 <span t-field="o.partner_id.street"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.level_no"/>
-                                ,
+                                <t t-if="o.partner_id.level_no">,</t>
                                 <span t-field="o.partner_id.street2"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.city"/>
-                                ,
+                                <t t-if="o.partner_id.city">,</t>
                                 <span t-field="o.partner_id.state_id"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.country_id"/>
-                                ,
+                                <t t-if="o.partner_id.country_id">,</t>
                                 <span t-field="o.partner_id.zip"/>
                               </div>
                             </div>
@@ -267,22 +267,22 @@
                               </div>
                               <div>
                                 <span t-field="o.partner_id.house_no"/>
-                                ,
+                                <t t-if="o.partner_id.house_no">,</t>
                                 <span t-field="o.partner_id.street"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.level_no"/>
-                                ,
+                                <t t-if="o.partner_id.level_no">,</t>
                                 <span t-field="o.partner_id.street2"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.city"/>
-                                ,
+                                <t t-if="o.partner_id.city">,</t>
                                 <span t-field="o.partner_id.state_id"/>
                               </div>
                               <div>
                                 <span t-field="o.partner_id.country_id"/>
-                                ,
+                                <t t-if="o.partner_id.country_id">,</t>
                                 <span t-field="o.partner_id.zip"/>
                               </div>
                             </div>

@@ -17,67 +17,57 @@
 
         <template id="external_header_acknowledgment_report">
             <div class="header">
-		          <div class="col-xs-3">
-		            <span t-if="o.company_id">
-		             <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 65px;"/>
-		           </span>
-		          </div>
-		          <div class="col-xs-8 col-xs-offset-1 text-right">
-		            <div t-if="o.company_id" style="font-size:12px">
-		              <div>
-		                <h5><b><span t-field="o.company_id.name" ></span></b></h5>
-		              </div>
-		
-<!-- 		              <div>
-		                <span >Company Rrgistration No.</span>
-		                <span>:</span>
-		                <span t-field="o.company_id.company_registry"/>
-		              </div>
-		
-		              <div>
-		                <span class="text-center">GST Rrgistration No.</span>
-		                <span>:</span>
-		                <t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
-		              </div> -->
-		
-		              <div>
+       		<div class="col-xs-3">
+       			<span t-if="o.company_id">
+   				   <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 65px;"/>
+   				 </span>
+   			  </div>
+       		<div class="col-xs-8 col-xs-offset-1 text-right">
+       			<div t-if="o.company_id" style="font-size:12px">
+                    <div>
+                        <h5><b><span t-field="o.company_id.name" ></span></b></h5>
+                    </div>
+     		        <div>
 		                <span t-field="o.company_id.street"/>
-		              </div>
-		              <div>
-		                <span t-field="o.company_id.city"/>
-		              </div>
-		              <div>
-		                <span t-field="o.company_id.country_id"/>
-		                <span t-field="o.company_id.zip"/>
-		              </div>
-		                
-		              <div>
-		                <span>Tel :</span>
-		                <span t-field="o.company_id.phone"/>
-		                
-		                <span> Fax :</span>
-		                <span t-field="o.company_id.fax"/>
-		              </div>
-		            </div>
-          		</div>
-          		<table width="100%">
-          			<tr>
-          				<td width="50%">
-          					<div>
-          						<h4><b>Acknowledgment</b></h4>
-          					</div>
-          				</td>
-          				<td width="50%" class="text-right">
-          					<div >
-			                  <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
-			                </div>
-			                <div style="font-size:11px">
-			                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
-			                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
-			                </div>
-          				</td>
-          			</tr>
-          		</table>
+		                <t t-if="o.company_id.street">,</t>
+						<span t-field="o.company_id.city"/>
+						<t t-if="o.company_id.city">,</t>
+ 						<span t-field="o.company_id.country_id"/>
+                        <span t-field="o.company_id.zip"/>
+ 					</div>
+ 					<div>
+ 						<span>Tel :</span>
+ 						<span t-field="o.company_id.phone"/>
+ 						
+ 						<span> Fax :</span>
+ 						<span t-field="o.company_id.fax"/>
+ 					</div>
+ 					<div>
+ 						<span >CO. REG. NO. </span>
+ 						<span t-field="o.company_id.company_registry" />
+ 					</div>
+ 					<div>
+ 						<span class="text-right">GST REG NO. </span>
+ 						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
+ 					</div>
+       			</div>
+       		</div> 
+       		<div class="col-xs-4">
+				<div> 
+   					<h4><b>Acknowledgment</b></h4>
+				</div>       		
+       		</div>
+       		<div class="col-xs-8 text-right" >
+				<div> 
+  					<div >
+	                  <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
+	                </div>
+	                <div style="font-size:11px">
+	                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+	                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+	                </div>
+				</div>       		
+       		</div>       		
           </div>
         </template>
             <!-- Footer for Packing List Report -->
@@ -330,7 +320,7 @@
 
                       <td style="text-align:left" width="21%">
                         <t t-if="o.name">
-                          <span t-field="o.name"/></t>
+                          <span t-field="o.user_id"/></t>
                       </td>
 
                       <td style="text-align:center" width="21%">
@@ -349,24 +339,24 @@
                       <th style="border:0.5px solid black;padding:5px" width="5%">Line</th>
                       <th style="border:0.5px solid black;padding:5px" width="10%">Cust line</th>
                       <th style="border:0.5px solid black;padding:5px" width="40%">Part Number/Description</th>
-                      <th style="border:0.5px solid black;padding:5px" width="10%">Price</th>
-                      <th style="border:0.5px solid black;padding:5px" width="5%">Qty</th>
-                      <th style="border:0.5px solid black;padding:5px" width="5%">Units</th>
-                      <th style="border:0.5px solid black;padding:5px" width="15%">Amount</th>
+                      <th style="border:0.5px solid black; text-align:right" width="10%">Price</th>
+                      <th style="border:0.5px solid black; text-align:right" width="5%">Qty</th>
+                      <th style="border:0.5px solid black; text-align:right" width="5%">Units</th>
+                      <th style="border:0.5px solid black; text-align:right" width="15%">Amount</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table table-condensed">
                     <t t-foreach="o.order_line" t-as="s"> 
                       <tr style="border:0.5px solid black">
-                        <td style="border:0.5px solid black;" width="5%">
+                        <td  width="5%">
                           <span t-esc="s_index+1" />
                         </td>
 
-                        <td style="border:0.5px solid black;" width="10%">
+                        <td  width="10%">
                           <span t-esc="s_index+1" />
                         </td>
 
-                        <td style="border:0.5px solid black;padding:5px" width="40%">
+                        <td  width="40%">
                           <t t-if="s.name">
                             <span t-field="s.name"/><br/>
                             <span><b>Adder Codes:</b></span><span t-field="s.name"/><br/>
@@ -376,20 +366,18 @@
                           </t>
                         </td>
 
-                        <td style="border:0.5px solid black;padding:5px" width="10%">
+                        <td style="text-align:right"  width="10%">
                           <span t-field="s.price_unit"/>
                         </td>
 
-                        <td style="border:0.5px solid black;padding:5px" width="5%">
+                        <td style="text-align:right"  width="5%">
                           <span t-field="s.product_uom_qty" />
                         </td>
 
-                        <td style="border:0.5px solid black;padding:5px" width="5%">
+                        <td style="text-align:right" width="5%">
                           <span t-esc="s.product_uom.name" />
                         </td>
-                        
-                        <td style="border:0.5px solid black;padding:5px" width="15%">
-                          
+                        <td style="text-align:right" width="15%">
                             <span t-field="s.price_unit"/>
                         </td>
                       </tr>
@@ -398,6 +386,7 @@
                 </table>
 
               </div> 
+              
             </t>
           </t>
         </template>
