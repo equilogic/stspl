@@ -4,7 +4,7 @@
         <report
             id="sale_report"
             model="sale.order"
-            string="Sales Report"
+            string="Sales"
             report_type="qweb-pdf"
             name="stspl_sales.report_sale_order"
             file="stspl_sales.report_sale_order"

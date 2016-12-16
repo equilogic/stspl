@@ -14,7 +14,7 @@
         <report
             id="packing_list_report"
             model="account.invoice"
-            string="Packing Report"
+            string="Packing"
             report_type="qweb-pdf"
             name="stspl_account.report_packing_list"
             file="stspl_account.report_packing_list"
@@ -22,8 +22,8 @@
 
         <report
             id="sale_acknowledgment_id"
-            model="account.invoice"
-            string="Acknowledgment Report"
+            model="sale.order"
+            string="Acknowledgment"
             report_type="qweb-pdf"
             name="stspl_account.report_sale_acknowledgment"
             file="stspl_account.report_sale_acknowledgment"
@@ -32,7 +32,7 @@
 
         <report
             id="proforma_invoice_id"
-            model="account.invoice"
+            model="sale.order"
             string="Proforma Invoice"
             report_type="qweb-pdf"
             name="stspl_account.report_stspl_proforma_invoice"

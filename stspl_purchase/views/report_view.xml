@@ -5,7 +5,7 @@
         <report
             id="purchase_report"
             model="purchase.order"
-            string="Purchase Report"
+            string="Purchase"
             report_type="qweb-pdf"
             name="stspl_purchase.report_purchase_order"
             file="stspl_purchase.report_purchase_order"

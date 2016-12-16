@@ -45,8 +45,16 @@ class sale_order(models.Model):
                 for report_dict in result['toolbar']['print']:
                     if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'stspl_sales.report_sale_order':
-                        report_dict.update({'display_name': 'Quotation Report','name': 'Quotation Report',
-                                            'string': 'Quotation Report'})
+                        report_dict.update({'display_name': 'Quotation','name': 'Quotation',
+                                            'string': 'Quotation'})
+                    if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_sale_acknowledgment':
+                        report_dict.update({'display_name': 'Quotation Acknowledgment','name': 'Quotation Acknowledgment',
+                                            'string': 'Quotation Acknowledgment'})
+                    if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_stspl_proforma_invoice':
+                        report_dict.update({'display_name': 'Quotation Proforma Invoice','name': 'Quotation Proforma Invoice',
+                                            'string': 'Quotation Proforma Invoice'})
         return result
 
     @api.model

@@ -77,21 +77,21 @@
                 <table class="table table-condensed">
                   <tr>
                     <td>Sub-Total</td>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span class="text-left" t-field="o.currency_id.symbol" />
                       <span class="text-left" t-field="o.amount_untaxed" />
                     </td>
                   </tr>
                   <tr>
                     <td>GST</td>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span class="text-left" t-field="o.currency_id.symbol" />
                       <span t-field="o.amount_tax" />
                     </td>
                   </tr>
                   <tr>
                     <td><b>Total Due</b></td>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span class="text-left" t-field="o.currency_id.symbol" />
                       <span t-field="o.amount_total" />
                     </td>
@@ -101,7 +101,7 @@
             </div>
             
           <div class="text-left">
-              <span><b>Additioanal information : </b></span><span t-esc="o.comment"></span>
+              <span><b>Additioanal information : </b></span><span t-esc="o.note"></span>
           </div> 
           
          <!--    <table width="100%" style="border:1px solid;">
@@ -199,7 +199,7 @@
                     <td width="2.5%"></td>
                     <td width="45%">
                      <span>Date:</span>
-                     <span t-field="o.date_invoice" t-field-options='{"format": "dd-MM-Y"}' />
+                     <span t-field="o.date_order" t-field-options='{"format": "dd-MM-Y"}' />
                     </td>
                     <td width="7.5%"></td>
                     <td width="45%">
@@ -242,7 +242,7 @@
                       </div>
                     </div>
                     <br/>
-                    <p>ATTN: <span t-field="o.attn_inv"/></p>
+                    <p>ATTN: <span t-field="o.attn_sales"/></p>
                   </td>
 
                   <td width="55%" style="padding:10px">
@@ -284,6 +284,7 @@
                   <td style="border:0.5px solid;padding:5px"><strong>Shipping Term</strong></td>
                   <td style="border:0.5px solid;padding:5px"><strong>RMA No.</strong></td>
                   <td style="border:0.5px solid;padding:5px"><strong>P/O No.</strong></td>
+                  <td style="border:0.5px solid;padding:5px"><strong>Currency</strong></td>
                   <td style="border:0.5px solid;padding:5px"><strong>Ship Via</strong></td>
                 </tr>
 
@@ -292,6 +293,7 @@
                   <td style="border:0.5px solid;padding:5px"><span t-field="o.payment_term" /></td>
                   <td style="border:0.5px solid;padding:5px"><span t-field="o.payment_term" /></td>
                   <td style="border:0.5px solid;padding:5px"><span t-field="o.name" /></td>
+                  <td style="border:0.5px solid;padding:5px"><span t-field="o.currency_id"/></td>
                   <td style="border:0.5px solid;padding:5px"><span/><span t-field="o.ship_via_id.name" /></td>
                 </tr>
               </table>
@@ -308,7 +310,7 @@
                  </tr>
                 </thead>
                 <tbody>
-                  <tr t-foreach="o.invoice_line" t-as="line">
+                  <tr t-foreach="o.order_line" t-as="line">
                     <td width="10%">
                       <span t-esc="line_index+1"/>
                     </td>
@@ -316,10 +318,10 @@
                       <span t-field="line.name"/>
                     </td>
                     <td width="15%">
-                      <span t-field="line.quantity" t-field-options='{"widget": "int"}' />
+                      <span t-field="line.product_uom_qty" t-field-options='{"widget": "int"}' />
                     </td>
                     <td width="15%">
-                      <span t-field="line.uos_id.name"/> 
+                      <span t-field="line.product_uom.name"/> 
                     </td>
                     <td width="15%">
                       <span t-field="o.currency_id.symbol" />

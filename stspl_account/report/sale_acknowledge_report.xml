@@ -72,8 +72,8 @@
 			                  <h4><b><span style="font-size:12px">Sales Order Number:</span><span style="font-size:12px;padding: 5px" t-field="o.name"/><br/></b></h4>
 			                </div>
 			                <div style="font-size:11px">
-			                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_invoice"/><br/>
-			                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_invoice"/><br/>
+			                  <span><b>Order Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
+			                  <span><b>Required Date:</b></span><span style="padding: 5px" t-field="o.date_order"/><br/>
 			                </div>
           				</td>
           			</tr>
@@ -297,7 +297,7 @@
                           <span t-field="o.partner_id.zip"/>
                         </div>
                       </div>
-                      <p><b>Attention:</b><b><span style="padding:5px;" t-field="o.attn_inv"/></b></p>
+                      <p><b>Attention:</b><b><span style="padding:5px;" t-field="o.attn_sales"/></b></p>
                     </td>
                   </tr>
                 </table>
@@ -336,9 +336,9 @@
                       <td style="text-align:center" width="21%">
                         <span t-field="o.user_id"/>
                       </td>
-<!--                       <td style="text-align:center" width="17%">
+                      <td style="text-align:center" width="17%">
                         <span t-field="o.incoterm"/>
-                      </td> -->
+                      </td>
                     </tr>
                   </t>
                 </table>
@@ -356,7 +356,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <t t-foreach="o.invoice_line" t-as="s"> 
+                    <t t-foreach="o.order_line" t-as="s"> 
                       <tr style="border:0.5px solid black">
                         <td style="border:0.5px solid black;" width="5%">
                           <span t-esc="s_index+1" />
@@ -381,11 +381,11 @@
                         </td>
 
                         <td style="border:0.5px solid black;padding:5px" width="5%">
-                          <span t-field="s.quantity" />
+                          <span t-field="s.product_uom_qty" />
                         </td>
 
                         <td style="border:0.5px solid black;padding:5px" width="5%">
-                          <span t-esc="s.uos_id.name" />
+                          <span t-esc="s.product_uom.name" />
                         </td>
                         
                         <td style="border:0.5px solid black;padding:5px" width="15%">

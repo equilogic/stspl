@@ -44,14 +44,14 @@
  						<span> Fax :</span>
  						<span t-field="o.company_id.fax"/>
  					</div>
- 			<!-- 		<div>
+ 					<div>
  						<span >CO. REG. NO. </span>
  						<span t-field="o.company_id.company_registry" />
  					</div>
  					<div>
  						<span class="text-right">GST REG NO. </span>
  						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
- 					</div> -->
+ 					</div>
        			</div>
        		</div> 
         </div>
