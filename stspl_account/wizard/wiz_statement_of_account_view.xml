@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_statement_of_account_form" model="ir.ui.view">
+            <field name="name">statement.of.account.form</field>
+            <field name="model">statement.of.account</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Statement Of Account" version="7.0">
+                <group>
+                    <field name="start_date" required="True" string = "Date"/>
+                    <field name="page_split" invisible="1"/>
+                </group>
+                <separator string="Customers" />
+                <field name="customer_ids" domain="[('customer','=',True)]"/>
+                <footer>
+                    <button string="Print"  type="object" name="print_report" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_soa_view">
+            <field name="name">Statement Of Account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">statement.of.account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_open_open_statment_of_acc_ageign_form"
+            parent="account.menu_finance_receivables" action="act_open_soa_view"/>
+            
+    </data>
+</openerp>

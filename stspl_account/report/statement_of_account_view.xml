@@ -1,0 +1,225 @@
+<openerp>
+  <data>
+    <!-- Template for Headre and Footer -->
+    <template id="external_layout_stspl_statement_of_account">
+
+      <t t-call="stspl_account.external_layout_header_stspl_account_statement_of_account"/>
+      <t t-raw="0" />
+      <t t-call="stspl_account.external_layout_footer_stspl_account_statement_of_account"/>
+
+    </template>
+
+    <!-- Report Header -->
+    <template id="external_layout_header_stspl_account_statement_of_account">
+      <div class="header">
+        <div class="col-xs-3">
+          <span>
+            <img t-att-src="'data:image/png;base64,%s' % get_company(data).logo" style="max-height: 70px;"/>
+          </span>
+        </div>
+
+        <div class="col-xs-8 col-xs-offset-1 text-right">
+          <div style="font-size:15px">
+            <span t-field="get_company(data).name" />
+          </div>
+          <div style="font-size:12px">
+            <span t-field="get_company(data).street" />
+            <span t-field="get_company(data).city" />
+            <span t-field="get_company(data).state_id" />
+            <span t-field="get_company(data).country_id" />
+            <span t-field="get_company(data).zip" />
+          </div>
+          <div style="font-size:12px">
+            <span>Tel :</span>
+            <span t-field="get_company(data).phone"/>
+            <span>Fax :</span>
+            <span t-field="get_company(data).fax"/>
+          </div>
+
+          <div style="font-size:12px">
+            <span >CO. REG. NO.</span>
+            <span t-field="get_company(data).company_registry" />
+          </div>
+
+          <div style="font-size:12px">
+            <span class="text-right">GST REG NO.</span>
+            <span t-field="get_company(data).gst_no"/>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Footer -->
+    <template id="external_layout_footer_stspl_account_statement_of_account">
+      <div class="footer">
+        <div class="page=last">
+          <table style="border:0.5px solid;font-size:11px" width="100%">
+            <tr style="border:0.5px solid">
+              <th style="border:0.5px solid;padding:5px;text-align:center;">
+                <strong>&gt;90 DAYS</strong>
+              </th>
+              <th style="border:0.5px solid;padding:5px;text-align:center;">
+                <strong>60 - 90 DAYS</strong>
+              </th>
+              <th style="border:0.5px solid;padding:5px;text-align:center;">
+                <strong>30 - 60 DAYS</strong>
+              </th>
+              <th style="border:0.5px solid;padding:5px;text-align:center;">
+                <strong>30 DAYS</strong>
+              </th>
+              <th style="border:0.5px solid;padding:5px;text-align:center;">
+                <strong>CURRENT</strong>
+              </th>
+            </tr>
+
+            <tr style="border:0.5px solid" class="text-center">
+              <td style="border:0.5px solid;padding:5px"><span /></td>
+              <td style="border:0.5px solid;padding:5px"><span /></td>
+              <td style="border:0.5px solid;padding:5px"><span /></td>
+              <td style="border:0.5px solid;padding:5px"><span /></td>
+              <td style="border:0.5px solid;padding:5px"><span /></td>
+            </tr>
+          </table>
+          <div>
+            <span>This is a computer generated documents and no signature is required</span>
+          </div>
+        </div>
+        <br/><br/>
+        <table width="100%">
+          <tr>
+            <td class="text-center" width="50%">
+              <span>Email : </span><span t-field="get_company(data).email" />
+            </td>
+            <td class="text-left" width="50%">
+              <span>Website @ </span><span t-field="get_company(data).website"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </template>
+
+
+    <template id="stspl_account_statement_of_account_template">
+      <t t-call="report.html_container">
+        <t t-foreach="get_customer(data['form'])" t-as="o">
+        <t t-call="stspl_account.external_layout_stspl_statement_of_account">
+          <div class="page">             
+            <div class="oe_structure"/>
+            <div class="row">
+              <div class="col-xs-6">
+                <div style="border: 1px solid black;padding: 3px 10px;width:100%;height:150px;border-radius: 15px;font-size:13px">
+                  <div>
+                    <b><span t-field="o.name"/></b>
+                  </div>
+                  <div>
+                    <span t-esc="o.house_no"/>
+                    <span t-esc="o.street"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.street2"/>
+                    <span t-esc="o.level_no"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.city"/>
+                    <span t-esc="o.state_id.name"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.country_id.name"/>
+                    <span t-esc="o.zip"/>
+                  </div>
+                  <table width="100%">
+                  <tr>
+                    <td width="50%" class="text-left">Tel:</td><span t-esc="o.phone"/> 
+                    <td width="50%" class="text-left">Fax:</td><span t-esc="o.fax"/>
+                  </tr>
+                </table>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                  <div style="border: 1px solid black;padding: 3px 10px;width:100%;height:150px;border-radius: 15px;font-size:13px" class="text-center">
+                    <span><h2><b>STATEMENT OF ACCOUNT</b></h2></span>    
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-xs-3">
+                <div style="border: 1px solid black;padding: 3px 10px;height:50px;border-radius:10px;font-size:13px" class="text-left">
+                  <b><span>CURRENCY:</span>
+                  <span t-field="get_company(data).currency_id.name"/></b>
+                </div>  
+              </div>
+
+              <div class="col-xs-3">
+                <div style="border: 1px solid black;padding: 3px 10px;height:50px;border-radius:10px;font-size:13px" class="text-left">
+                  <b><span>TERM:</span>
+                  <span /></b>
+                </div> 
+              </div>
+
+              <div class="col-xs-6">
+                <div style="border:1px solid black;padding:3px 10px;height:50px;border-radius: 10px;font-size:13px" class="text-left">
+                  <b><span>FOR THE MONTH OF:</span>
+                  <span t-esc="datetime.datetime.now().strftime('%B %Y')"/></b>
+                </div> 
+              </div>
+            </div>
+            <br/>
+
+            <table style="border:0.5px solid;font-size:11px" width="100%">
+                <tr style="border-bottom:1px solid;font-family:Helvetica;font-size:11px;">
+                  <th width="15%" style="border:0.5px solid;padding:5px;text-align:center;">
+                    DATE
+                  </th>
+                  <th width="15%" style="border:0.5px solid;padding:5px;text-align:center;">INVOICE NO.
+                  </th>
+                  <th width="15%" style="border:0.5px solid;padding:5px;text-align:center;">AMOUNT($)
+                  </th>
+                  <th width="15%" style="border:0.5px solid;padding:5px;text-align:center;">DUE DATE
+                  </th>
+                  <th width="15%" style="border:0.5px solid;padding:5px;text-align:center;">AGING
+                  </th>
+                  <th width="20%" style="border:0.5px solid;padding:5px;text-align:center;">OUTSTANDING BALANCE($)
+                  </th>
+                </tr>
+
+                <tr t-foreach="lines(data)" t-as="line">
+                  <t t-if="line">
+                    <td width="15%" class="text-center">
+                      <span t-esc="line.date_invoice or '' " />
+                    </td>
+                    <td width="15%" class="text-center"> 
+                      <span t-esc="line.number or ''"/>
+                    </td>
+                    <td width="15%" class="text-center">
+                      <span t-esc="line.currency_id.name"/>
+                      <span t-esc="line.amount_total or '' "/>
+                    </td>
+                    <td width="15%" class="text-center">
+                      <span t-esc="line.date_due"/>
+                    </td>
+                    <td width="15%" class="text-center">
+                      <span />
+                    </td>
+                    <td width="20%" class="text-center">
+                      <span t-esc="line.residual or '' "/>
+                    </td>
+                  </t>
+                </tr>
+            </table>
+          </div>
+        </t>
+      </t>
+    </t>
+    </template>
+  </data>
+</openerp>
+
+
+
+
+
+
+
+
+

@@ -33,12 +33,14 @@
     
     'data': [
              'views/account_invoice_view.xml',
+             'views/report_view.xml',
              'report/stspl_tax_invoice_report_view.xml',
              'report/packing_list.xml',
              'report/sale_acknowledge_report.xml',
              'report/stspl_proforma_report.xml',
-             'views/report_view.xml',
+             'report/statement_of_account_view.xml',
              'data/ir.sequence_tax.xml',
+             'wizard/wiz_statement_of_account_view.xml',
              
     ],
     'installable': True,

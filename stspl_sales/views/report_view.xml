@@ -30,6 +30,7 @@
             name="stspl_sales.stspl_sales_partner_account_statement_template"
             file="stspl_sales.stspl_sales_partner_account_statement_template"
             />
+
        
         <record id="paperformat_euro_lowmargin_stspl_sales_report" model="report.paperformat">
 			<field name="name">European A4 low margin sales</field>
