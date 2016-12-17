@@ -216,7 +216,7 @@
 
              	<table  width="100%" style="font-size:12px" >
            			<tr>
-           				<th width="50%" style="padding:5px">SOLD TO:</th>
+           				<th width="50%" style="padding:5px">BILL TO:</th>
            				<th width="55%" style="padding:5px">SHIP TO:</th>
            			</tr>
            			<tr class="table" style="border:0.5px solid" >
