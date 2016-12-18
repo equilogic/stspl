@@ -82,8 +82,8 @@ class purchase_order(models.Model):
                                             'string': 'Quotation Order'})
                     if action_rec.name == 'Requests for Quotation' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'stspl_purchase.report_purchase_order':
-                        report_dict.update({'display_name': 'Quotation','name': 'Quotation Report',
-                                            'string': 'Quotation Report'})
+                        report_dict.update({'display_name': 'Quotation','name': 'Quotation',
+                                            'string': 'Quotation'})
                     if action_rec.name == 'Purchase Orders' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'purchase.report_purchasequotation':
                         report_dict.update({'display_name': 'Request for Purchase','name': 'Request for Purchase',
