@@ -49,7 +49,16 @@
             menu="False"
             />
 
-
+		<!-- Customer Payment Report -->
+        <report
+            id="customer_payment_report"
+            string="Customer Payment Report"
+            model="account.voucher"
+            name="stspl_account.report_stspl_customer_payment"
+            report_type="qweb-pdf"
+            menu="True"
+            />
+		
         <report 
             id="account.account_invoices"
             model="account.invoice"

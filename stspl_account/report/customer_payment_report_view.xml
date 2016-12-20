@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<!-- Template for Headre and Footer -->
+    	<template id="external_layout_stspl_customer_payment">
+    		<!-- Multicompany -->
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+    
+        <t t-call="stspl_account.external_layout_header_stspl_customer_payment" />
+        <t t-raw="0" />
+        <t t-call="stspl_account.external_layout_footer_stspl_customer_payment" />
+    	</template>
+    	
+    	<!-- Report Header -->
+    	<!-- <template id="external_layout_header_stspl_customer_payment">
+  			<t t-call="report.minimal_layout"></t>
+    	</template> -->
+
+    	<!-- Report Footer -->
+    	<template id="external_layout_footer_stspl_customer_payment">
+    	<div class="footer">
+        </div>
+    	</template>
+
+
+      <!-- Reports Template  -->
+  		<template id="stspl_customer_payment_template">
+        <style type="text/css"> 
+            td.line , span.line ,th.line {
+                font-family:times new roman;
+            }
+        </style>
+        <t t-call="report.html_container">
+          <!-- <t t-call="stspl_account.external_layout_stspl_customer_payment"> -->
+          <t t-call="report.external_layout">
+            <div class="page">
+              <div class="oe_structure" />
+              	<table width="100%" >
+              		<tr>
+              			<td width="50%">
+              				
+              			</td>
+              			<td width="50%">
+              				<div>
+              					<span><b>Voucher No. :</b> </span>
+              					<t t-if="o.number">
+              						<span t-field="o.number"/>
+              					</t>
+              				</div>
+              				<div>
+              					<span><b>Date : </b></span>
+              					<t t-if="o.date">
+              						<span t-field="o.date"/>
+              					</t>
+              				</div>
+              				<div>
+              					<span><b>Payer :</b></span>
+              					<t t-if="o.partner_id">
+              						<span t-field="o.partner_id"/>
+              					</t>
+              				</div>
+              				<div>
+              					<span><b>Mode of Receipt :</b> </span>
+              					<t t-if="o.journal_id">
+              						<span t-field="o.journal_id"/>
+              					</t>
+              				</div>
+              				<div>
+              					<span><b>Reference :</b> </span>
+              					<t t-if="o.reference">
+              						<span t-field="o.reference"/>
+              					</t>
+              				</div>
+              				<div>
+              					<span><b>Currency : </b></span>
+              					<t t-if="o.currency_id">
+              						<span t-field="o.currency_id"/>
+              					</t>
+              				</div>
+              			</td>
+              		</tr>
+              	</table>
+              	<br/>
+              	<table width="100%" class="table table-consed" >
+              		<thead>
+	              		<tr >
+	              			<th width="70%" class="text-left">Description</th>
+	              			<th width="30%" class="text-right">Amount</th>
+	              		</tr>
+              		</thead>
+              		<tbody>
+              			<t t-foreach="o.line_cr_ids" t-as="s"> 
+	              			<tr>
+	              				<td width="70%" class="text-left line" ><span t-field="s.move_line_id" /></td>
+	              				<td width="30%" class="text-right line"><span t-field="s.amount_original" /></td>
+	              			</tr>
+              			</t>
+              		</tbody>
+              		<tfoot>
+              			<tr >
+              				<td width="70%" class="text-right"><b>Total</b></td>
+              				<td width="30%" class="text-right"><b></b></td>
+              			</tr>
+              		</tfoot>
+              	</table>
+         	  </div>
+          </t>
+        </t>
+      </template>
+        
+      <template id="report_stspl_customer_payment">
+    		<t t-call="report.html_container">
+        		<t t-foreach="doc_ids" t-as="doc_id">
+            		<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stspl_account.stspl_customer_payment_template')"/>
+        		</t>
+    		</t>
+		  </template>
+    </data>
+</openerp>
