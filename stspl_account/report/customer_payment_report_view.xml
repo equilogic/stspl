@@ -94,9 +94,9 @@
 	              		</tr>
               		</thead>
               		<tbody>
-              			<t t-foreach="o.line_cr_ids" t-as="s"> 
+              			<t t-foreach="get_inv_details(o)" t-as="s"> 
 	              			<tr>
-	              				<td width="70%" class="text-left line" ><span t-field="s.move_line_id" /></td>
+	              				<td width="70%" class="text-left line" ><span>[ </span><span t-esc="s.move_line_id.invoice.number or ''"/><span>     </span><span t-esc="s.move_line_id.invoice.date_invoice or ''" /><span> ]</span></td>
 	              				<td width="30%" class="text-right line"><span t-field="s.amount_original" /></td>
 	              			</tr>
               			</t>
