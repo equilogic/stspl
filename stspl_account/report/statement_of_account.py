@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2016 Serpent Consulting Services Pvt. Ltd.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +20,7 @@
 #
 ##############################################################################
 
+
 import time
 from openerp.report import report_sxw
 from openerp import models
@@ -28,114 +30,161 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.exceptions import except_orm
 from dateutil.relativedelta import relativedelta
 
+
 class report_statement_of_account(report_sxw.rml_parse):
-    def __init__(self, cr, uid, name, context):
-        super(report_statement_of_account, self).__init__(cr, uid, name, context)
+    
+    def __init__(self, cr, uid, name, context=None):
+        super(report_statement_of_account, self).__init__(cr, uid, name, context=context)
+        self.start_date = ''
+        self.total_account = []
+        self.total = 0.0
+        self.all_inv_total = 0.0
         self.localcontext.update({
             'time': time,
-            'get_company':self._get_company,
-            'get_customer':self._get_customer,
-            'lines':self.lines
+            'get_start_partners': self.get_start_partners,
+            'get_date': self.get_date,
+            'lines': self.lines,
+            'date_part': self.date_part,
+            'get_move_data':self.get_move_data,
+            'get_all_total':self.get_all_total
         })
 
 
-    def _get_company(self,data):
-        user = self.pool.get('res.users').browse(self.cr, self.uid, self.uid)
-        return user and user.company_id or False
 
+    def get_date(self, form):
+        data_data = {}
+        if form.get('start_date', False):
+            date = datetime.strptime(str(form.get('start_date', False)), "%Y-%m-%d")
+            data_data.update({'month': date.strftime("%b") + ' ' + date.strftime("%Y"),
+                              'date': form.get('start_date', False)})
+        self.start_date = form.get('start_date', False)
+        date_today = datetime.today()
+        data_data.update({'date': date_today})        
+        return data_data
+    
 
-    def _get_customer(self, form):
-            result = []
-            emp = self.pool.get('res.partner')
-            result = emp.browse(self.cr, self.uid, form['customer_ids'])
-            return result
-
-
-
-    def lines(self,data):
-
+    def get_start_partners(self, form):
+        partner_obj = self.pool.get('res.partner')
+        lst = []
+        data = []
+        self.start_date = form.get('start_date', False)
+        data2 = []
+        if form.get('customer_ids', False):
+            partners = partner_obj.browse(self.cr, self.uid, form.get('customer_ids', []))
+            for partner in partners:
+                date_data = self.date_part(partner)
+                for key, value in date_data[0].items():
+                    data2 = self.get_move_data(value['start'], value['stop'], partner)
+                    if data2:
+                        if partner not in lst:
+                            lst.append(partner)
+            if data:
+                if partner not in lst:
+                    lst.append(partner)
+        return lst 
+    
+    def lines(self, partner):
         inv_list = []
-
-        if data:
-            inv_ids = self.pool.get('account.invoice').search(self.cr, self.uid, \
-                                                    [('partner_id', 'in', data['form']['customer_ids'])])
-            print "\n inv_ids :::::::::", inv_ids
+        total = 0.0
+        inv_id_list = []
+        
+        if partner:
+            inv_ids = self.pool.get('account.invoice').search(self.cr, self.uid, [('partner_id', '=', partner.id),
+                                                                     ('state', 'not in', ('draft', 'cancel', 'paid')),
+                                                                     ('type', 'in', ('out_invoice', 'out_refund')),
+                                                                     ('date_invoice', '<=', self.start_date),
+                                                                     ], order = 'date_invoice desc')                         
             if inv_ids:
-                inv_list = self.pool.get('account.invoice').browse(self.cr, self.uid, inv_ids)
-                print "inv_list:::::::::::::::::::::::::",inv_list
+                for inv_data in self.pool.get('account.invoice').browse(self.cr, self.uid, inv_ids):
+                    inv_dict = {}
 
+                    if inv_data.type == 'out_invoice':
+                        total += inv_data.residual
+                        inv_dict.update({'debit': inv_data.residual and inv_data.residual or 0.0})
+                        inv_dict.update({'credit': 0.0})
+                        if inv_data.payment_ids:
+                            debit = 0.0
+                            credit = 0.0
+                            for payment_rec in inv_data.payment_ids:
+                                if inv_data.company_id.currency_id.id != inv_data.currency_id.id:
+                                    credit += abs(payment_rec.amount_currency)
+                                else:
+                                    credit += payment_rec.credit
+                                inv_dict.update({'credit':credit or 0.0})
+                                inv_dict.update({'debit': inv_data.residual and inv_data.residual or 0.0})
+                    if inv_data.type == 'out_refund':
+                        total -= inv_data.residual
+                        debit = 0.0
+                        inv_dict.update({'credit': inv_data.residual and inv_data.residual or 0.0})
+                        for payment_rec in inv_data.payment_ids:
+                                if inv_data.company_id.currency_id.id != inv_data.currency_id.id:
+                                    debit -= abs(payment_rec.amount_currency)
+                                else:
+                                    debit += payment_rec.credit                            
+                                inv_dict.update({'debit': debit or 0.0})
+                    inv_dict.update({
+                                     'date': inv_data.date_invoice,
+                                     'inv_no': inv_data.number,
+                                     'due_date':inv_data.date_due,
+                                     'total': total})
+                    inv_list.append(inv_dict)
+
+        self.all_inv_total = total
         return inv_list
 
 
+    def get_all_total(self):
+        return self.all_inv_total
+    
 
+    def date_part(self, partner):
+        res = {}
+        date_data = []
+        start = datetime.strptime(self.start_date, DEFAULT_SERVER_DATE_FORMAT)
+        for i in range(4)[::-1]:
+            stop = start - relativedelta(days=30)
+            try:
+                res[str(i)] = {
+                    'name': (i != 0 and (str((4 - (i + 1)) * 30) + '-' + str((4 - i) * 30)) or ('' + str(3 * 30))),
+                    'stop': start.strftime('%Y-%m-%d'),
+                    'start': (i != 0 and stop.strftime('%Y-%m-%d') or False),
+                }
+            except Exception as ex:
+                raise except_orm(_('User Error'), _('Please select Valid date'))
+            start = stop - relativedelta(days=1)
+        date_data.append(res)
+        return date_data
 
-#     def lines(self, partner):
-#         inv_list = []
-#         total = 0.0
-#         inv_id_list = []
-#         if partner:
-#             inv_ids = self.pool.get('account.invoice').search(self.cr, self.uid, [('partner_id', '=', partner.id),
-#                                                                      ('state', 'not in', ('draft', 'cancel', 'paid')),
-#                                                                      ('type', 'in', ('out_invoice', 'out_refund')),
-#                                                                      ('date_invoice', '<=', self.start_date),
-#                                                                      # ('freight_other_charges', '=', False),
-#                                                                      ], order = 'date_invoice desc')
-#             if inv_ids:
-#                 for inv in inv_ids:
-#                     inv_id_list.append(inv) 
-                            
-#             if inv_id_list:
-#                 for inv_data in self.pool.get('account.invoice').browse(self.cr, self.uid, inv_id_list):
-#                     inv_dict = {}
-#                     if inv_data.type == 'out_invoice':
-#                         total += inv_data.residual
-#                         inv_dict.update({'debit': inv_data.residual and inv_data.residual or 0.0})
-#                         inv_dict.update({'credit': 0.0})
-#                         if inv_data.payment_ids:
-#                             debit = 0.0
-#                             credit = 0.0
-#                             for payment_rec in inv_data.payment_ids:
-#                                 if inv_data.company_id.currency_id.id != inv_data.currency_id.id:
-#                                     credit += abs(payment_rec.amount_currency)
-#                                 else:
-#                                     credit += payment_rec.credit
-#                                 inv_dict.update({'credit':credit or 0.0})
-#                                 inv_dict.update({'debit': inv_data.residual and inv_data.residual or 0.0})
-#                     if inv_data.type == 'out_refund':
-#                         total -= inv_data.residual
-#                         debit = 0.0
-#                         inv_dict.update({'credit': inv_data.residual and inv_data.residual or 0.0})
-#                         for payment_rec in inv_data.payment_ids:
-#                                 if inv_data.company_id.currency_id.id != inv_data.currency_id.id:
-#                                     debit -= abs(payment_rec.amount_currency)
-#                                 else:
-#                                     debit += payment_rec.credit                            
-# #                                 debit += payment_rec.debit
-#                                 inv_dict.update({'debit': debit or 0.0})
-#                     inv_dict.update({
-#                                      'date': inv_data.date_invoice,
-#                                      'ref': inv_data.number,
-#                                      'desc': inv_data.comment,
-#                                      'total': total})
-
-#                     inv_list.append(inv_dict)
-#         self.all_inv_total = total
-# #         newlist = sorted(inv_list, key=lambda k: k['date'], reverse=True)
-#         return inv_list
-
-
-    # def lines(self,data):
-
-    #     soa_data = []
-
-    #     if data:
-    #         invoices = self.pool.get('account.invoice').search(self.cr, self.uid,[('partner_id','=',data.id),('type','=','out_invoice')])
-    #         print "invoices::::::::::::::::::::::::::::::::::", invoices
-    #         if invoices:
-    #             invoices = self.pool.get('account.invoice').browse(self.cr, self.uid, invoices)
-    #     return invoices
-
-
+    
+    def get_move_data(self, date_s, date_e, partner):
+        inv_ids = []
+        if partner and date_s and date_e:
+            inv_ids = self.pool.get('account.invoice').search(self.cr, self.uid, [('partner_id', '=', partner.id),
+                                                                         ('state', 'not in', ('draft', 'cancel', 'paid')),
+                                                                         ('type', 'in', ('out_invoice', 'out_refund')),
+                                                                         ('date_due', '<=', date_e),
+                                                                         ('date_due', '>=', date_s), ])
+        if partner and not date_s:
+            if inv_ids:
+                inv_ids.append(self.pool.get('account.invoice').search(self.cr, self.uid, [('partner_id', '=', partner.id),
+                                                                         ('state', 'not in', ('draft', 'cancel', 'paid')),
+                                                                         ('type', '=', 'out_invoice'),
+                                                                         ('date_due', '<=', date_e),
+                                                                         ],)) 
+            else:
+                inv_ids = self.pool.get('account.invoice').search(self.cr, self.uid, [('partner_id', '=', partner.id),
+                                                                         ('state', 'not in', ('draft', 'cancel', 'paid')),
+                                                                         ('type', 'in', ('out_invoice', 'out_refund')),
+                                                                         ('date_due', '<=', date_s),
+                                                                         ],)               
+        amt = 0.0
+        if inv_ids:
+            for inv_data in self.pool.get('account.invoice').browse(self.cr, self.uid, inv_ids):
+                if inv_data.type =='out_invoice':
+                    amt += inv_data.residual
+                if inv_data.type =='out_refund':
+                    amt -= inv_data.residual
+        return amt 
 
 
 class report_print_sales_statement_of_account_extended(models.AbstractModel):

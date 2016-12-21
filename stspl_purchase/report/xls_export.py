@@ -17,7 +17,6 @@ class purchase_order(models.Model):
     @api.multi
     def print_report(self):        
         cr,uid,context = self.env.args
-        print "cr,uid,context:::::::::::::::::::::::::::::::::::::::::",self
 
         fl = StringIO()
         cr,uid,context=self.env.args
@@ -82,7 +81,7 @@ class purchase_order(models.Model):
             col+=1
             worksheet.write(row, col, p_line.product_id and p_line.product_id.name or '' ,header1)
             col+=1
-            worksheet.write(row, col, p_line.product_id and p_line.product_id.name or '',header1)
+            worksheet.write(row, col, p_line.product_id and p_line.product_id.default_code or '',header1)
             col+=1
             worksheet.write(row, col, p_line.product_qty or 0.0,header1)
             col+=1

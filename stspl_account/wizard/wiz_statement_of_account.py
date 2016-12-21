@@ -35,7 +35,6 @@ class statement_of_account(models.TransientModel):
                 if cust_ids:
                     res['customer_ids'] = cust_ids
             datas['form'] = res
-        print":::::::::::::::::::::::::",datas
         return self.env['report'].get_action(self,
                  'stspl_account.stspl_account_statement_of_account_template', data = datas)
 

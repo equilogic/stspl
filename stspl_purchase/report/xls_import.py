@@ -38,7 +38,9 @@ class wiz_xls_import(models.TransientModel):
             data_list = []
             headers_dict = {}
             supplier_dict = {}
-            
+            company_dict = {}
+            currency_dict = {}
+                        
             for sheet in wb.sheets():
                 for rownum in range(sheet.nrows):
                     # Preparing headers
@@ -63,24 +65,15 @@ class wiz_xls_import(models.TransientModel):
                                     'po_qty'                : header_list.index('Po Qty'),
                                     'unit_price'            : header_list.index('Unit Price'),
                                 }
-                        # print"headers_dict::::::::::::::::::::::::::::::::::;",headers_dict
+
                     if rownum >= 1:
                         data_list.append(sheet.row_values(rownum))
-            print "headers_dict::::::::::::::::::::::::::::",headers_dict
-            if data_list and headers_dict:
-                # Collecting Projects in dictionary
-                # having key as project name and project id as a value.
-                print "\n data_list :::::::::::", data_list
 
-                # cr.execute("select rp.name,ru.id from res_users ru,res_partner rp \
-                #                      where rp.id = ru.partner_id ")
-                # supplier_dict.update(cr.fetchall())
-                # print ":::::::::::::::::::::::::::::::::::::::supplier_dict",supplier_dict
+            if data_list and headers_dict:           
 
                 for row in data_list:
-                    print "\n row ::::::::::::::", row
                     s_name            =  row[headers_dict['supplier_name']]
-                    s_date            =  row[headers_dict['order_date']]
+                    s_o_date          =  row[headers_dict['order_date']]
                     s_term            =  row[headers_dict['shipment_term']]
                     s_via             =  row[headers_dict['ship_via']]
                     s_prod_name       =  row[headers_dict['product_name']]
@@ -88,61 +81,30 @@ class wiz_xls_import(models.TransientModel):
                     s_po_qty          =  row[headers_dict['po_qty']]
                     s_unit_price      =  row[headers_dict['unit_price']]
 
-                    print "\n s_name ::::::::::", s_name
-                    supplier = False
-                    if s_name:
-                        supplier = self.env['res.partner'].search([('name','=', s_name),('supplier','=', True)], limit=1)
-                    else:
-                        supplier = self.env['res.partner'].create({'name': s_name, 'supplier': True})
 
-                    purchase_vals = {'partner_id': supplier and supplier.id or False}
-                    pick_type = self.env['stock.picking.type'].search([('code','=', 'incoming'),('warehouse_id.company_id','=', supplier and supplier.company_id.id or False)], limit=1)
+                    if context.get('active_id', False):
+                        purchase_rec = self.env['purchase.order'].browse(context['active_id'])
 
-                    print "\n pick_type :::::::::", pick_type
-                    if pick_type:
-                        purchase_vals.update({'picking_type_id': pick_type and pick_type.id or False, 'location_id': pick_type and pick_type.default_location_dest_id.id or False})
-                    new_purch_id = self.env['purchase.order'].create(purchase_vals)
-                    print "\n new_purch_id :::::::::::", new_purch_id
+                        flag=False
 
-
-
-
-                #     pur_order_id = False
-
-
-                #     if s_name:
-                #         if s_name in supplier_dict:
-                #             pur_order_id = supplier_dict[s_name]
-
-
-                #     if not pur_order_id:
-
-                #         create_datetime = datetime.strftime(datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT)
-
-                #         pur_order_qry = "insert into purchase_order \
-                #                 (create_uid,create_date"
-
-                #         pur_order_params = (uid, create_datetime)
-
-                #         pur_order_values = "%s, %s"
-
-                #         # order Date
-                #         if type (s_date) == float:
-                #                     dt = datetime(* (xlrd.xldate_as_tuple(s_date, wb.datemode))).strftime('%d/%m/%Y')
-                #                     dt = datetime.strptime(dt, '%d/%m/%Y')
-                #                     s_date = dt
-
-                #                     if s_date:
-                #                         pur_order_qry += ',date_order'
-                #                         pur_order_params += (s_date,)
-                #                         pur_order_values += ", %s"
+                        for line in purchase_rec.order_line:
+                            if line.product_id.default_code == s_item_ref:                    
+                                line.write({'product_qty':s_po_qty,'price_unit':s_unit_price})
+                                
+                                flag=True
+                        if not flag:
+                            product = self.env['product.product'].search([('default_code','=',s_item_ref)])
+                            line =({'product_id':product and product.ids[0] or False,
+                                    'name': product and product[0].name or '',
+                                    'product_qty':s_po_qty,
+                                    'price_unit':s_unit_price,
+                                    'order_id':purchase_rec.id,
+                                    'date_planned':purchase_rec and purchase_rec.date_order or False
+                                })
+                            final = self.env['purchase.order.line'].create(line) 
+            return True
 
 
 
-                #         pur_order_qry += ') values (' + pur_order_values + ') RETURNING id'
-                #         cr.execute(pur_order_qry, pur_order_params)
-                #         purchase_order_rec = cr.fetchone()
-                #         supplier_id = purchase_order_rec and purchase_order_rec[0]
-
-                # cr.commit()
-        return True     
+                
+  
