@@ -170,7 +170,7 @@
 
                	<table class="table tabcenter-block" width="100%" style="border: 0.5px solid;font-size:12">
              			<tr>
-             				<th style="border-top: 0.5px solid;border-right:0.5px solid;" width="50%">SOLD TO:</th>
+             				<th style="border-top: 0.5px solid;border-right:0.5px solid;" width="50%">BILL TO:</th>
              				<th style="border-top: 0.5px solid;" width="50%">SHIP TO:</th>
              			</tr>
 

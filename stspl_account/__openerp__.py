@@ -39,6 +39,7 @@
              'report/sale_acknowledge_report.xml',
              'report/stspl_proforma_report.xml',
              'report/statement_of_account_view.xml',
+             'report/customer_payment_report_view.xml',
              'data/ir.sequence_tax.xml',
              'wizard/wiz_statement_of_account_view.xml',
              

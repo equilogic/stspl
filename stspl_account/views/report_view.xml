@@ -13,8 +13,8 @@
 
         <report
             id="packing_list_report"
-            model="sale.order"
-            string="Packing Report"
+            model="account.invoice"
+            string="Packing"
             report_type="qweb-pdf"
             name="stspl_account.report_packing_list"
             file="stspl_account.report_packing_list"
@@ -23,7 +23,7 @@
         <report
             id="sale_acknowledgment_id"
             model="sale.order"
-            string="Acknowledgment Report"
+            string="Acknowledgment"
             report_type="qweb-pdf"
             name="stspl_account.report_sale_acknowledgment"
             file="stspl_account.report_sale_acknowledgment"
@@ -49,7 +49,16 @@
             menu="False"
             />
 
-
+		<!-- Customer Payment Report -->
+        <report
+            id="customer_payment_report"
+            string="Customer Payment Report"
+            model="account.voucher"
+            name="stspl_account.report_stspl_customer_payment"
+            report_type="qweb-pdf"
+            menu="True"
+            />
+		
         <report 
             id="account.account_invoices"
             model="account.invoice"
@@ -83,14 +92,14 @@
             <field name="default" eval="True" />
             <field name="format">A4</field>
             <field name="orientation">Portrait</field>
-            <field name="margin_top">46</field>
-            <field name="margin_bottom">70</field>
+            <field name="margin_top">70</field>
+            <field name="margin_bottom">20</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">35</field>
+            <field name="header_spacing">70</field>
             <field name="dpi">20</field>
-            <!-- <field name="report_ids" eval="[(4, ref('stspl_account.sale_delivery_id'))]"/> -->
+            <field name="report_ids" eval="[(4, ref('stspl_account.packing_list_report'))]"/> 
         </record>
 
 
@@ -99,12 +108,12 @@
             <field name="default" eval="True" />
             <field name="format">A4</field>
             <field name="orientation">Portrait</field>
-            <field name="margin_top">60</field>
-            <field name="margin_bottom">60</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
             <field name="margin_left">10</field>
             <field name="margin_right">10</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">60</field>
+            <field name="header_spacing">45</field>
             <field name="dpi">100</field>
             <field name="report_ids"
                 eval="[(4, ref('stspl_account.sale_acknowledgment_id'))]" /> 
@@ -120,7 +129,7 @@
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">45</field>
+            <field name="header_spacing">40</field>
             <field name="dpi">100</field>
             <field name="report_ids"
                 eval="[(4, ref('stspl_account.proforma_invoice_id'))]" /> 
@@ -134,8 +143,8 @@
             <field name="orientation">Portrait</field>
             <field name="margin_top">50</field>
             <field name="margin_bottom">50</field>
-            <field name="margin_left">5</field>
-            <field name="margin_right">5</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
             <field name="header_line" eval="False" />
             <field name="header_spacing">32</field>
             <field name="dpi">90</field>

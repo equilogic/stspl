@@ -45,8 +45,25 @@ class sale_order(models.Model):
                 for report_dict in result['toolbar']['print']:
                     if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
                                         report_dict['report_name'] == 'stspl_sales.report_sale_order':
-                        report_dict.update({'display_name': 'Quotation Report','name': 'Quotation Report',
-                                            'string': 'Quotation Report'})
+                        report_dict.update({'display_name': 'Quotation','name': 'Quotation',
+                                            'string': 'Quotation'})
+                    if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_sale_acknowledgment':
+                        report_dict.update({'display_name': '','name': '',
+                                            'string': ''})
+                    if action_rec.name == 'Quotations' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_stspl_proforma_invoice':
+                        report_dict.update({'display_name': '','name': '',
+                                            'string': ''})
+                                                
+                    if action_rec.name == 'Sales Orders' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_sale_acknowledgment':
+                        report_dict.update({'display_name': 'Acknowledgment','name': 'Acknowledgment',
+                                            'string': 'Acknowledgment'})
+                    if action_rec.name == 'Sales Orders' and report_dict.get('report_name',False) and \
+                                        report_dict['report_name'] == 'stspl_account.report_stspl_proforma_invoice':
+                        report_dict.update({'display_name': 'Proforma Invoice','name': 'Proforma Invoice',
+                                            'string': 'Proforma Invoice'})
         return result
 
     @api.model

@@ -26,34 +26,32 @@
    			  </div>
        		<div class="col-xs-8 col-xs-offset-1 text-right">
        			<div t-if="o.company_id" style="font-size:12px">
-     					<div>
-                <h5><b><span t-field="o.company_id.name" ></span></b></h5>
-              </div>
-
-     					<div>
-                <span t-field="o.company_id.street"/>
-                ,
-     						<span t-field="o.company_id.city"/>
-                ,
-     						<span t-field="o.company_id.country_id"/>
-                <span t-field="o.company_id.zip"/>
-     					</div>
-       					
-     					<div>
-     						<span>Tel :</span>
-     						<span t-field="o.company_id.phone"/>
-     						
-     						<span>Fax :</span>
-     						<span t-field="o.company_id.fax"/>
-     					</div>
-     					<div>
-     						<span >CO. REG. NO. </span>
-     						<span t-field="o.company_id.company_registry" />
-     					</div>
-     					<div>
-     						<span class="text-right">GST REG NO. </span>
-     						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
-     					</div>
+                    <div>
+                        <h5><b><span t-field="o.company_id.name" ></span></b></h5>
+                    </div>
+     		        <div>
+		                <span t-field="o.company_id.street"/>
+		                <t t-if="o.company_id.street">,</t>
+						<span t-field="o.company_id.city"/>
+						<t t-if="o.company_id.city">,</t>
+ 						<span t-field="o.company_id.country_id"/>
+                        <span t-field="o.company_id.zip"/>
+ 					</div>
+ 					<div>
+ 						<span>Tel :</span>
+ 						<span t-field="o.company_id.phone"/>
+ 						
+ 						<span> Fax :</span>
+ 						<span t-field="o.company_id.fax"/>
+ 					</div>
+ 					<div>
+ 						<span >CO. REG. NO. </span>
+ 						<span t-field="o.company_id.company_registry" />
+ 					</div>
+ 					<div>
+ 						<span class="text-right">GST REG NO. </span>
+ 						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
+ 					</div>
        			</div>
        		</div> 
         </div>
@@ -65,7 +63,7 @@
           <div class="last-page">
             <p style="font-size:11px">PARTIAL DELIVERY</p>
             <br/>
-            <t t-if="o.partner_id.country_id.name == 'Singapore'">
+            <t t-if="o.partner_id.country_id.name == 'Singapore' and o.currency_id.name != 'SGD'">
                 <t t-foreach="get_sgd_details(o,o.currency_id)" t-as="sgd_res">
 	                <p style="font-size:11px">For GST Purpose Only <br/>
 	                    <span>USD 1.00 = </span><span t-esc="sgd_res['rate']" /><br/>
@@ -80,7 +78,7 @@
                 <table class="table table-condensed">
                   <tr>
                     <td>Sub-Total</td>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span t-field="o.amount_untaxed" />
                     </td>
                   </tr>
@@ -94,13 +92,13 @@
                   		</t>                  		
                   		
                   	</t>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span t-field="o.amount_tax" />
                     </td>
                   </tr>
                   <tr>
                     <td><b>Total</b></td>
-                    <td class="text-right">
+                    <td class="text-left">
                       <span t-field="o.amount_total" />
                     </td>
                   </tr>
@@ -218,7 +216,7 @@
 
              	<table  width="100%" style="font-size:12px" >
            			<tr>
-           				<th width="50%" style="padding:5px">SOLD TO:</th>
+           				<th width="50%" style="padding:5px">BILL TO:</th>
            				<th width="55%" style="padding:5px">SHIP TO:</th>
            			</tr>
            			<tr class="table" style="border:0.5px solid" >
@@ -310,38 +308,43 @@
               </table>
               <br/>
               <table class="table table-condensed" style="border-top:0.5px solid;font-size:11px" width="100%">
+                <t t-set="disc_inv_line" t-value="get_lines_if_discount(o.invoice_line)"/>
                 <thead>
                  <tr>
                      <th class="text-left line" width="15%">Qty</th>
                      <th class="text-left line" width="15%">Unit</th> 
                      <th class="text-center line" width="25%">Description/Part No</th>
                      <th class="text-center line" width="15%">Unit Price</th>
-                     <th class="text-center line" width="15%">Discount(%)</th>
+                     <t t-if="disc_inv_line">
+                        <th class="text-center line" width="15%">Discount(%)</th>
+                     </t>
                      <th class="text-center line" width="15%">Amount</th>
                  </tr>
                 </thead>
                 <tbody>
-             			<tr t-foreach="o.invoice_line" t-as="line">
+         			<tr t-foreach="o.invoice_line" t-as="line">
                			<td class="text-left" width="15%">
-                      <span t-field="line.quantity" t-field-options='{"widget": "int"}' />
-                      <span t-field="line.uos_id.name"/>  
-                   	</td>
-                    <td >
-                      <span t-field="line.product_id.name"/>
-                    </td>
-
-                    <td class="text-left line" width="25%">
-                        <span t-field="line.name"/>
-                    </td>
-                    <td class="text-center line" width="15%">
-                        <span t-field="line.price_unit"/>
-                    </td>
-                    <td class="text-center line" width="15%">
-                        <span t-field="line.discount"/>
-                    </td>
-                    <td class="text-center line" width="15%">
-                        <span t-field="line.price_subtotal"/>
-                    </td>
+                            <span t-field="line.quantity" t-field-options='{"widget": "int"}' />
+                            <span t-field="line.uos_id.name"/>  
+	                   	</td>
+	                    <td >
+	                      <span t-field="line.product_id.name"/>
+	                    </td>
+	
+	                    <td class="text-left line" width="25%">
+	                        <span t-field="line.name"/>
+	                    </td>
+	                    <td class="text-center line" width="15%">
+	                        <span t-field="line.price_unit"/>
+	                    </td>
+	                    <t t-if="disc_inv_line">
+		                    <td class="text-center line" width="15%">
+		                        <span t-field="line.discount"/>
+		                    </td>
+	                    </t>
+	                    <td class="text-center line" width="15%">
+	                        <span t-field="line.price_subtotal"/>
+	                    </td>
               		</tr>
                 </tbody>
               </table>
