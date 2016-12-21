@@ -48,41 +48,6 @@
             </div>
           </t>
         </div>
-       		<div class="col-xs-3">
-       			<span t-if="o.company_id">
-   				   <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 65px;"/>
-   				 </span>
-   			  </div>
-       		<div class="col-xs-8 col-xs-offset-1 text-right">
-       			<div t-if="o.company_id" style="font-size:12px">
-                    <div>
-                        <h5><b><span t-field="o.company_id.name" ></span></b></h5>
-                    </div>
-     		        <div>
-		                <span t-field="o.company_id.street"/>
-		                <t t-if="o.company_id.street">,</t>
-						<span t-field="o.company_id.city"/>
-						<t t-if="o.company_id.city">,</t>
- 						<span t-field="o.company_id.country_id"/>
-                        <span t-field="o.company_id.zip"/>
- 					</div>
- 					<div>
- 						<span>Tel :</span>
- 						<span t-field="o.company_id.phone"/>
- 						
- 						<span> Fax :</span>
- 						<span t-field="o.company_id.fax"/>
- 					</div>
- 					<div>
- 						<span >CO. REG. NO. </span>
- 						<span t-field="o.company_id.company_registry" />
- 					</div>
- 					<div>
- 						<span class="text-right">GST REG NO. </span>
- 						<t t-if="o.company_id.gst_no"><span t-field="o.company_id.gst_no"/></t>
- 					</div>
-       			</div>
-       		</div>
       </div>
     </template>
 
@@ -194,67 +159,65 @@
     <!-- Main Template -->
     <template id="stspl_account_statement_of_account_template">
       <t t-call="report.html_container">
-        <t t-foreach="get_start_partners(data['form'])" t-as="o">
+        <t t-foreach="get_start_partners(data['form'])['list']" t-as="o">
           <t t-call="stspl_account.external_layout_stspl_statement_of_account">
               <div class="page">             
               <div class="oe_structure"/>
               <div class="row">
-                <div class="col-xs-6">
-                  <div style="border: 1px solid black;padding: 3px 10px;width:100%;height:150px;border-radius: 15px;font-size:13px">
-                    <div>
-                      <b><span t-field="o.name"/></b>
-                    </div>
-                    <div>
-                      <span t-esc="o.house_no"/>
-                      <span t-esc="o.street"/>
-                    </div>
-                    <div>
-                      <span t-esc="o.street2"/>
-                      <span t-esc="o.level_no"/>
-                    </div>
-                    <div>
-                      <span t-esc="o.city"/>
-                      <span t-esc="o.state_id.name"/>
-                    </div>
-                    <div>
-                      <span t-esc="o.country_id.name"/>
-                      <span t-esc="o.zip"/>
-                    </div>
-                    <table width="100%">
-                    <tr>
-                      <td width="50%" class="text-left">Tel:<span t-esc="o.phone"/></td>
-                      <td width="50%" class="text-left">Fax:<span t-esc="o.fax"/></td>
-                    </tr>
-                  </table>
+              <div class="col-xs-6">
+                <div style="padding: 3px 10px;width:100%;height:150px;font-size:13px">
+                  <div>
+                  	<h4><b>STATEMENT OF ACCOUNT</b></h4>
+                    <b><span t-field="o.name"/></b>
                   </div>
-                </div>
-                <div class="col-xs-6">
-                    <div style="border: 1px solid black;padding: 3px 10px;width:100%;height:150px;border-radius: 15px;font-size:13px" class="text-center">
-                      <span><h2><b>STATEMENT OF ACCOUNT</b></h2></span>    
+                  <div>
+                    <span t-esc="o.house_no"/>
+                    <span t-esc="o.street"/>
                   </div>
+                  <div>
+                    <span t-esc="o.street2"/>
+                    <span t-esc="o.level_no"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.city"/>
+                    <span t-esc="o.state_id.name"/>
+                  </div>
+                  <div>
+                    <span t-esc="o.country_id.name"/>
+                    <span t-esc="o.zip"/>
+                  </div>
+                  <table width="100%">
+                  <tr>
+                  	<td width="50%" class="text-left">
+                  		<b>ATTN : </b>
+                  		<span t-esc="get_start_partners(data['form'])['attn'][o]"  />
+                  	</td> 
+                    <td width="50%" class="text-left">
+	                </td>
+                  </tr>
+                  <tr>
+                    <td width="50%" class="text-left">Tel: <span t-esc="o.phone"/></td> 
+                    <td width="50%" class="text-left">Fax: <span t-esc="o.fax"/></td>
+                  </tr>
+                </table>
                 </div>
               </div>
+              <div class="col-xs-6">
+              </div>
+            </div>
               <br/>
-              <div class="row">
-                <div class="col-xs-3">
-                  <div style="border: 1px solid black;padding: 3px 10px;height:50px;border-radius:10px;font-size:13px" class="text-left">
-                    <b><span>CURRENCY:</span><span t-field="o.company_id.currency_id.name"/></b>
-                  </div>  
-                </div>
-
-                <div class="col-xs-3">
-                  <div style="border: 1px solid black;padding: 3px 10px;height:50px;border-radius:10px;font-size:13px" class="text-left">
-                    <b><span>TERM:</span>
-                      <span t-esc="o.property_payment_term and  o.property_payment_term.name or ''"/></b>
-                  </div> 
-                </div>
-
-                <div class="col-xs-6">
-                  <div style="border:1px solid black;padding:3px 10px;height:50px;border-radius: 10px;font-size:13px" class="text-left">
-                    <b><span>FOR THE MONTH OF:</span><span t-esc="get_date(data['form'])['month'] or ''"/></b>
-                  </div> 
-                </div>
-              </div>
+             	<table width="100%" style="border:1 px solid black;font-family:Helvetica;font-size:11px;">
+            		<tr style="border:1 px solid black">
+            			<th width="33%" class="text-center">CURRENCY</th>
+            			<th width="33%" class="text-center">TERM</th>
+            			<th width="34%" class="text-center">FOR THE MONTH OF</th>
+            		</tr>
+            		<tr>
+            			<td width="33%" class="text-center"><span t-field="o.company_id.currency_id.name"/></td>
+            			<td width="33%" class="text-center"><span t-esc="o.property_payment_term and  o.property_payment_term.name or ''"/></td>
+            			<td width="34%" class="text-center"><span t-esc="get_date(data['form'])['month'] or ''"/></td>
+            		</tr>
+            	</table>
               <br/>
 
               <table style="border:0.5px solid;font-size:11px;" width="100%">

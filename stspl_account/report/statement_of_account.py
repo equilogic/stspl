@@ -66,6 +66,8 @@ class report_statement_of_account(report_sxw.rml_parse):
     def get_start_partners(self, form):
         partner_obj = self.pool.get('res.partner')
         lst = []
+        result={}
+        attn_dict={}
         data = []
         self.start_date = form.get('start_date', False)
         data2 = []
@@ -78,10 +80,11 @@ class report_statement_of_account(report_sxw.rml_parse):
                     if data2:
                         if partner not in lst:
                             lst.append(partner)
-            if data:
-                if partner not in lst:
-                    lst.append(partner)
-        return lst 
+                            attn_id = partner_obj.search(self.cr, self.uid,[('parent_id','=',partner.id),('type','=','other')])
+                            attn = partner_obj.browse(self.cr, self.uid, attn_id).name
+                            attn_dict.update({partner:attn})
+            result.update({'list':lst,'attn':attn_dict})
+        return result
     
     def lines(self, partner):
         inv_list = []
