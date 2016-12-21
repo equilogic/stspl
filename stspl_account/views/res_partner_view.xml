@@ -1,0 +1,15 @@
+<openerp>
+    <data>
+        <!-- Partner Form View Inherited -->
+        <record id="view_partner_form_ext" model="ir.ui.view">
+            <field name="name">view.res.partner.form.ext</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="website" position="after">
+                    <field name="show_gst" attrs="{'invisible':[('supplier','=',False)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
