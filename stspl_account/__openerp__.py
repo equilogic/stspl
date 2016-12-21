@@ -34,6 +34,7 @@
     'data': [
              'views/account_invoice_view.xml',
              'views/report_view.xml',
+             'views/res_partner_view.xml',
              'report/stspl_tax_invoice_report_view.xml',
              'report/packing_list.xml',
              'report/sale_acknowledge_report.xml',

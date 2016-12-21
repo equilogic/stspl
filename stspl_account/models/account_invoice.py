@@ -55,6 +55,28 @@ class account_invoice(models.Model):
                 self.write({'number': next_supp_id})                      
         return self.write({'state': 'open'})
 
+
+class account_invoice_line(models.Model):
+    
+    _inherit = 'account.invoice.line'
+    
+    def product_id_change(self, cr, uid, ids, product, uom_id, qty=0, name='', type='in_invoice',
+            partner_id=False, fposition_id=False, price_unit=False, currency_id=False,
+            company_id=None, context=None):
+        cr, uid, context
+        res = super(account_invoice_line, self).product_id_change(cr, uid, ids, product, uom_id, qty, name, type,
+                                                      partner_id, fposition_id, price_unit, currency_id=currency_id,
+                                                      company_id=company_id, context=context)
+        if partner_id:
+            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
+            if partner.show_gst:
+                if res and res.get('value', False):
+                    res['value'].update({'invoice_line_tax_id': []})
+                elif res:
+                    res.update({'value': {'invoice_line_tax_id': []}})
+        return res
+
+
 class purchase_order(models.Model):
     _inherit = 'purchase.order'
     

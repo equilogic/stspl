@@ -1,24 +1,71 @@
 <openerp>
 	<data>
+	    <!--  Inherited Customer Invoice Form view  -->
 		<record id="inherited_invoice_form" model="ir.ui.view">
             <field name="name">account.invoice.inherited.form</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
-            	<xpath expr="//field[@name='partner_id']" position="after">
-            		<field name="customer_po" />
-					<field name="attn_inv"
-						domain="[('type','=','contact'),('parent_id','=',partner_id)]"
-						attrs="{'readonly': [('state','not in',('draft','sent'))]}" />            		
-            		<field name="purchase_id" invisible="1"/>
-            		<field name="sales_id" invisible="1"/>
-            	</xpath>
-
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="customer_po" />
+                    <field name="attn_inv"
+                        domain="[('type','=','contact'),('parent_id','=',partner_id)]"
+                        attrs="{'readonly': [('state','not in',('draft','sent'))]}" />                  
+                    <field name="purchase_id" invisible="1"/>
+                    <field name="sales_id" invisible="1"/>
+                </xpath>
+                <field name="origin" position="attributes">
+                    <attribute name="string">Sales Order No.</attribute>
+                </field>
+                <field name="fiscal_position" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
                 <xpath expr="//page[@string='Other Info']//field[@name='date_due']" position='after'>
                     <field name="ship_via_id"/>
                 </xpath>
          	</field>
         </record>
+        
+        <!--  Inherited Supplier Invoice Form view  -->
+        <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="attributes">
+                    <attribute name="string">Purchase Order No.</attribute>
+                </field>
+                <field name="fiscal_position" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <xpath expr="//sheet/group/group/div" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group/label[@for='reference_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!--  Inherited Customer Refunds Action  -->
+        <record id="account.action_invoice_tree3" model="ir.actions.act_window">
+            <field name="name">Credit Notes</field>
+        </record>
+        
+        <!--  Inherited Menuitem of Customer Refunds  -->
+        <menuitem action="account.action_invoice_tree3" id="account.menu_action_invoice_tree3"
+                parent="account.menu_finance_receivables" name="Credit Notes"/>
+        
+        <!--  Inherited Supplier Refunds Action  -->
+        <record id="account.action_invoice_tree4" model="ir.actions.act_window">
+            <field name="name">Debit Notes</field>
+        </record>
+        
+        <!--  Inherited Menuitem of Supplier Refunds  -->
+        <menuitem action="account.action_invoice_tree4" id="account.menu_action_invoice_tree4"
+                parent="account.menu_finance_payables" name="Debit Notes"/>
+        
+        
 	</data>
 </openerp>
 
