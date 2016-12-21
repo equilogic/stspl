@@ -20,8 +20,10 @@
 #
 ##############################################################################
 import time
-from openerp.osv import fields, osv
 from openerp import models,fields,api
+from openerp.tools.translate import _
+from openerp.exceptions import except_orm, ValidationError
+
 
 class sale_order(models.Model):
     _inherit='sale.order'
@@ -29,6 +31,7 @@ class sale_order(models.Model):
     customer_po = fields.Char('Customer PO')
     attn_sales = fields.Many2one('res.partner', 'ATTN')
     ship_via_id = fields.Many2one('ship.via', 'Ship Via')
+    
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
@@ -66,17 +69,18 @@ class sale_order(models.Model):
                                             'string': 'Proforma Invoice'})
         return result
 
+
     @api.model
     def create(self,vals):
         if vals.get('name', '/') == '/':
             vals['name'] = self.env['ir.sequence'].get('sale.order.new')
         res = super(sale_order,self).create(vals)
         return res
- 
+
  
 class shipment_term(models.Model):
     _name = 'shipment.term'
     
-    name = fields.Char('Name')
+    name = fields.Char('Name') 
        
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
