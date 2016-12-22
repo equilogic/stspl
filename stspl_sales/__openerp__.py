@@ -39,9 +39,9 @@
              'report/partner_account_statement_view.xml',
              'views/report_view.xml',
              'data/ir.sequence.xml',
+             'wizard/convert_purchase_order_wizard_view.xml',
              'views/sale_order_view.xml',
              'views/res_partner_view.xml',
-             
     ],
     "installable": True,
     "auto_install":False,

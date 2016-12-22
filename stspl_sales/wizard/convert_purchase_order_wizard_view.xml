@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="purchase_order_wiz_form_view" model="ir.ui.view">
+            <field name="name">purchase.oder.wiz.form.view</field>
+            <field name="model">purchase.order.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Purchase Order Wizard" version="7.0">
+                <separator string="Suppliers" />
+                <field name="supplier_ids" domain="[('supplier','=',True)]"/>
+                <footer>
+                    <button string="Create Purchase Order"  type="object" name="create_po" 
+                    class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="po_wiz_action" model="ir.actions.act_window" >
+            <field name="name">Purchase Order Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

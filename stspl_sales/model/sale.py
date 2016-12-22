@@ -96,3 +96,4 @@ class sale_order_line(osv.osv):
             return line.price_unit * (1 - (line.discount or 0.0) / 100.0)
         
 
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
