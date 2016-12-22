@@ -44,6 +44,10 @@
                 <xpath expr="//sheet/group/group/label[@for='reference_type']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+
+                <xpath expr="//page[@string='Invoice']/field[@name='invoice_line']/tree[@string='Invoice lines']/field[@name='price_unit']" position='after'>
+                    <field name="discount_type"/>
+                </xpath>
             </field>
         </record>
         
@@ -64,8 +68,24 @@
         <!--  Inherited Menuitem of Supplier Refunds  -->
         <menuitem action="account.action_invoice_tree4" id="account.menu_action_invoice_tree4"
                 parent="account.menu_finance_payables" name="Debit Notes"/>
-        
-        
+
+        <!-- Inherited Form View of Invoice Form (Customer Invoices) -->
+        <record id="invoice_form_inherited_new" model="ir.ui.view">
+            <field name="name">invoice.form.inherited.new</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//page[@string='Invoice Lines']/field[@name='invoice_line']/tree[@string='Invoice Lines']/field[@name='discount']"
+                    position='before'>
+                    <field name="discount_type"/>
+                </xpath>
+                <field name="amount_untaxed" position="after">
+                    <field name="amount_discount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </field>
+            </field>
+        </record>
+ 
 	</data>
 </openerp>
 
