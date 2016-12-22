@@ -25,13 +25,16 @@
                 <field name="amount_tax" position="before">
                     <field name="amount_discount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </field>
+                <field name="partner_id" position="before">
+                    <field name="is_po" invisible="1"/>
+                    <field name="purchase_ids" invisible="1"/>
+                </field>
                 <button name="invoice_cancel" position="after">
                 	<button name="%(po_wiz_action)d" string="Convert to RFQ" 
-                	type="action" states="draft,sent"/>
+                	type="action" attrs="{'invisible':['|',('is_po', '=', True),('state','not in',('draft','sent'))]}"/>
                 </button>
 			</field>
 		</record>
-
 
 		 <!-- Shipment Term View -->
         <record id="shipment_term_tree_view" model="ir.ui.view" >

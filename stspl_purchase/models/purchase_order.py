@@ -31,6 +31,7 @@ class purchase_order(models.Model):
     customer_po = fields.Char('Customer PO')
     attn_pur = fields.Many2one('res.partner', 'ATTN')
     ship_via_id = fields.Many2one('ship.via', 'Ship Via')  
+    sale_id = fields.Many2one('sale.order','Sale Order')
 
     @api.model
     def create(self,vals):
@@ -65,6 +66,11 @@ class purchase_order(models.Model):
                         report_dict.update({'display_name': 'Request for Purchase','name': 'Request for Purchase',
                                             'string': 'Request for Purchase'})
         return result
+
+class purchase_order_line(models.Model):
+    _inherit = 'purchase.order.line'
+    
+    so_line = fields.Many2one('sale.order.line','sale order line')
     
 
 

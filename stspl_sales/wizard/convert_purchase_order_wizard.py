@@ -34,19 +34,23 @@ class purchase_order_wiz(models.TransientModel):
         po_line_obj = self.env['purchase.order.line']
         loc_id = self.env['stock.location'].search([('location_id', '!=', False), ('location_id.name', 'ilike', 'WH'),
                     ('company_id.id', '=', comp.id), ('usage', '=', 'internal')])
-        
+        attn_id=0
         attn = self.env['res.partner'].search([('parent_id','=',partner.id),('type','=','contact')])
+        if attn:
+            attn_id = attn.ids[0]
+
         order_vals = {
           'partner_id': partner.id,
           'invoice_method': 'manual',
           'date_order': sorder.date_order,
-          'pricelist_id': partner.property_product_pricelist.id,
-          'invoiced':True,
+          'pricelist_id': sorder.pricelist_id.id,
           'currency_id':sorder.currency_id.id,
           'location_id' : loc_id.id or '',
           'incoterm_id':sorder.incoterm.id,
           'payment_term_id':sorder.payment_term.id,
-          'attn_pur':attn.ids[0],
+          'attn_pur': attn_id,
+          'sale_id':sorder.id,
+          'customer_po':sorder.customer_po,
           }
         po_res = po_obj.create(order_vals)
         for line in sorder.order_line:
@@ -60,8 +64,10 @@ class purchase_order_wiz(models.TransientModel):
                     'taxes_id': [(6, 0, [x.id for x in line.tax_id])],
                     'price_subtotal':line.price_subtotal,
                     'order_id':po_res.id,
+                    'so_line':line.id,
                     }
             po_res1 = po_line_obj.create(vals)
+        sorder.is_po = True
 
     @api.multi
     def create_po(self):
@@ -70,5 +76,9 @@ class purchase_order_wiz(models.TransientModel):
         if self.supplier_ids:
             for sup in self.supplier_ids:
                 self.prepare_po(sup,com)
+
+    
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
