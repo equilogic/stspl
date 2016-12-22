@@ -24,7 +24,6 @@ from datetime import date, datetime
 from dateutil import relativedelta
 import json
 import time
-
 from openerp.osv import fields, osv
 from openerp import models,fields,api
 
