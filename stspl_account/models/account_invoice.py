@@ -238,4 +238,4 @@ class account_move(models.Model):
          if self._context and self._context.get('invoice', False):
              vals['name'] = self._context['invoice'].number or '/'
          return super(account_move, self).create(vals)
-     
+
