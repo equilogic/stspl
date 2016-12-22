@@ -87,10 +87,8 @@ class sale_order_line(osv.osv):
 
     def _calc_line_base_price(self, cr, uid, line, context=None):
         if line.discount_type == 'percent':
-            print "\n PERCENT ::::::::::::", line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             return line.price_unit * (1 - (line.discount or 0.0) / 100.0)
         elif line.discount_type == 'amount':
-            print "\n AMOUNT BASED ::::::::::::::", line.price_unit - line.discount or 0.0
             return line.price_unit - line.discount or 0.0
         else:
             return line.price_unit * (1 - (line.discount or 0.0) / 100.0)
