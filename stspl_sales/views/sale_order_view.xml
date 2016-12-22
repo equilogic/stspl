@@ -25,6 +25,10 @@
                 <field name="amount_tax" position="before">
                     <field name="amount_discount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </field>
+                <button name="invoice_cancel" position="after">
+                	<button name="%(po_wiz_action)d" string="Convert to RFQ" 
+                	type="action" states="draft,sent"/>
+                </button>
 			</field>
 		</record>
 
