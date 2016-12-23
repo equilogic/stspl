@@ -125,8 +125,6 @@ class sale_order(models.Model):
                                         purch_line_vals.update({'product_uom': s_line_val[2].get('product_uom')})
                                     if s_line_val[2].get('price_unit',False):
                                         purch_line_vals.update({'price_unit': s_line_val[2].get('price_unit')})
-                                    if s_line_val[2].get('tax_id',False):
-                                        purch_line_vals.update({'taxes_id': s_line_val[2].get('tax_id')})
                                     if s_line_val[2].get('price_subtotal',False):
                                         purch_line_vals.update({'price_subtotal': s_line_val[2].get('price_subtotal')})
                                     purch_lines.write(purch_line_vals)
@@ -148,11 +146,12 @@ class sale_order(models.Model):
                                         purch_line_vals.update({'product_uom': s_line_val[2].get('product_uom')})
                                     if s_line_val[2].get('price_unit',False):
                                         purch_line_vals.update({'price_unit': s_line_val[2].get('price_unit')})
-                                    if s_line_val[2].get('tax_id',False):
-                                        purch_line_vals.update({'taxes_id': s_line_val[2].get('tax_id')})
                                     if s_line_val[2].get('price_subtotal',False):
                                         purch_line_vals.update({'price_subtotal': s_line_val[2].get('price_subtotal')})
+                                    if s_line_val[2].get('tax_id',False):
+                                        purch_line_vals.update({'taxes_id':  [(6, 0, [x.id for x in p.order_line[-1].taxes_id])]})
                                     purch_line_vals.update({'so_line': new_sale_id.ids[0] or False})
+                                    
                                 new_purch_line_id = purch_l_obj.create(purch_line_vals)
         return True
 class sale_order_line(models.Model):

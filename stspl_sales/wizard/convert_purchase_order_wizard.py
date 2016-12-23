@@ -25,10 +25,10 @@ class purchase_order_wiz(models.TransientModel):
     _name = 'purchase.order.wiz'
 
     supplier_ids = fields.Many2many('res.partner',string='Suppliers')
+    sup_tax_ids = fields.Many2many('account.tax',string="Taxes")
 
     @api.multi
     def prepare_po(self,partner,comp):
-
         sorder = self.env['sale.order'].browse(self._context.get('active_id'))
         po_obj = self.env['purchase.order']
         po_line_obj = self.env['purchase.order.line']
@@ -61,11 +61,12 @@ class purchase_order_wiz(models.TransientModel):
                     'product_qty' : line.product_uom_qty,
                     'product_uom' :line.product_uom.id or False,
                     'price_unit':line.price_unit,
-                    'taxes_id': [(6, 0, [x.id for x in line.tax_id])],
                     'price_subtotal':line.price_subtotal,
                     'order_id':po_res.id,
                     'so_line':line.id,
                     }
+            if not partner.show_gst:
+                vals.update({'taxes_id': [(6, 0, [x.id for x in self.sup_tax_ids])]})
             po_res1 = po_line_obj.create(vals)
         sorder.is_po = True
 
