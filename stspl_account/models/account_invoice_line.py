@@ -31,17 +31,17 @@ class account_invoice(models.Model):
                         compute='_compute_amount')
 
     @api.one
-    @api.depends('invoice_line.discount')
+    @api.depends('invoice_line.discount','invoice_line.quantity')
     def _compute_amount(self):
         res = super(account_invoice,self)._compute_amount()
-        self.amount_discount = sum(line.discount for line in self.invoice_line) 
+        self.amount_discount = sum(line.discount * line.quantity for line in self.invoice_line) 
         return res
 
 
 class account_invoice_line(models.Model):
     _inherit = "account.invoice.line"
 
-    discount_type = fields.Selection([('percent', 'Percentage'),('amount', 'Amount')],'Discount Type')
+    discount_type = fields.Selection([('percent', 'Percentage'),('amount', 'Amount')],'Discount Type',default='percent')
 
 
     @api.one
