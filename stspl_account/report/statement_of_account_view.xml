@@ -233,23 +233,25 @@
                 </thead>
                 <tbody>
                   <tr t-foreach="lines(o)" t-as="line">
-                      <td width="15%" class="text-center" >
-                        <span t-esc="line['date'] or '' " />
+                      <td width="15%" style="border:0.5px solid;" class="text-center" >
+                        <span t-esc="line['date'] or '' "/>
                       </td>
-                      <td width="15%" class="text-center"> 
+                      <td width="15%" style="border:0.5px solid;" class="text-center"> 
                         <span t-esc="line['inv_no'] or ''"/>
                       </td>
-                      <td width="15%" class="text-center">
+                      <td width="15%" style="border:0.5px solid;" class="text-left">
                         <span t-esc="o.company_id.currency_id.name"/>
+                        <span t-esc="o.company_id.currency_id.symbol"/>
                         <span t-esc="line['debit'] or '' "/>
                       </td>
-                      <td width="15%" class="text-center">
+                      <td width="15%" style="border:0.5px solid;" class="text-center">
                         <span t-esc="line.get('due_date') or ''"/>
                       </td>
-                      <td width="15%" class="text-center">
+                      <td width="15%" style="border:0.5px solid;" class="text-center">
                         <span />
                       </td>
-                      <td width="20%" class="text-center">
+                      <td width="20%" style="border:0.5px solid;" class="text-left">
+                        <span t-esc="o.company_id.currency_id.symbol"/>
                         <span t-esc="line.get('total') or '' "/>
                       </td>
                   </tr>

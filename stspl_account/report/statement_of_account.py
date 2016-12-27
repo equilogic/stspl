@@ -100,7 +100,8 @@ class report_statement_of_account(report_sxw.rml_parse):
             if inv_ids:
                 for inv_data in self.pool.get('account.invoice').browse(self.cr, self.uid, inv_ids):
                     inv_dict = {}
-
+                    date_invoice_format = ''
+                    date_due_format = ''
                     if inv_data.type == 'out_invoice':
                         total += inv_data.residual
                         inv_dict.update({'debit': inv_data.residual and inv_data.residual or 0.0})
@@ -125,10 +126,18 @@ class report_statement_of_account(report_sxw.rml_parse):
                                 else:
                                     debit += payment_rec.credit                            
                                 inv_dict.update({'debit': debit or 0.0})
+                    if inv_data.date_invoice:
+                        converted_date = datetime.strptime(inv_data.date_invoice, DEFAULT_SERVER_DATE_FORMAT)
+                        date_invoice_format = datetime.strftime(converted_date, "%d-%m-%Y")
+
+                    if inv_data.date_due:
+                        converted_date = datetime.strptime(inv_data.date_due, DEFAULT_SERVER_DATE_FORMAT)
+                        date_due_format = datetime.strftime(converted_date, "%d-%m-%Y")
+
                     inv_dict.update({
-                                     'date': inv_data.date_invoice,
+                                     'date': date_invoice_format,
                                      'inv_no': inv_data.number,
-                                     'due_date':inv_data.date_due,
+                                     'due_date':date_due_format,
                                      'total': total})
                     inv_list.append(inv_dict)
 
