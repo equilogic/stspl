@@ -20,23 +20,19 @@
 #
 ##############################################################################
 
-{
-    "name": "STSPL E-Claim",
-    "version": "1.1",
-    "depends": ['hr_expense', 'hr_holidays'],
-    "author" :"Serpent Consulting Services Pvt. Ltd.",
-    "website" : "http://www.serpentcs.com",
-    "category": "HR",
-    "description":"""
-        This application enables you to manage E-Claim.
-    """,
-    "data": [
-         'security/ir_rule.xml',
-         'views/hr_eclaim_view.xml'
-    ],
-    "installable": True,
-    "auto_install": False,
-    "application": False,
-}
+from openerp import fields, models, api
+from openerp.tools.translate import _
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+class product_template(models.Model):
+    _inherit = "product.template"
+
+    markup_amt = fields.Float(string="Markup Amount")
+    shipment_amt = fields.Float(string="Shipment Amount")
+    operation_amt = fields.Float(string="Operation Amount")
+    expense_amt = fields.Float(string="Expense Amount")
+    pure_profit_amt = fields.Float(string="Pure Profit Amount")
+    prod_alias_name = fields.Char(string="Product Alias First")
+    prod_alias_name1 = fields.Char(string="Product Alias Second")
+    
+    

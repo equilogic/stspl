@@ -1,3 +1,12 @@
 id,name,model_id:id,group_id:id,perm_create,perm_unlink,perm_write,perm_read
 access_product_cust_code_user,product.cust.code.user,model_product_cust_code,group_product_customer_code_user,0,0,0,1
 access_product_cust_code_manager,product.cust.code.manager,model_product_cust_code,group_product_customer_code_manager,1,1,1,1
+
+access_brand_brand_groupuser,brand.brand.groupuser,model_brand_brand,base.group_user,0,0,0,1
+access_brand_brand_user,brand.brand.user,model_brand_brand,group_product_customer_code_user,0,0,0,1
+access_brand_brand_manager,brand.brand.manager,model_brand_brand,group_product_customer_code_manager,1,1,1,1
+
+access_ship_via_groupuser,ship.via.groupuser,model_ship_via,base.group_user,0,0,0,1
+access_ship_via_user,ship.via.user,model_ship_via,group_product_customer_code_user,0,0,0,1
+access_ship_via_manager,ship.via.manager,model_ship_via,group_product_customer_code_manager,1,1,1,1
+

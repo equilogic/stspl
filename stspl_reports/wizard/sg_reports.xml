@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--  Inherited form view of BL and PL Report Wizard   -->
+        <record id="wizard_report_view_inherit" model="ir.ui.view">
+            <field name="name">YTD Financial Reports</field>
+            <field name="model">wizard.report</field>
+            <field name="inherit_id" ref="sg_account_report.wizard_report_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='inf_type']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('inf_type','in', ['IS','GL','TB'])]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!--  Inherited BL and PL Report Action to rename  -->
+        <record id="sg_account_report.action_wizard_report" model="ir.actions.act_window">
+            <field name="name">Balance Sheet Report</field>
+            <field name="res_model">wizard.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sg_account_report.wizard_report_view"/>
+            <field name="target">new</field>
+        </record>
+        
+        <!--  Inherited BL and PL Report Menu to rename  -->
+        <menuitem
+            id="sg_account_report.menu_wizard_report"
+            name="Balance Sheet Report"
+            parent="sg_account_report.sg_report_menu"
+            sequence="102"
+            action="sg_account_report.action_wizard_report"/>
+        
+        <!--  Action of SG Profit And Loss Report  -->
+        <record id="action_profit_loss_report" model="ir.actions.act_window">
+            <field name="name">Profit and Loss Report</field>
+            <field name="res_model">wizard.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'inf_type': 'IS'}</field>
+            <field name="view_id" ref="sg_account_report.wizard_report_view"/>
+            <field name="target">new</field>
+        </record>
+        
+        <!--  Menuitem of SG Profit And Loss Report  -->
+        <menuitem
+            id="menu_sg_profit_loss_report"
+            name="Profit and Loss Report"
+            parent="sg_account_report.sg_report_menu"
+            sequence="102"
+            action="action_profit_loss_report"/>
+            
+        <!--  Action of General Ledger Report  -->
+        <record id="action_general_ledger_report" model="ir.actions.act_window">
+            <field name="name">General Ledger Report</field>
+            <field name="res_model">wizard.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'inf_type': 'GL'}</field>
+            <field name="view_id" ref="sg_account_report.wizard_report_view"/>
+            <field name="target">new</field>
+        </record>
+        
+        <!--  Menuitem of General Ledger Report  -->
+        <menuitem
+            id="menu_sg_general_ledger_report"
+            name="General Ledger Report"
+            parent="sg_account_report.sg_report_menu"
+            sequence="102"
+            action="action_general_ledger_report"/>
+            
+        <!--  Action of Trial Balance Report  -->
+        <record id="action_trial_bal_report" model="ir.actions.act_window">
+            <field name="name">Trial Balance Report</field>
+            <field name="res_model">wizard.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'inf_type': 'TB'}</field>
+            <field name="view_id" ref="sg_account_report.wizard_report_view"/>
+            <field name="target">new</field>
+        </record>
+        
+        <!--  Menuitem of General Ledger Report  -->
+        <menuitem
+            id="menu_sg_trial_bal_report"
+            name="Trial Balance Report"
+            parent="sg_account_report.sg_report_menu"
+            sequence="102"
+            action="action_trial_bal_report"/>
+            
+    </data>
+</openerp>

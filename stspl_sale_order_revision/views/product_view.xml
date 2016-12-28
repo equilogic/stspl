@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_template_form_view_extended" model="ir.ui.view">
+            <field name="name">product.product.form.extended</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@string='Sales']" position="after">
+                    <page string="Markup and Margin">
+                        <group>
+                            <field name="markup_amt"/>
+                            <field name="shipment_amt"/>
+                            <field name="operation_amt"/>
+                            <field name="expense_amt"/>
+                            <field name="pure_profit_amt"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="prod_alias_name" placeholder="Product Alias Name"/>
+                    <field name="prod_alias_name1" placeholder="Product Alias Name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

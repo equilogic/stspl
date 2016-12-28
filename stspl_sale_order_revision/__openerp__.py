@@ -21,22 +21,23 @@
 ##############################################################################
 
 {
-    "name": "STSPL E-Claim",
-    "version": "1.1",
-    "depends": ['hr_expense', 'hr_holidays'],
+    "name": "STSPL Sales Order Revision",
+    "version": "8.0.0.1.0",
+    "depends": ['sale_margin'],
     "author" :"Serpent Consulting Services Pvt. Ltd.",
     "website" : "http://www.serpentcs.com",
-    "category": "HR",
+    "category": "sales",
     "description":"""
-        This application enables you to manage E-Claim.
+        This module is will helps to create revision order of sales.
     """,
     "data": [
-         'security/ir_rule.xml',
-         'views/hr_eclaim_view.xml'
+         "views/sale_workflow.xml",
+         "views/sale_order_view.xml",
+         "views/product_view.xml"
     ],
     "installable": True,
-    "auto_install": False,
-    "application": False,
+    "auto_install":False,
+    "application":False,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

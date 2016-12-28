@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <!-- Added Activity in sale workflow -->
+        <record id="act_revised" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">revise</field>
+            <field name="flow_stop">True</field>
+            <field name="kind">stopall</field>
+            <field name="action">action_revised()</field>
+        </record>
+        
+        <record id="act_negotiation" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">negotiation</field>
+            <field name="kind">function</field>
+            <field name="action">action_negotiation()</field>
+        </record>
+        
+        <record id="act_pending" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">pending</field>
+            <field name="kind">function</field>
+            <field name="action">action_pending()</field>
+        </record>
+        
+        <!-- Added Transition in sale workflow -->
+        <record id="trans_sent_revised" model="workflow.transition">
+            <field name="act_from" ref="sale.act_sent"/>
+            <field name="act_to" ref="act_revised"/>
+            <field name="signal">revise</field>
+        </record>
+        
+        <record id="trans_sent_negotiation" model="workflow.transition">
+            <field name="act_from" ref="sale.act_sent"/>
+            <field name="act_to" ref="act_negotiation"/>
+            <field name="signal">negotiation</field>
+        </record>
+        
+        <record id="trans_negotiation_revised" model="workflow.transition">
+            <field name="act_from" ref="act_negotiation"/>
+            <field name="act_to" ref="act_revised"/>
+            <field name="signal">revise</field>
+        </record>
+        
+        <record id="trans_sent_pending" model="workflow.transition">
+            <field name="act_from" ref="sale.act_sent"/>
+            <field name="act_to" ref="act_pending"/>
+            <field name="signal">pending</field>
+        </record>
+        
+        <record id="trans_pending_revised" model="workflow.transition">
+            <field name="act_from" ref="act_pending"/>
+            <field name="act_to" ref="act_revised"/>
+            <field name="signal">revise</field>
+        </record>
+        
+        <record id="trans_negotiation_pending" model="workflow.transition">
+            <field name="act_from" ref="act_negotiation"/>
+            <field name="act_to" ref="act_pending"/>
+            <field name="signal">pending</field>
+        </record>
+        
+    </data>
+</openerp>
+    

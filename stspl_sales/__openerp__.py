@@ -31,6 +31,7 @@
         This module customises the sales reports as per the Customs of STSPL.
     """,
     "data": [
+             'security/ir.model.access.csv',
              'data/account_payment_terms_demo.xml',
              'views/stock_picking.xml',  
 	         'report/sale_delivery_order_report_view.xml',

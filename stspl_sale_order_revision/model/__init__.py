@@ -20,23 +20,7 @@
 #
 ##############################################################################
 
-{
-    "name": "STSPL E-Claim",
-    "version": "1.1",
-    "depends": ['hr_expense', 'hr_holidays'],
-    "author" :"Serpent Consulting Services Pvt. Ltd.",
-    "website" : "http://www.serpentcs.com",
-    "category": "HR",
-    "description":"""
-        This application enables you to manage E-Claim.
-    """,
-    "data": [
-         'security/ir_rule.xml',
-         'views/hr_eclaim_view.xml'
-    ],
-    "installable": True,
-    "auto_install": False,
-    "application": False,
-}
+import sale_order
+import product
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

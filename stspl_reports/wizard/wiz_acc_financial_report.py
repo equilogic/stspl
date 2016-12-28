@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2011-2012 Serpent Consulting Services Pvt. Ltd. (<http://serpentcs.com>).
+#    Copyright (C) 2016 Serpent Consulting Services Pvt. Ltd.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,23 +20,19 @@
 #
 ##############################################################################
 
-{
-    "name": "STSPL E-Claim",
-    "version": "1.1",
-    "depends": ['hr_expense', 'hr_holidays'],
-    "author" :"Serpent Consulting Services Pvt. Ltd.",
-    "website" : "http://www.serpentcs.com",
-    "category": "HR",
-    "description":"""
-        This application enables you to manage E-Claim.
-    """,
-    "data": [
-         'security/ir_rule.xml',
-         'views/hr_eclaim_view.xml'
-    ],
-    "installable": True,
-    "auto_install": False,
-    "application": False,
-}
+from openerp import fields, models, api
+from openerp.tools.translate import _
+
+
+class wizard_report(models.TransientModel):
+    _inherit = "wizard.report"
+
+    @api.model
+    def default_get(self, fields):
+        res = super(wizard_report, self).default_get(fields)
+        if self._context and self._context.get('inf_type', False):
+            res.update({'inf_type': self._context['inf_type']})
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
