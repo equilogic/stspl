@@ -44,7 +44,7 @@ class sale_order(models.Model):
               \nThe exception status is automatically set when a cancel operation occurs \
               in the invoice validation (Invoice Exception) or in the picking list process (Shipping Exception).\nThe 'Waiting Schedule' status is set when the invoice is confirmed\
                but waiting for the scheduler to run on the order date.", select=True)
-
+    quotation_ref = fields.Char(string='Quotation Reference', copy=False)
 
     _sql_constraints = [
         ('revision_unique',
@@ -111,13 +111,16 @@ class sale_order(models.Model):
         return super(sale_order, self).copy(defaults)
 
     @api.model
-    def create(self, values):
-        if 'unrevisioned_ref' not in values:
-            if values.get('name', '/') == '/':
+    def create(self, vals):
+        if 'unrevisioned_ref' not in vals:
+            if vals.get('name', '/') == '/':
                 seq = self.env['ir.sequence']
-                values['name'] = seq.next_by_code('sale.order') or '/'
-            values['unrevisioned_ref'] = values['name']
-        return super(sale_order, self).create(values)
+                vals['name'] = seq.next_by_code('sale.order') or '/'
+            vals['unrevisioned_ref'] = vals['name']
+        sale_rec = super(sale_order, self).create(vals)
+        if sale_rec.name and not sale_rec.quotation_ref:
+            sale_rec.quotation_ref = sale_rec.name or ''
+        return sale_rec
 
 
 class sale_order_line(models.Model):

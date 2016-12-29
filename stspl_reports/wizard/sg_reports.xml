@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="sg_account_report.wizard_report_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='inf_type']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('inf_type','in', ['IS','GL','TB'])]}</attribute>
+                    <attribute name="attrs">{'readonly': [('inf_type','in', ['IS','GL','TB','BS'])]}</attribute>
                 </xpath>
             </field>
         </record>

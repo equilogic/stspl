@@ -14,6 +14,9 @@
                 <xpath expr="//button[@name='copy_quotation']" position="replace">
                     <button name="copy_quotation" states="revised" string="New Copy of Quotation" type="object"/>
                 </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="quotation_ref" attrs="{'invisible': [('state','in',('draft','sent','cancel'))]}"/>
+                </xpath>
                 <notebook position="inside">
                     <page string="Revisions">
                         <field name="old_rev_ids" readonly="1">

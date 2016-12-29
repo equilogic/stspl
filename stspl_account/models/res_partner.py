@@ -20,7 +20,8 @@
 #
 ##############################################################################
 
-from openerp import models,fields,api
+from openerp import models, fields, api, _
+
 
 
 class res_partner(models.Model):
@@ -28,3 +29,22 @@ class res_partner(models.Model):
     _inherit = 'res.partner'
 
     show_gst = fields.Boolean(string="Show GST")
+    grn_number = fields.Char('GRN No.')
+    
+    @api.multi
+    @api.constrains('grn_number', 'supplier', 'customer')
+    def _check_grn_number(self):
+        for partner in self:
+            if partner.grn_number and partner.customer:
+                customers = self.env['res.partner'].search([('customer', '=', True),
+                                                ('grn_number', '=', partner.grn_number)])
+                if customers and len(customers.ids) > 1:
+                    raise Warning(_('GRN Number must be unique for customer !'))
+            if partner.grn_number and partner.supplier:
+                suppliers = self.env['res.partner'].search([('supplier', '=', True),
+                                                ('grn_number', '=', partner.grn_number)])
+                if suppliers and len(suppliers.ids) > 1:
+                    raise Warning(_('GRN Number must be unique for supplier !'))
+
+#     _sql_constraints = [('grn_unique', 'unique(grn_number)',
+#                          'GRN Number must be unique!')]

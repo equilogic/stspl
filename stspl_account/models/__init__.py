@@ -23,5 +23,6 @@
 import account_invoice
 import res_partner
 import account_invoice_line
+import res_company
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

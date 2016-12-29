@@ -9,6 +9,9 @@
                 <field name="website" position="after">
                     <field name="show_gst" attrs="{'invisible':[('supplier','=',False)]}"/>
                 </field>
+                <field name="mobile" position="before">
+                    <field name="grn_number"/>
+                </field>
             </field>
         </record>
     </data>

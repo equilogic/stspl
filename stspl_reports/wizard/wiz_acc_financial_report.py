@@ -34,5 +34,15 @@ class wizard_report(models.TransientModel):
             res.update({'inf_type': self._context['inf_type']})
         return res
 
+    @api.v7
+    def onchange_inf_type(self, cr, uid, ids, inf_type, context=None):
+        if context is None:
+            context = {}
+        res = {'value':{}, 'domain':{}}
+        if inf_type:
+            res['domain'].update(
+                {'afr_id': [('inf_type', '=', inf_type)]})
+        return res
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
