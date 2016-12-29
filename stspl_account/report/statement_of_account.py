@@ -142,6 +142,7 @@ class report_statement_of_account(report_sxw.rml_parse):
                     inv_list.append(inv_dict)
 
         self.all_inv_total = total
+        print":::::::::::::::::::::::::;inv_list",inv_list
         return inv_list
 
 
