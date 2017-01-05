@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- Order Summary Wizard View -->
+        <record id="order_summary_form_view" model="ir.ui.view">
+            <field name="name">order.summary.form.view</field>
+            <field name="model">order.summary.xls</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="order Summary" version="7.0">
+                <separator string=""/>
+                <footer>
+                    <button string="Xls Export"  type="object" name="print_xls_export" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <!-- xls Export wizard view -->
+        <record id="order_summary_xls_export_form" model="ir.ui.view">
+            <field name="name">order.summary.xls.export.form</field>
+            <field name="model">order.summary.xls.export</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml"> 
+                <form string="xls Export">
+                    <group col="4" colspan="4">
+                        <label string="Save the File with '.xls' extension." colspan="4"/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" readonly="1" filename="name" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button string="Back" name="click_back" class="oe_highlight" type="object"/>
+                        or
+                        <button string="Close" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="act_open_os_view" model="ir.actions.act_window">
+            <field name="name">Order Summary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order.summary.xls</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_order_summary_form" parent="base.menu_reporting_dashboard" action="act_open_os_view"/>
+
+    </data>
+</openerp>

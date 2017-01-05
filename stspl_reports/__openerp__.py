@@ -31,7 +31,8 @@
         This module is provide analysis based on reports.
     """,
     "data": [
-         "wizard/sg_reports.xml"
+         "wizard/sg_reports.xml",
+         "wizard/order_summary_xls_report_view.xml"
     ],
     "installable": True,
     "auto_install":False,

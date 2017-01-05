@@ -3,9 +3,6 @@ from openerp.tools.translate import _
 from dateutil.relativedelta import relativedelta
 import time
 from openerp import tools
-
-
-from openerp import models,fields,api
 import xlwt
 import base64
 import tempfile
@@ -64,7 +61,7 @@ class statement_of_account(models.TransientModel):
         max_raw=0
         min_raw=1
            
-        workbook = xlwt.Workbook()
+        workbook = xlwt.Workbook(encoding='utf-8')
         worksheet = workbook.add_sheet('New Sheet')
               
         font = xlwt.Font()
@@ -137,9 +134,9 @@ class statement_of_account(models.TransientModel):
             col+=1
             worksheet.write(row, col, "DUE DATE",header_date_2)
             col+=1
-            worksheet.write(row,col,"AGING",header_date_2)
+            worksheet.write(row, col, "AGING",header_date_2)
             col+=1
-            worksheet.write(row,col,"OUTSTANDING BALANCE($)",header_date_2)
+            worksheet.write(row, col, "OUTSTANDING BALANCE($)",header_date_2)
             col+=1
             row+=1
 
@@ -181,7 +178,7 @@ class statement_of_account(models.TransientModel):
         col+=1
         worksheet.write(row, col, "<30 DAYS ",header_date_2)
         col+=1
-        worksheet.write(row,col,"CURRENT",header_date_2)
+        worksheet.write(row, col, "CURRENT",header_date_2)
         col+=1
         row+=1
 
