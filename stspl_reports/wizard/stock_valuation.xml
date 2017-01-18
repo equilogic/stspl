@@ -1,0 +1,46 @@
+<openerp>
+	<data>
+        <record id="view_wizard_valuation_history_inherited" model="ir.ui.view">
+            <field name="name">Stock Valuation</field>
+            <field name="model">wizard.valuation.history</field>
+            <field name="inherit_id" ref="stock_account.view_wizard_valuation_history"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group/field[@name='choose_date']" position="after">
+                    <field name="date_choose"/>
+                    <field name="date_start" attrs="{'invisible': [('date_choose', '=', False)]}"/>
+                    <field name="date_end" attrs="{'invisible': [('date_choose', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='open_table']" position="replace">
+                    <button name="open_table" string="Retrieve the Inventory Value" type="object"  class="oe_highlight" attrs="{'invisible': [('date_choose', '=', True)]}"/>
+                </xpath>
+	            <xpath expr="//button[@name='open_table']" position="after">
+					<button name="xls_show_product" string="Product Valuation Xls Export" type="object"  class="oe_highlight" attrs="{'invisible': [('date_choose', '=', False)]}"/>
+                    or
+	            </xpath>
+            </field>
+        </record>
+
+        <!-- xls Export wizard view -->
+        <record id="wiz_stspl_product_valuation_xls_report_form" model="ir.ui.view">
+            <field name="name">wiz.stspl.product.valuation.xls.report.form</field>
+            <field name="model">wiz.stspl.product.valuation.xls.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml"> 
+                <form string="xls Export">
+                    <group col="4" colspan="4">
+                        <label string="Save the File with '.xls' extension." colspan="4"/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" readonly="1" filename="name" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button string="Back" name="back" class="oe_highlight" type="object"/>
+                        or
+                        <button string="Close" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+	</data>
+</openerp>

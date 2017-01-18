@@ -1,0 +1,62 @@
+
+<openerp>
+    <data>
+
+        <record id="account_trial_balance_view" model="ir.ui.view">
+            <field name="name">Trial Balance Report </field>
+            <field name="model">wiz.trial.balance</field>
+            <field name="arch" type="xml">
+            <form string="Trail Balance Report" >
+                <group col="2">
+                   <field name="chart_account_id" required="True"></field>
+                </group>
+                <group col="4">
+                    <field name="start_date" required="True"/>
+                    <field name="end_date" required="True"/>
+                </group>
+                <footer>
+                    <button name="xls_trail_balance" string="Trail Balance Xls Export" type="object" default_focus="1" class="oe_highlight"/>
+                    or 
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="account_trial_balance_standard_export_report_wiz" model="ir.ui.view">
+            <field name="name">account.trial.balance.standard.export</field>
+            <field name="model">account.trial.balance.standard.export</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="xls Export">
+                    <group col="4" colspan="4">
+                        <label string="Save the File with '.xls' extension." colspan="4"/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" readonly="1" filename="name" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button string="Back" name="action_back" class="oe_highlight" type="object"/>
+                        or
+                        <button string="Close" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+           </field>
+        </record>
+
+        <record id="action_menu_trial_balance" model="ir.actions.act_window">
+            <field name="name">Stspl Trial Balance Report</field>
+            <field name="res_model">wiz.trial.balance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_trial_balance_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_trail_balance_form" parent="account.menu_finance_reporting" action="action_menu_trial_balance"/>
+    </data>
+</openerp>
+
+
+
+

@@ -22,6 +22,9 @@
 
 import wiz_acc_financial_report
 import order_summary_xls_report
-
+import stspl_sales_analysis_repo
+import stock_valuation
+import trail_balance_report
+import balance_sheet
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

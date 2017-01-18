@@ -31,8 +31,12 @@
         This module is provide analysis based on reports.
     """,
     "data": [
-         "wizard/sg_reports.xml",
-         "wizard/order_summary_xls_report_view.xml"
+         'wizard/sg_reports.xml',
+         'wizard/order_summary_xls_report_view.xml',
+         'wizard/stspl_sales_analysis_repo_view.xml',
+         'wizard/stock_valuation.xml',
+         'wizard/trail_balance_report_view.xml',
+         'wizard/balance_sheet_view.xml',
     ],
     "installable": True,
     "auto_install":False,

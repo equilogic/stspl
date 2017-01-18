@@ -1,0 +1,62 @@
+<openerp>
+    <data>
+        <record id="view_bal_sheet_excel_export_report_wiz" model="ir.ui.view">
+            <field name="name">bal.sheet.excel..form</field>
+            <field name="model">bal.sheet.excel.export</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="xls Export">
+                    <group col="4" colspan="4">
+                        <label string="Save the File with '.xls' extension." colspan="4"/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" readonly="1" filename="name" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button string="Back" name="action_back" class="oe_highlight" type="object"/>
+                        or
+                        <button string="Close" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+           </field>
+        </record>
+        
+        <record id="account_balance_sheet_view" model="ir.ui.view">
+            <field name="name">Stspl Balance Sheet Report</field>
+            <field name="model">wiz.bal.sheet</field>
+            <field name="arch" type="xml">
+            <form string="Report Options" version="7.0">
+                <group col="2">
+                   <field name='chart_account_id' required="1"/>
+                   <field name="company_id" invisible="1"/>
+                </group>
+                <group col="4">
+                   <field name="fiscalyear_id" required="True" domain="[('company_id', '=',company_id )]" on_change="onchange_fiscalyear(fiscalyear_id)"/>  
+                    <field name="period_to" domain="[('fiscalyear_id', '=',fiscalyear_id )]" required="True"/>
+                </group>
+                <footer>
+                    <button name="check_report" string="Balance Sheet Xls Export" type="object" default_focus="1" class="oe_highlight"/>
+                    Or 
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_menu_bal_sheet" model="ir.actions.act_window">
+            <field name="name">Stspl Balance Sheet Report</field>
+            <field name="res_model">wiz.bal.sheet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_balance_sheet_view"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="menu_balance_sheet_form" parent="account.menu_finance_reporting" action="action_menu_bal_sheet"/>
+    
+    </data>
+</openerp>
+
+
+
+

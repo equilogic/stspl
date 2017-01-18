@@ -12,6 +12,7 @@
                 <separator string=""/>
                 <footer>
                     <button string="Xls Export"  type="object" name="print_xls_export" class="oe_highlight"/>
+                    Or
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
@@ -40,7 +41,7 @@
         </record>
 
         <record id="act_open_os_view" model="ir.actions.act_window">
-            <field name="name">Order Summary</field>
+            <field name="name">Stspl Order Summary</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">order.summary.xls</field>
             <field name="view_type">form</field>
