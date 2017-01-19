@@ -56,17 +56,12 @@ class statement_of_account(models.TransientModel):
         fl = StringIO()
         cr,uid,context=self.env.args
         ctx=dict(context)
-
-
-        max_raw=0
-        min_raw=1
            
         workbook = xlwt.Workbook(encoding='utf-8')
         worksheet = workbook.add_sheet('New Sheet')
               
         font = xlwt.Font()
         font.bold = True
-
 
         header_date_1 = xlwt.easyxf('align: horiz center,vert center ;borders :top hair, bottom hair,left hair, right hair, bottom_color black,top_color black')
         header_date_2 = xlwt.easyxf('font: bold 1, height 230; align: horiz center,vert center ,wrap 1;borders :top hair, bottom hair,left hair, right hair, bottom_color black,top_color black')
@@ -80,7 +75,6 @@ class statement_of_account(models.TransientModel):
 
 
         partner_data = self.get_start_partners()
-        print "partner_data:::::::::::::::::::::::::::::::::",partner_data
 
         for partner in partner_data.get('list',[]):
 
@@ -112,6 +106,7 @@ class statement_of_account(models.TransientModel):
             worksheet.write_merge(22,23,0,1, 'CURRENCY' + '\n' + partner.company_id.currency_id.name or '',header_date_2)
             worksheet.write_merge(22,23,2,3, 'TERM' + '\n' + partner.property_payment_term.name or '',header_date_2)
             worksheet.write_merge(22,23,4,5, 'FOR THE MONTH OF' + '\n' + self.get_date() or '',header_date_2)
+            worksheet.write_merge(53,55,0,5, 'This is a computer generated documents and no signature is required' + '\n' + '\n' +'Email:' + partner.company_id.email + '             ' + 'Website:' + partner.company_id.website,align_center)
 
 
             row=25
@@ -199,7 +194,6 @@ class statement_of_account(models.TransientModel):
         col+=1
         row+=1
 
-        worksheet.write_merge(53,55,0,5, 'This is a computer generated documents and no signature is required' + '\n' + '\n' +'Email:' + partner.company_id.email + '             ' + 'Website:' + partner.company_id.website,align_center)
 
         workbook.save(fl)
         fl.seek(0)
