@@ -31,6 +31,12 @@ class res_partner(models.Model):
     show_gst = fields.Boolean(string="Show GST")
     grn_number = fields.Char('GRN No.')
     
+    level_no =  fields.Char('Level No')
+    house_no =  fields.Char('House No')
+    unit_no = fields.Char('Unit No')
+
+
+
     @api.multi
     @api.constrains('grn_number', 'supplier', 'customer')
     def _check_grn_number(self):

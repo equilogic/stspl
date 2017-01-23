@@ -11,6 +11,9 @@
                 </field>
                 <field name="mobile" position="before">
                     <field name="grn_number"/>
+                    <field name="level_no"/>
+                    <field name="house_no"/>
+                    <field name="unit_no"/>
                 </field>
             </field>
         </record>

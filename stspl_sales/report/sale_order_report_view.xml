@@ -201,22 +201,22 @@
 										</div>
 										<div>
 											<span t-field="o.partner_id.house_no"/>
-											,
+											<span t-if="o.partner_id.house_no">,</span>
 											<span t-field="o.partner_id.street"/>
 										</div>
 										<div>
 											<span t-field="o.partner_id.level_no"/>
-											,
+											<span t-if="o.partner_id.level_no">,</span>
 											<span t-field="o.partner_id.street2"/>
 										</div>
 										<div>
 											<span t-field="o.partner_id.city"/>
-											,
+											<span t-if="o.partner_id.city">,</span>
 											<span t-field="o.partner_id.state_id"/>
 										</div>
 										<div>
 											<span t-field="o.partner_id.country_id"/>
-											,
+											<span t-if="o.partner_id.country_id">,</span>
 											<span t-field="o.partner_id.zip"/>
 										</div>
 									</div>
