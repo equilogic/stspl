@@ -11,7 +11,7 @@
 			<field name="code">account.invoice.customer</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">5</field>
+			<field name="padding">4</field>
 			<field name="prefix">INV%(y)s-</field>
 		</record>
 
@@ -25,7 +25,7 @@
 			<field name="code">account.invoice.supplier</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">5</field>
+			<field name="padding">4</field>
 			<field name="prefix">INV%(y)s-</field>
 		</record>
 		
