@@ -11,7 +11,7 @@
 			<field name="code">stock.picking.new_seq</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">5</field>
+			<field name="padding">4</field>
 			<field name="prefix">D%(y)s-</field>
 		</record>
 		
@@ -27,7 +27,7 @@
 			<field name="code">sale.order.new</field>
 			<field name="number_next">1</field>
 			<field name="number_increment">1</field>
-			<field name="padding">5</field>
+			<field name="padding">4</field>
 			<field name="prefix">S%(y)s-</field>
 		</record>
 	</data>
