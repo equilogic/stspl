@@ -29,7 +29,7 @@ from openerp.tools.translate import _
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import time
-import xlsxwriter
+#import xlsxwriter
 import xlwt
 import base64
 import random
