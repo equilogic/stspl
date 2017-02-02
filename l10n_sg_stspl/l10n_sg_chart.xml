@@ -173,7 +173,7 @@
             <field name="parent_id" ref="account_account_708" />
         </record>
         
-        <record model="account.account.template" id="account_account_712_1">
+        <record model="account.account.template" id="account_account_715">
             <field name="name">Accumulated Depcreciation - Furniture &amp; Fixtures</field>
             <field name="code">102004</field>
             <field name="type">other</field>
