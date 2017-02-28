@@ -71,8 +71,10 @@
                     <field name="courrier_id"/>
                     <field name="forwarder_id"/>
                 </field>
+                <field name="credit_limit" position="after">
+                    <field name="debit_limit"/>
+                </field>
             </field>
-        </record>
-                
+        </record>   
 	</data>
 </openerp>
