@@ -85,5 +85,57 @@
         <menuitem id="shipment_term_menu" parent="base.menu_product"
                   action="shipment_term_action"/>
 
+
+         <!-- Forwarder View -->
+        <record id="forwarder_tree_view" model="ir.ui.view" >
+            <field name="name">forwarder.tree.view</field>
+            <field name="model">forwarder</field>
+            <field name="arch" type="xml">
+                <tree string="Forwarder">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Forwarder Form -->
+        <record id="forwarder_form_view" model="ir.ui.view" >
+            <field name="name">forwarder.form.view</field>
+            <field name="model">forwarder</field>
+            <field name="arch" type="xml">
+                <form string="Forwarder">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Forwarder Search -->
+        <record id="forwarder_search_view" model="ir.ui.view" >
+            <field name="name">forwarder.search.view</field>
+            <field name="model">forwarder</field>
+            <field name="arch" type="xml">
+                <search string="Forwarder">
+                    <field name="name"/>
+                    <filter name="grp_name" string="Forwarder" domain="[]" context="{'group_by':'name'}"/>
+                </search>
+            </field>
+        </record>
+        
+        <!-- Forwarder Action -->
+        <record id="forwarder_action" model="ir.actions.act_window" >
+            <field name="name">Forwarder</field>
+            <field name="res_model">forwarder</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_forwarder':'name'}</field>
+        </record>
+        
+        <!-- Menu for Forwarder -->
+        <menuitem id="forwarder_menu" parent="base.menu_product"
+                  action="forwarder_action"/>
+
 	</data>
 </openerp>

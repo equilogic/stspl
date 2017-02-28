@@ -167,6 +167,20 @@ class sale_order_line(models.Model):
 class shipment_term(models.Model):
     _name = 'shipment.term'
     
-    name = fields.Char('Name') 
+    name = fields.Char('Name')
+
+
+class forwarder(models.Model):
+    _name = 'forwarder'
+    
+    name = fields.Char('Name')
+    code = fields.Char('Code')
+
+
+class partner_inherit(models.Model):
+    _inherit = 'res.partner'
+
+    courrier_id = fields.Many2one('ship.via', 'Courrier')
+    forwarder_id = fields.Many2one('forwarder', 'Forwarder')
        
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

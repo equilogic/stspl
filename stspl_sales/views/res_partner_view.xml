@@ -60,6 +60,19 @@
               </p>
             </field>
         </record>
+
+        <!-- Partner Form View Inherited -->
+        <record id="res_partner_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.inherited.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="courrier_id"/>
+                    <field name="forwarder_id"/>
+                </field>
+            </field>
+        </record>
                 
 	</data>
 </openerp>
