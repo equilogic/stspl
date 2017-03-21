@@ -64,70 +64,68 @@
                     </th>
                 </table>
               </div>
-              <div style="border: 1px solid black;padding: 3px 10px;width: 800px;border-radius: 15px;font-size:10.5px">
-                <table>
+                <table style="font-size:10.5px">
                   <tr>
-                    <td style="padding:5px">
+                    <td style="padding:3px">
                       <span>PAGE NO.   </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       <span class="page"/>
                     </td>
                     <td style="padding:15px">
                       <span>INVOICE#  </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       <span t-field="o.name" />
                     </td> 
                     <td style="padding:15px">
                       <span>SHIP DATE  </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       <span t-field="o.date_invoice" />
                     </td> 
                     <td style="padding:25px">
                       <span>DOCUMENTARY CREDIT #</span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       
                     </td>                                       
                   </tr>
                   <tr>
-                    <td style="padding:5px">
+                    <td style="padding:3px">
                       <span>SALESMAN   </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       <span t-field="o.user_id.name" />
                     </td>
-                    <td style="padding:5px">
-                      <span>CUSTOMER PH #   </span>
+                    <td style="padding:15px">
+                      <span>CUSTOMER PH #  </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
-                      
-                    </td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
+
+                    </td> 
+                    <td style="padding:15px">
                       <span>CUSTOMER PO #  </span>
                     </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
                       <span t-field="o.customer_po" />
+                    </td> 
+                    <td style="padding:25px">
+                      <span>FREIGHT TERMS #</span>
                     </td>
-                    <td style="padding:5px">
-                      <span>FREIGHT TERMS  </span>
-                    </td>
-                    <td style="padding:5px">:</td>
-                    <td style="padding:5px">
-                      <!-- <span t-field="o.currency_id" /> -->
-                    </td>
+                    <td style="padding:3px">:</td>
+                    <td style="padding:3px">
+                      
+                    </td>                                       
                   </tr>
                 </table>
-              </div>
             </div>
           </div>
         </template>
@@ -141,56 +139,56 @@
             <t t-call="stspl_account.external_layout_stspl_picking_list_report_template">
               <div class="page">             
                 <div class="oe_structure"/>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
-
-                      <th style="border-top: 1px solid;border-right:1px solid;" width="50%">BILL TO</th>
-                      <div t-if="o.company_id">
-                        <div>
-                          <span t-field="o.partner_id.name"></span>
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.street" />
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.city" />
-                          <span t-field="o.partner_id.state_id" />
-                          <span t-field="o.partner_id.zip" />
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.country_id" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-5">
-                      <div style="border: 1px solid black;padding: 3px 10px;width: 350px;border-radius: 15px;font-size:11px">
-
-                        <th style="border-top: 1px solid;border-right:1px solid;" width="50%">SHIP TO</th>
+                <table  width="720px" style="font-size:12px" >
+                  <tr>
+                    <th width="50%" style="padding:5px">BILL TO:</th>
+                    <th width="50%" style="padding:5px">SHIP TO:</th>
+                  </tr>
+                  <tr class="table" style="border:0.5px solid" >
+                    <td width="50%" style="border-right:0.5px solid;padding:10px">
                         <div t-if="o.company_id">
-                        <div>
-                          <span t-field="o.partner_id.name"></span>
+                          <div>
+                            <span t-field="o.partner_id.name"></span>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.street" />
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.city" />
+                            <span t-field="o.partner_id.state_id" />
+                            <span t-field="o.partner_id.zip" />
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.country_id" />
+                          </div>
                         </div>
-                        <div>
-                          <span t-field="o.partner_id.street" />
+                      <br/>
+                    </td>
+
+                    <td width="50%" style="padding:10px">
+                          <div t-if="o.company_id">
+                          <div>
+                            <span t-field="o.partner_id.name"></span>
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.street" />
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.city" />
+                            <span t-field="o.partner_id.state_id" />
+                            <span t-field="o.partner_id.zip" />
+                          </div>
+                          <div>
+                            <span t-field="o.partner_id.country_id" />
+                          </div>
                         </div>
-                        <div>
-                          <span t-field="o.partner_id.city" />
-                          <span t-field="o.partner_id.state_id" />
-                          <span t-field="o.partner_id.zip" />
-                        </div>
-                        <div>
-                          <span t-field="o.partner_id.country_id" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      <br/>                      
+                    </td>
+                  </tr>
+                </table>
                 <br/>
 
-                <div style="border: 1px solid black;padding: 3px 10px;width: 720px;border-radius: 10px;font-size:12px">
+                <div style="border: 1px solid black;padding: 3px 10px;width: 720px;font-size:12px">
                   <table width="100%" >
                     <tr>
                       <td colspan="3" width="35%">
