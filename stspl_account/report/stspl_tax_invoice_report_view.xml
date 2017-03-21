@@ -252,9 +252,9 @@
 
            				<td width="55%" style="padding:10px">
                     <div t-if="o.partner_id" name="partner_header">
-                      <div>
+<!--                       <div>
                         <span>ONSEMI-</span><span style="padding:5px" t-field="o.partner_id.parent_id"/>
-                      </div>
+                      </div> -->
                       <div>
                         <span t-field="o.partner_id.name"/>
                       </div>
