@@ -31,9 +31,7 @@
                   </div>
          					<div>
                     <span t-field="o.company_id.street"/>
-                    ,
          						<span t-field="o.company_id.city"/>
-                    ,
          						<span t-field="o.company_id.country_id"/>
                     <span t-field="o.company_id.zip"/>
          					</div>
@@ -175,42 +173,30 @@
              			</tr>
 
              			<td width="50%" style="border-top: 0px white;font-size:12px">
-               			<div t-if="o.partner_id" name="partner_header">
+               			<div t-if="o.sale_id.partner_invoice_id" name="partner_header">
                       <div>
-                        <span t-field="o.partner_id.name"/>
-                      </div>
-                      <br/>
-                      <div>
-                        <span/>
-                        -
-                        <span/>
+                        <span t-field="o.sale_id.partner_invoice_id.name"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.house_no"/>
-                        ,
-                        <span t-field="o.partner_id.street"/>
+                        <span t-field="o.sale_id.partner_invoice_id.house_no"/>
+                        <span t-field="o.sale_id.partner_invoice_id.street"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.level_no"/>
-                        ,
-                        <span t-field="o.partner_id.street2"/>
+                        <span t-field="o.sale_id.partner_invoice_id.level_no"/>
+                        <span t-field="o.sale_id.partner_invoice_id.street2"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.city"/>
-                        ,
-                        <span t-field="o.partner_id.state_id"/>
+                        <span t-field="o.sale_id.partner_invoice_id.city"/>
+                        <span t-field="o.sale_id.partner_invoice_id.state_id"/>
                       </div>
                       <div>
-                        <span t-field="o.partner_id.country_id"/>
-                        ,
-                        <span t-field="o.partner_id.zip"/>
+                        <span t-field="o.sale_id.partner_invoice_id.country_id"/>
+                        <span t-field="o.sale_id.partner_invoice_id.zip"/>
                       </div>
                     </div>
                     <br/>
                     <span>ATTN:</span> 
                     <span style="padding:5px" t-field="o.partner_id.parent_id"/>
-                      -
-                    <span t-field="o.partner_id.parent_id"/>
              			</td>
 
                		<td width="50%" style="border-left: 0.5px solid; border-top: 0px white;font-size:12px">
@@ -220,22 +206,18 @@
                       </div>
                       <div>
                         <span t-field="o.partner_id.house_no"/>
-                        ,
                         <span t-field="o.partner_id.street"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.level_no"/>
-                        ,
                         <span t-field="o.partner_id.street2"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.city"/>
-                        ,
                         <span t-field="o.partner_id.state_id"/>
                       </div>
                       <div>
                         <span t-field="o.partner_id.country_id"/>
-                        ,
                         <span t-field="o.partner_id.zip"/>
                       </div>
                     </div>

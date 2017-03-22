@@ -35,7 +35,7 @@
 						<span t-field="o.company_id.city"/>
 						<t t-if="o.company_id.city">,</t>
  						<span t-field="o.company_id.country_id"/>
-                        <span t-field="o.company_id.zip"/>
+            <span t-field="o.company_id.zip"/>
  					</div>
  					<div>
  						<span>Tel :</span>
@@ -66,7 +66,7 @@
             <t t-if="o.partner_id.country_id.name == 'Singapore' and o.currency_id.name != 'SGD'">
                 <t t-foreach="get_sgd_details(o,o.currency_id)" t-as="sgd_res">
 	                <p style="font-size:11px">For GST Purpose Only <br/>
-	                    <span>USD 1.00 = </span><span t-esc="sgd_res['rate']" /><br/>
+	                    <span>USD 1.00 = </span><span t-esc="sgd_res['rate']"/><br/>
 	                    <span>Amount Before GST = </span><span t-esc="sgd_res['before_gst']" /><br/>
 	                    <span>GST Amount = </span><span t-esc="sgd_res['gst_amt']" /><br/>
 	                    <span>Amount After GST = </span><span t-esc="sgd_res['after_amt']" /><br/>
@@ -252,9 +252,6 @@
 
            				<td width="55%" style="padding:10px">
                     <div t-if="o.partner_id" name="partner_header">
-<!--                       <div>
-                        <span>ONSEMI-</span><span style="padding:5px" t-field="o.partner_id.parent_id"/>
-                      </div> -->
                       <div>
                         <span t-field="o.partner_id.name"/>
                       </div>
