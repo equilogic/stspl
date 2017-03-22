@@ -104,7 +104,7 @@
                     </td>
                     <td style="padding:5px">:</td>
                     <td style="padding:5px">
-                      <!-- <span t-field="o." /> -->
+                      <span t-field="o.partner_id.phone" />
                     </td>
                   </tr>
                   <tr>
@@ -131,7 +131,7 @@
                     </td>
                     <td style="padding:5px">:</td>
                     <td style="padding:5px">
-                      <!-- <span t-field="o."/> -->
+                      <!-- <span t-field=""/> -->
                     </td>
                   </tr>
                 </table>
@@ -206,7 +206,7 @@
                       </td>
                       <td colspan="2" width="35%">
                         <span>TERMS:</span>
-                        <span t-field="o.partner_id.property_payment_term"/>
+                        <span t-field="o.payment_term"/>
                       </td>
                       <td colspan="2" width="30%">
                         <span>ACCT:</span>
