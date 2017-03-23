@@ -432,7 +432,7 @@
                         </td>
 
                         <td style="text-align:right"  width="5%">
-                          <span t-field="s.product_uom_qty" />
+                          <span t-esc="int(s['product_uom_qty'])"/>
                         </td>
 
                         <td style="text-align:right" width="5%">

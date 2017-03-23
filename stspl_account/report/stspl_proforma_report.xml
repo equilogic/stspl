@@ -312,7 +312,7 @@
                       <span t-field="line.name"/>
                     </td>
                     <td width="15%">
-                      <span t-field="line.product_uom_qty" t-field-options='{"widget": "int"}' />
+                      <span t-esc="int(line['product_uom_qty'])"/>
                     </td>
                     <td width="15%">
                       <span t-field="line.product_uom.name"/> 

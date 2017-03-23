@@ -253,15 +253,15 @@
                       </td>
 
                       <td width="30%" class="text-center line">
-                        <span t-field="line.quantity" />
+                        <span t-esc="int(line['quantity'])"/>
                       </td>
 
                       <td width="40%" class="text-center line">
-                        <span t-field="line.quantity" />
+                        <span t-esc="int(line['quantity'])"/>
                       </td>
 
                       <td width="30%" class="text-center line">
-                        <b><span t-field="line.quantity"/></b>
+                        <b><span t-esc="int(line['quantity'])"/></b>
                       </td>
                     </tr>
                   </t>
